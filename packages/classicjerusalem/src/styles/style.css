@@ -1,0 +1,9 @@
+.image-gallery-content .image-gallery-slide .image-gallery-image {
+
+    height: 100%;
+}
+
+.image-gallery-slide .image-gallery-image {
+    width: 100%;
+    object-fit: cover;
+}
