@@ -16,7 +16,7 @@ const settings = {
           "menu": [
             ["Home", "/"],
             ["Properties", "/properties/"],
-            ["Blog", "/blog/"],       
+            ["Blog", "/blogposts/"],       
             ["Contact", "/contact/"]
           ],
           "featured": {
@@ -32,7 +32,24 @@ const settings = {
       "name": "@frontity/wp-source",
       "state": {
         "source": {
-          "api": "https://realstate.wildfreewalkingtours.com/wp-json"
+          "api": "https://realstate.wildfreewalkingtours.com/wp-json",
+         
+          "params": {
+            per_page: 100,
+          },
+
+          "postTypes": [
+            {
+              type: "properties",
+              endpoint: "properties",
+              archive: "properties",
+            },
+            {
+              type: "blog",
+              endpoint: "blog",
+              archive: "blog",
+            }
+          ],
         }
       }
     },

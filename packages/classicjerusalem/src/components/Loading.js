@@ -1,40 +1,18 @@
 import React from "react";
 import { styled, keyframes, css } from "frontity";
-
-const scale = keyframes`
-  0% {transform: scaley(1.0)}
-  50% {transform: scaley(0.4)}
-  100% {transform: scaley(1.0)}
-`;
+import Image from "@frontity/components/image";
+import logo from '../images/logo.png'
 
 const Loading = () => (
   <Container>
-    <div>
-      <div css={bar(1)} />
-      <div css={bar(2)} />
-      <div css={bar(3)} />
-      <div css={bar(4)} />
-      <div css={bar(5)} />
-    </div>
+      <Loader> Classic Jerusalem ...</Loader>
+
   </Container>
 );
 
-export default Loading;
-
-const bar = index => css`
-  background-color: #203492;
-  width: 4px;
-  height: 24px;
-  margin: 3px;
-  border-radius: 0;
-  display: inline-block;
-  animation: ${scale} 1s ${index * 0.1}s infinite
-    cubic-bezier(0.2, 0.68, 0.18, 1.08);
-  animation-fill-mode: both;
-`;
-
 const Container = styled.div`
   width: 100%;
+  height: 100vh;
   padding: 24px;
   display: flex;
   justify-content: center;
@@ -49,3 +27,37 @@ const Container = styled.div`
     padding: 0;
   }
 `;
+
+const Spotlight = keyframes`
+    0% , 20% {
+      opacity: 1;
+      letter-spacing: 2px;
+    }
+
+    80% , 100% {
+      opacity: 0;
+      letter-spacing: 32px;
+
+        @media(max-width: 768px) {
+            letter-spacing: 8px;
+        }
+    }
+`
+const Loader = styled.span`
+    font-size: 2rem;
+    font-weight: 300;
+    display: inline-block;
+    letter-spacing: 2px;
+    font-family: 'Monserrat';
+    color: var(--golden);
+    box-sizing: border-box;
+    animation: ${Spotlight} 2s linear infinite alternate;
+    text-align: center;
+    
+    @media(max-width: 768px) {
+        font-size: 1.2rem;
+    }
+
+`
+
+export default Loading;

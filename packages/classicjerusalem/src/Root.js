@@ -6,6 +6,8 @@ import FooterOne from './components/footer-one'
 import Home from './components/home';
 import Properties from './components/AllProperties'
 import Details from './components/Details';
+import Blog from './components/BlogPage';
+import BlogDetails from './components/BlogDetails'
 import GeneralContact from './components/MainContact';
 
 /**Root */
@@ -33,10 +35,12 @@ const Root = ({state, actions}) => {
 
                     :root {
                         --green: #0c884a; //#5B3BE8;
-                        --golden: #b27c00; 
-                        --goldenMain : rgb(178, 124, 0);
+                        /* --golden: #b27c00; */
+                        /* --golden: #df9b00; */
+                        --golden: #c88b00;
                         --black: #000000;
                         --white: #ffffff;
+                        --blue-elegant : #3e4c66;
                         --bodycolor: #343434;
                     }
 
@@ -272,8 +276,12 @@ const Root = ({state, actions}) => {
             <Header />
 
             {data.isHomePage && <Home /> }
-            {data.isDetails && <Details />}
-            {data.isProperties && <Properties />}
+            {/* {data.isDetails && <Details />} */}
+            {/* {data.isProperties && <Properties />} */}
+            {state.router.link === "/properties/" && <Properties /> }
+            {data.isProperties && <Details /> }
+            {state.router.link === "/blogposts/" && <Blog />}
+            {data.isBlog && <BlogDetails />}
             {state.router.link === "/contact/" && <GeneralContact />}  
             <FooterOne />
             <Footer title= "Classic Jerusalem" />  

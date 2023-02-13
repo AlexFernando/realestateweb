@@ -17,18 +17,6 @@ export default {
           isFetching: false,
           isHomePage: true
         },
-
-        "/details/": {
-          isReady: true,
-          isFetching: false,
-          isDetails : true
-        },
-
-        "/properties/": {
-          isReady: true,
-          isFetching: false,
-          isProperties : true
-        }
       }
     }
   },

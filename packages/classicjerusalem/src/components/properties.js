@@ -8,17 +8,37 @@ import {ImLocation} from 'react-icons/im';
 
 const Properties = ({state, actions, libraries}) => {
 
+    useEffect( () => {
+        actions.source.fetch("/properties")
+    }, [])
+
+    const data = state.source.get('/properties');
+
+    let myPosts = [];
+
+    if(data.isReady) {
+        
+        data.items.map( ({id}) => {
+
+            const singlePost = state.source.properties[id];
+            myPosts.push(singlePost);
+        })
+        console.log("los post: ", myPosts)
+    }
+
+
+
     return(
 
         <PropertiesGrid>
 
             {
-                [0,1,2].map(element => {
+                myPosts.slice(0,3).map(property => {
                     return(
-                    <Link href="/details">
-                        <SingleProperty key={element}>
+                    <Link href={property.link}>
+                        <SingleProperty key={property.id}>
                             <SinglePropertyThumb>
-                                <ImageCard src="https://findhousenextjs.vercel.app/assets/images/property/fp2.jpg" />
+                                <ImageCard src={property.acf.images_carousel.img_one.sizes.medium_large} />
                                 <ImageContent>
                                     <ul>
                                         <li>
@@ -32,7 +52,7 @@ const Properties = ({state, actions, libraries}) => {
 
                                     <p>
                                         $
-                                        1600
+                                        {` `+property.acf.details_properties.price_dollars}
                                         <small>/mo</small>
                                     </p>
 
@@ -42,30 +62,30 @@ const Properties = ({state, actions, libraries}) => {
                             <SinglePropertyDetails>
                                 <div>
                                     <h4>
-                                        <a href="#">Luxury Aparment</a>
+                                        <a href="#">{property.acf.details_properties.property_name}</a>
                                     </h4>
 
                                     <p>
                                         <span>
-                                        <IconContext.Provider value={{ color: "#b27c00", className: "global-class-name", size: "1rem" } }>
+                                        <IconContext.Provider value={{ color: "#df9b00", className: "global-class-name", size: "1rem" } }>
                                             <ImLocation />
                                         </IconContext.Provider>
                                         </span>
-                                        Talbiya, Jerusalem, Israel
+                                        {property.acf.details_properties.address}
                                     </p>
 
                                     <ul>
                                         <li>
-                                            <p>2</p>
+                                            <p>{property.acf.details_properties.beds}</p>
                                             Beds
                                         </li>
 
                                         <li>
-                                            <p>1</p>
+                                            <p>{property.acf.details_properties.baths}</p>
                                             Bathroom
                                         </li>
                                         <li>
-                                            <p>120</p>
+                                            <p>{property.acf.details_properties.sqm}</p>
                                             Sqm
                                         </li>
                                     </ul>
@@ -77,14 +97,14 @@ const Properties = ({state, actions, libraries}) => {
                 })
             }
 
-            {
-                [0,1,2].map(element => {
+            {/* {
+                [0,1].map(element => {
                     return(
                         <Link href="/details">
                         
                             <SingleProperty key={element} >
                                 <SinglePropertyThumb>
-                                    <ImageCard src="https://findhousenextjs.vercel.app/assets/images/property/fp3.jpg" />
+                                    <ImageCard src="https://realstate.wildfreewalkingtours.com/wp-content/uploads/2023/02/image00001-1-768x512.jpeg" />
                                     <ImageContent>
                                         <ul>
                                             <li>
@@ -113,7 +133,7 @@ const Properties = ({state, actions, libraries}) => {
 
                                         <p>
                                             <span>
-                                            <IconContext.Provider value={{ color: "#b27c00", className: "global-class-name", size: "1rem" } }>
+                                            <IconContext.Provider value={{ color: "#df9b00", className: "global-class-name", size: "1rem" } }>
                                                 <ImLocation />
                                             </IconContext.Provider>
                                             </span>
@@ -141,7 +161,7 @@ const Properties = ({state, actions, libraries}) => {
                         </Link>
                     )
                 })
-            }
+            } */}
         
         </PropertiesGrid>
     )
@@ -158,19 +178,24 @@ export const PropertiesGrid = styled.div`
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 1rem;
     color: #444;
-    padding-left: calc(1.5rem/2);
-    padding-right: calc(1.5rem/2);
+ 
+    font-family: 'Lato';
+    margin-top: 4rem;
 
     @media (max-width: 576px){
         grid-template-columns: repeat(1, 1fr);
         grid-gap: 1rem;
         margin: 2rem 0;
+        padding-left: calc(1.5rem/2);
+    padding-right: calc(1.5rem/2);
     }
 
     @media (min-width: 576px) and (max-width: 968px){
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 1rem;
         margin: 2rem 0;
+        padding-left: calc(1.5rem/2);
+    padding-right: calc(1.5rem/2);
     }
 `
 
@@ -182,6 +207,7 @@ export const SingleProperty = styled.div`
     overflow: hidden;
     position: relative;
     transition: all .3s ease;
+  
 `
 
 export const SinglePropertyThumb = styled.div`
@@ -192,13 +218,13 @@ export const SinglePropertyThumb = styled.div`
     overflow: hidden;
     margin: 10px 9px 0 10px;
     position: relative;
+    max-height: 28vh;
 `
 
 export const ImageCard = styled(Image)`
-    opacity: .8;
-    object-fit: fill;
-    min-height: 220px;
+    opacity: .7;
     vertical-align: middle;
+    min-height: 220px;
     max-width: 100%;
 `
 export const ImageContent = styled.div`
@@ -232,7 +258,7 @@ export const ImageContent = styled.div`
             
             &:nth-of-type(2n) {
                 margin-left: 1rem;
-                background-color: #b27c00;;
+                background-color: var(--golden);;
             }
 
             a {
@@ -251,7 +277,7 @@ export const ImageContent = styled.div`
     p {
         bottom: 15px;
         font-size: 22px;
-        font-family: Nunito;
+        /* font-family: Nunito; */
         color: #fff;
         font-weight: 700;
         left: 20px;
@@ -273,11 +299,12 @@ export const SinglePropertyDetails = styled.div`
 
         h4 {
             font-size: 1.2rem;
-            font-family: Nunito;
+            font-family: Lato;
             color: #484848;
-            font-weight: 700;
+            font-weight: 600;
             line-height: 1.2;
             margin-bottom: 15px;
+            text-transform: capitalize;
 
             a {
                 text-decoration: none;
@@ -288,8 +315,8 @@ export const SinglePropertyDetails = styled.div`
 
         p {
             font-size: 1rem;
-            font-family: Nunito;
-            color: #b27c00;
+            font-family: Lato;
+            color: var(--golden);
             line-height: 1;
             font-weight: 400;
             text-transform: uppercase;
@@ -307,13 +334,14 @@ export const SinglePropertyDetails = styled.div`
 
         li {
             display: inline-block;
+            font-weight: 300;
     
             :not(:last-child) {
                 border-right: 1px solid #ccc;
             }
             
             font-size: 12px;
-            font-weight: 300;
+            font-weight: 500;
             padding: 0 8px;
             color: #777;
             
@@ -327,7 +355,6 @@ export const SinglePropertyDetails = styled.div`
             p {
 
                 font-size: 15px;
-                font-weight: 100;
                 line-height: 18px;
                 margin-bottom: 5px;
                 color: #484848;

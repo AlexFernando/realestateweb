@@ -6,12 +6,36 @@ import {SingleProperty, SinglePropertyThumb, SinglePropertyDetails, ImageCard, I
 import Link from './Link';
 import { IconContext } from "react-icons";
 import {ImLocation} from 'react-icons/im';
+import Loading from './Loading';
 
 const AllProperties = ({state, actions, libraries}) => {
+    
+    const pageProperties = state.source.page[71];
 
+    const Html2react = libraries.html2react.Component;
+
+    useEffect( () => {
+        actions.source.fetch("/properties")
+    }, [])
+
+    const data = state.source.get('/properties');
+
+    let myPosts = [];
+
+    if(data.isReady) {
+        
+        data.items.map( ({id}) => {
+
+            const singlePost = state.source.properties[id];
+            myPosts.push(singlePost);
+        })
+        console.log("los post: ", myPosts)
+    }
 
     return ( 
- 
+        <>
+        {
+            data.isReady && myPosts.length > 0? 
         <>
             <ContainerBackgroundTour>
 
@@ -99,9 +123,79 @@ const AllProperties = ({state, actions, libraries}) => {
                     </SearchTabContent>
 
                     <PropertiesGrid>
-
                         {
-                            [0,1,2,3,4,5].map(element => {
+                            myPosts.map(property => {
+                                return(
+                                    <Link href={property.link} >
+                                        <SingleProperty>
+                                            <SinglePropertyThumb>
+                                                <ImageCard src={property.acf.images_carousel.img_one.sizes.medium_large} />
+                                                <ImageContent>
+                                                    <ul>
+                                                        <li>
+                                                            <a>Featured</a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a>Sale</a>
+                                                        </li>
+                                                    </ul>
+
+                                                    <p>
+                                                        $
+                                                        {property.acf.details_properties.price_dollars}
+                                                        <small>/mo</small>
+                                                    </p>
+                                                </ImageContent>
+                                            </SinglePropertyThumb>
+                                            <SinglePropertyDetails>
+                                                <div>
+                                                    <h4>
+                                                        <a href="#">{property.acf.details_properties.property_name}</a>
+                                                    </h4>
+
+                                                    <p>
+                                                        <span>
+                                                        <IconContext.Provider value={{ color: "#df9b00", className: "global-class-name", size: "1rem" } }>
+                                                            <ImLocation />
+                                                        </IconContext.Provider>
+                                                        </span>
+                                                        {property.acf.details_properties.address}
+                                                    </p>
+
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#">
+                                                                Beds
+                                                                :   
+                                                                {` `+property.acf.details_properties.beds}
+                                                            </a>
+                                                        </li>
+
+                                                        <li>
+                                                            <a href="#">
+                                                                Baths 
+                                                                :   
+                                                                {` `+property.acf.details_properties.baths}
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">
+                                                                sqm 
+                                                                :
+                                                                {` `+property.acf.details_properties.sqm}
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </SinglePropertyDetails>
+                                        </SingleProperty>
+                                    </Link>
+                                )
+                            })
+                        }
+                        {
+                            [0,1].map(element => {
                                 return(
                                     <Link href="/details">
                                         <SingleProperty key={element}>
@@ -135,7 +229,7 @@ const AllProperties = ({state, actions, libraries}) => {
 
                                                     <p>
                                                         <span>
-                                                        <IconContext.Provider value={{ color: "#b27c00", className: "global-class-name", size: "1rem" } }>
+                                                        <IconContext.Provider value={{ color: "#df9b00", className: "global-class-name", size: "1rem" } }>
                                                             <ImLocation />
                                                         </IconContext.Provider>
                                                         </span>
@@ -180,7 +274,9 @@ const AllProperties = ({state, actions, libraries}) => {
             </SectionFeaturedProperties>
 
         </>
-        
+        : <Loading/>
+        }
+        </>
      );
 }
 
@@ -194,7 +290,8 @@ export const ContainerBackgroundTour = styled.div`
 `
 
 export const BackgroundColor = styled.div`
-    background-image: linear-gradient(to top, rgba(34,49,63, .3), rgba(34, 49, 63, .3)); 
+
+    background-image: linear-gradient(to top, rgba(34,49,63, .5), rgba(34, 49, 63, .5)); 
     color: #FFF;
     display: flex;
     flex-direction: column;

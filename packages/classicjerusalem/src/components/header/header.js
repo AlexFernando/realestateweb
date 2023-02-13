@@ -25,7 +25,7 @@ const Header = ({ state }) => {
       <SocialMediaSuperior>
           <li>
             <a href="https://wa.me/+972586540969" alt="WhatsApp" aria-label="Link to WhatsApp" target="_blank" rel="noreferrer">
-              <IconContext.Provider value={{ color: "white", className: "global-class-name", size: "2rem" } }>
+              <IconContext.Provider value={{ color: "white", className: "global-class-name", size: "1.7rem" } }>
                 <FaWhatsapp />
               </IconContext.Provider>
             </a>
@@ -33,7 +33,7 @@ const Header = ({ state }) => {
 
           <li>
             <a href="https://www.facebook.com/ClassicJerusalem" alt="Share on Facebook" aria-label="Link to Facebook" target="_blank" rel="noreferrer">
-              <IconContext.Provider value={{ color: "white", className: "global-class-name", size: "2rem" } }>
+              <IconContext.Provider value={{ color: "white", className: "global-class-name", size: "1.7rem" } }>
                 <FaFacebook />
               </IconContext.Provider> 
             </a>
@@ -41,7 +41,7 @@ const Header = ({ state }) => {
 
           <li>
             <a href="https://www.instagram.com/classicjerusalem/" alt="Share on Instagram" aria-label="Link to Instagram" target="_blank" rel="noreferrer">
-              <IconContext.Provider value={{ color: "white", className: "global-class-name", size: "2rem" } }>
+              <IconContext.Provider value={{ color: "white", className: "global-class-name", size: "1.7rem" } }>
                 <FaInstagram />
               </IconContext.Provider>
             </a>
@@ -67,11 +67,10 @@ const AllNavbar = styled.div`
     align-items: center;
     width: 100%;
     height: 12vh;
-
-    border-bottom: 1px solid #b27c00;
+    border-bottom: 1px solid var(--golden);
   
     @media (max-width: 1024px) {
-      height: 15vh;
+      height: 100px;
     }
 `
 
@@ -103,7 +102,7 @@ const StyledLink = styled(Link)`
 `;
 
 
-const ImageStyled = styled(Image)`
+export const ImageStyled = styled(Image)`
     width: 90px;
     height: 90px;
     margin-left: 1rem;
@@ -117,7 +116,7 @@ const ImageStyled = styled(Image)`
     }
 `
 
-const SocialMediaSuperior = styled.ul`
+export const SocialMediaSuperior = styled.ul`
 
     display: flex;
 

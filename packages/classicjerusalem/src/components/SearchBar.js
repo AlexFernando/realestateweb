@@ -101,6 +101,7 @@ const SearchForm = styled.div`
 
     &:before {
         background-color: hsla(0,0%,100%,.15);
+        /* background-color: hsla(224, 40%, 18%, .9); */
         border-radius: 8px;
         bottom: -10px;
         content: "";
@@ -195,7 +196,29 @@ const ProperyType = styled.div`
 
     div {
         width: 100%;
+        /* select {
+            background-color: #fff;
+            border: 1px solid #bcbcbc;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #777;
+            line-height: 1.2;
+            height: 50px;
+            width: 215px;
+            padding: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+  
+       
+        } */
+
         select {
+            background: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='DimGray' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>") no-repeat;
+            background-position: calc(100% - 0.75rem) center !important;
+            -moz-appearance:none !important;
+            -webkit-appearance: none !important; 
+            appearance: none !important;
+            padding-right: 2rem !important;
             background-color: #fff;
             border: 1px solid #bcbcbc;
             border-radius: 8px;
@@ -206,8 +229,7 @@ const ProperyType = styled.div`
             /* width: 215px; */
             padding: 1rem;
             width: 100%;
-            /* box-sizing: border-box; */
-  
+
             &:focus {
                 outline: none;
             }  

@@ -40,7 +40,7 @@ const NavContainer = styled.nav`
   }
 `;
 
-const NavItem = styled.div`
+export const NavItem = styled.div`
   padding: 0;
   margin: 0 16px;
   color: var(--brand);

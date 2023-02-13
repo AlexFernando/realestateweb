@@ -2,7 +2,8 @@ import React from 'react';
 import {styled } from "frontity";
 import { IconContext } from "react-icons";
 import { FaTripadvisor, FaInstagram, FaWhatsapp, FaFacebook, FaEnvelope } from 'react-icons/fa';
-
+import {SocialMediaSuperior} from '../components/header/header'
+ 
 const InfoFooter = () => {
 
     return ( 
@@ -44,34 +45,36 @@ const InfoFooter = () => {
                 </ul>
             </ContactElement>
 
-            <ContactElement>
+            <IconsContainer>
+
                 <h4>Follow us</h4>
-            
                 <ul>
+                
                     <li>
                         <a href="https://wa.me/+972586540969" alt="WhatsApp" aria-label="Link to WhatsApp" target="_blank" rel="noreferrer">
-                        <IconContext.Provider value={{ color: "white", className: "global-class-name", size: "1.5rem" } }>
-                            <FaWhatsapp />+972586540969
+                        <IconContext.Provider value={{ color: "white", className: "global-class-name", size: "1.7rem" } }>
+                            <FaWhatsapp />
                         </IconContext.Provider>
                         </a>
                     </li>
+
                     <li>
-                        <a href="https://www.facebook.com/ClassicJerusalem/" alt="Share on Facebook" aria-label="Link to Facebook" target="_blank" rel="noreferrer">
-                        <IconContext.Provider value={{ color: "white", className: "global-class-name", size: "1.5rem" } }>
-                            <FaFacebook />Facebook
+                        <a href="https://www.facebook.com/ClassicJerusalem" alt="Share on Facebook" aria-label="Link to Facebook" target="_blank" rel="noreferrer">
+                        <IconContext.Provider value={{ color: "white", className: "global-class-name", size: "1.7rem" } }>
+                            <FaFacebook />
                         </IconContext.Provider> 
                         </a>
                     </li>
-                
+
                     <li>
                         <a href="https://www.instagram.com/classicjerusalem/" alt="Share on Instagram" aria-label="Link to Instagram" target="_blank" rel="noreferrer">
-                        <IconContext.Provider value={{ color: "white", className: "global-class-name", size: "1.5rem" } }>
-                            <FaInstagram /> Instagram
+                        <IconContext.Provider value={{ color: "white", className: "global-class-name", size: "1.7rem" } }>
+                            <FaInstagram />
                         </IconContext.Provider>
                         </a>
                     </li>
                 </ul>
-            </ContactElement>
+            </IconsContainer>
         </ContactContainer >
 
     );
@@ -146,3 +149,49 @@ const ContactElement = styled.div`
 
     }
 `;
+
+export const IconsContainer = styled.div`
+
+    display: flex;
+    flex-basis: 15%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+    line-height: 2;
+
+    @media(max-width: 768px) {
+        flex-basis: 100%;
+        margin: 1rem 0;
+        line-height: 2.5;
+    }
+
+    h4 {
+        font-size: 1rem;
+    }
+   
+    p {
+        font-size: 14px;
+        margin-top: 0;
+    }
+
+    ul {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: flex-start;
+        align-content: center;
+
+        li {
+            list-style: none;
+            margin-top: 0;
+            margin-right: 1rem;
+
+            a {
+                color : #fff;
+                font-size: 14px;
+                text-decoration: none;
+            }
+        }
+
+    }
+`
