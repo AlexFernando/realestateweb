@@ -66,7 +66,7 @@ const GeneralContact = ({state, actions, libraries}) => {
                 <ContactInfo>
                     <IframeMapContact 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d217152.94172576632!2d34.90260814069641!3d31.742799330483617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502c4edaeeb9e23%3A0x4ca1616bb452513d!2sDistrito%20de%20Jerusal%C3%A9n%2C%20Israel!5e0!3m2!1ses-419!2spe!4v1674433992414!5m2!1ses-419!2spe" 
-                        width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        width="800" height="600" style={{border:0}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                     </IframeMapContact>
                 </ContactInfo>
                 </ContainerRigth>
@@ -195,17 +195,10 @@ const Content = styled.div`
     }
 
     @media(max-width: 768px) {
-        padding-left: 1rem;
-    }
-  
-
-    //background-color: #b8e5f6;
-
-    @media(max-width: 768px) {
         flex-direction: column;
         justify-content: space-around;
         align-items: center;
-        padding: 0rem;
+        padding: 1rem;
     }
 
     .wp-block-group {

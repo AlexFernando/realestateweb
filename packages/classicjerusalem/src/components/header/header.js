@@ -15,7 +15,10 @@ const Header = ({ state }) => {
     <AllNavbar>
       <BrandContainer>
         <StyledLink link="/">
-          <ImageStyled alt="logo" src={logo} />  
+          <ImageStyled>
+            <Image alt="logo" src={logo} />  
+          </ImageStyled>
+         
         </StyledLink>
         
         <MobileMenu />
@@ -61,12 +64,16 @@ const AllNavbar = styled.div`
     position: fixed; /* Set the navbar to fixed position */
     top: 0; /* Position the navbar at the top of the page */
     z-index: 10;
-    background-color: #000;
+    background-color: #0c0c0c;
+    /* background-color: #101627; */
+    /* background-color: #323b54; */
+    /* background-color: #131a2d; */
+    /* background-color: #191919; */
     display: flex;
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    height: 12vh;
+    height: 90px;
     border-bottom: 1px solid var(--golden);
   
     @media (max-width: 1024px) {
@@ -102,18 +109,25 @@ const StyledLink = styled(Link)`
 `;
 
 
-export const ImageStyled = styled(Image)`
-    width: 90px;
-    height: 90px;
+export const ImageStyled = styled.div`
+    max-width: 80px;
+    height: auto;
     margin-left: 1rem;
     margin-top: 5px;
 
     @media(min-width: 1024px) {
-          width: 110px;
-          height: 100px;
-          margin-top: 0;
-          margin-left: 1rem;
+          max-width: 80px;
+          height: 80px;
     }
+
+    img {
+
+      max-width: 100%;
+      object-fit: cover;
+      height: auto;
+    }
+
+
 `
 
 export const SocialMediaSuperior = styled.ul`

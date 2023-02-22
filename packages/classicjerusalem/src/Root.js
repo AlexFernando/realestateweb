@@ -38,9 +38,13 @@ const Root = ({state, actions}) => {
                         /* --golden: #b27c00; */
                         /* --golden: #df9b00; */
                         --golden: #c88b00;
+                        /* --golden : #e28f2d; */
+                        /* --golden : #cba631; */
+                        /* --golden: #b6952c; */
                         --black: #000000;
                         --white: #ffffff;
                         --blue-elegant : #3e4c66;
+                        --blue-dark: #1C2641;
                         --bodycolor: #343434;
                     }
 
@@ -262,6 +266,10 @@ const Root = ({state, actions}) => {
                     p {
                         font-family: 'Montserrat', sans-serif;
                         font-weight: 400;
+                    }
+
+                    h1,h2,h3,h4,h5,h6 {
+                        font-family: 'Lato', sans-serif;
                     }
                 `}
             />

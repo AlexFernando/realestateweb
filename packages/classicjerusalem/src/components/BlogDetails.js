@@ -67,7 +67,7 @@ const BlogMain = styled.div`
 
     @media(max-width: 768px) { 
         max-width: 100%;
-        width: 300px;
+        width: 100%;
         padding-right: 0px;
         padding-left: 0px;
     }
@@ -119,16 +119,19 @@ const Content = styled.div`
     }
 
     img {
-        display: block;
-        height: 100%;
+       
         width: 100%;
-        object-fit: cover;
+        height: auto;
+        object-fit: contain;
     }
     
  
     @media(max-width: 1200px) {
         flex-direction: column;
         align-content: center;
+
+        padding-left: 0;
+        padding-right: 0;
     }
 
 

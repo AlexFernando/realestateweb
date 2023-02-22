@@ -6,12 +6,30 @@ import Loading from './Loading';
 import { IconContext } from "react-icons";
 import {ImLocation} from 'react-icons/im';
 import {SectionFeaturedProperties, MarginPaddingContainer, SectionTitle, UnderlineTitle} from './home'
+import {IoBedOutline} from 'react-icons/io5'
+import {FaShower} from 'react-icons/fa'
+import {TfiRulerAlt2} from 'react-icons/tfi'
+
 
 const RentSell = ({state, actions, libraries}) => {
 
-    const [StateProperty, setStateProperty] = useState('Sell')
+    const [StateProperty, setStateProperty] = useState('Rent')
 
+    /**Item Switch color */
+    const [activeItem, setActiveItem] = useState(0);
 
+    const handleItemClick = itemIndex => {
+      setActiveItem(itemIndex);
+
+      if(itemIndex === 0) {
+        setStateProperty('Rent')
+      }
+      else {
+        setStateProperty('Sell')
+      }
+    };
+    
+    /**End Item Switch color */
 
     useEffect( () => {
         actions.source.fetch("/properties")
@@ -28,10 +46,7 @@ const RentSell = ({state, actions, libraries}) => {
             const singlePost = state.source.properties[id];
             myPosts.push(singlePost);
         })
-        console.log("los post: ", myPosts)
     }
-
-
 
     return(
         <SectionFeaturedProperties>
@@ -43,22 +58,13 @@ const RentSell = ({state, actions, libraries}) => {
                     <span></span>
                 </UnderlineTitle>
 
-                <ButtonFunctionality>
-                        <p>Click the buttons to view properties for rent or buy</p>
-                        <p><strong>{`Properties for `+StateProperty}</strong></p>
-                        <ButtonContainer>
-                            <ButtonRent onClick={()=>setStateProperty('Rent')} >Rent</ButtonRent>
-                            <ButtonRent onClick={()=>setStateProperty('Sell')} >Buy</ButtonRent>
-                        </ButtonContainer>
+           
+                <ListContainer>
+                    <ListItem active={activeItem === 0} onClick={() => handleItemClick(0)}>For Rent </ListItem>
+                    <ListItem active={activeItem === 1} onClick={() => handleItemClick(1)}>To Buy</ListItem>
+                </ListContainer>
 
-                      
-                </ButtonFunctionality>
-
-          
-            
                 <PropertiesGrid>
-                 
-
                     {
                         StateProperty === 'Sell' ? 
                         myPosts.slice(0,3).map(property => {
@@ -88,36 +94,51 @@ const RentSell = ({state, actions, libraries}) => {
                                     </SinglePropertyThumb>
 
                                     <SinglePropertyDetails>
-                                        <div>
-                                            <h4>
-                                                <a href="#">{property.acf.details_properties.property_name}</a>
-                                            </h4>
+                                            <div>
+                                                <h4>
+                                                    {property.acf.details_properties.property_name}
+                                                </h4>
+    
+                                                <p>
+                                                    <span>
+                                                    <IconContext.Provider value={{ color: "#df9b00", className: "global-class-name", size: "1rem" } }>
+                                                        <ImLocation />
+                                                    </IconContext.Provider>
+                                                    </span>
+                                                    {property.acf.details_properties.address}
+                                                </p>
+                                                <ul>
+                                                    <li>
+                                                        <span>
+                                                            <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                                                <IoBedOutline />
+                                                            </IconContext.Provider>
+                                                        </span>
+                                                        
+                                                        <span>
+                                                            {property.acf.details_properties.beds}
+                                                        </span>
+                                                    </li>
 
-                                            <p>
-                                                <span>
-                                                <IconContext.Provider value={{ color: "#df9b00", className: "global-class-name", size: "1rem" } }>
-                                                    <ImLocation />
-                                                </IconContext.Provider>
-                                                </span>
-                                                {property.acf.details_properties.address}
-                                            </p>
-
-                                            <ul>
-                                                <li>
-                                                    <p>{property.acf.details_properties.beds}</p>
-                                                    Beds
-                                                </li>
-
-                                                <li>
-                                                    <p>{property.acf.details_properties.baths}</p>
-                                                    Bathroom
-                                                </li>
-                                                <li>
-                                                    <p>{property.acf.details_properties.sqm}</p>
-                                                    Sqm
-                                                </li>
-                                            </ul>
-                                        </div>
+                                                    <li>
+                                                        <span>
+                                                            <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                                                <FaShower />
+                                                            </IconContext.Provider>
+                                                        </span>
+                                                        <span>{property.acf.details_properties.baths}</span>
+                                                    </li>
+                                                    <li>
+                                                        <span>
+                                                            <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                                                <TfiRulerAlt2 />
+                                                            </IconContext.Provider>
+                                                        </span>
+                                                        <span>{property.acf.details_properties.sqm}</span>
+                                                        <span>Sqm</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                     </SinglePropertyDetails>
                                 </SingleProperty>
                                 </Link>
@@ -156,7 +177,7 @@ const RentSell = ({state, actions, libraries}) => {
                                         <SinglePropertyDetails>
                                             <div>
                                                 <h4>
-                                                    <a href="#">{property.acf.details_properties.property_name}</a>
+                                                    {property.acf.details_properties.property_name}
                                                 </h4>
     
                                                 <p>
@@ -167,20 +188,35 @@ const RentSell = ({state, actions, libraries}) => {
                                                     </span>
                                                     {property.acf.details_properties.address}
                                                 </p>
-    
                                                 <ul>
                                                     <li>
-                                                        <p>{property.acf.details_properties.beds}</p>
-                                                        Beds
+                                                        <span>
+                                                            <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                                                <IoBedOutline />
+                                                            </IconContext.Provider>
+                                                        </span>
+                                                        
+                                                        <span>
+                                                            {property.acf.details_properties.beds}
+                                                        </span>
                                                     </li>
-    
+
                                                     <li>
-                                                        <p>{property.acf.details_properties.baths}</p>
-                                                        Bathroom
+                                                        <span>
+                                                            <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                                                <FaShower />
+                                                            </IconContext.Provider>
+                                                        </span>
+                                                        <span>{property.acf.details_properties.baths}</span>
                                                     </li>
                                                     <li>
-                                                        <p>{property.acf.details_properties.sqm}</p>
-                                                        Sqm
+                                                        <span>
+                                                            <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                                                <TfiRulerAlt2 />
+                                                            </IconContext.Provider>
+                                                        </span>
+                                                        <span>{property.acf.details_properties.sqm}</span>
+                                                        <span>Sqm</span>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -232,44 +268,25 @@ export const PropertiesGrid = styled.div`
     }
 `
 
-const ButtonFunctionality = styled.div`
+const ListContainer = styled.ul`
     display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    margin-top: 3rem;
 
-    @media (max-width: 968px){
-        flex-direction: column;
-        padding-left: calc(1.5rem/2);
-        padding-right: calc(1.5rem/2);
-    }
 `
 
-const ButtonContainer = styled.div`
-    display: flex;
-    justify-content: space-around;
-`
-
-const ButtonRent = styled.button`
+const ListItem = styled.li`
+    cursor: pointer;   
+    list-style: none;
     text-decoration: none;
-    background-color: var(--golden);
-    text-transform: capitalize;
-    color: #fff;
-    padding: .8rem 1.5rem;
-    border-radius: 10px;
-    border-color: #fff;
-    text-align: center;
-    margin-bottom: 2rem;
-    font-weight: 300;
-    font-size: .8rem;
-    margin-left: 1rem;
-
-    &:focus {
-        background-color: #444;
-        transition: all 0.4s;
-    }
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: auto 3rem;
+    color: ${props => (props.active ? "#0c0c0c" : "#a6a6a6")};
+    border-bottom: ${props => props.active ? "2px solid #0c0c0c": "unset"};
 `
-
-
 
 export const SingleProperty = styled.div`   
     background-color: #fff;
@@ -290,13 +307,12 @@ export const SinglePropertyThumb = styled.div`
     overflow: hidden;
     margin: 10px 9px 0 10px;
     position: relative;
-    max-height: 28vh;
 `
 
 export const ImageCard = styled(Image)`
     opacity: .7;
     vertical-align: middle;
-    min-height: 220px;
+    min-height: 250px;
     max-width: 100%;
 `
 export const ImageContent = styled.div`
@@ -366,24 +382,19 @@ export const SinglePropertyDetails = styled.div`
     position: relative;
 
     div{
-        padding: 20px;
+        padding: 0 20px 20px 20px;
         text-align: center;
 
         h4 {
             font-size: 1.2rem;
             font-family: Lato;
-            color: #484848;
+            color: #333332;
             font-weight: 600;
             line-height: 1.2;
             margin-bottom: 15px;
             text-transform: capitalize;
-
-            a {
-                text-decoration: none;
-                color: #484848;
-            }
-
         }
+
 
         p {
             font-size: 1rem;
@@ -405,32 +416,17 @@ export const SinglePropertyDetails = styled.div`
         }
 
         li {
-            display: inline-block;
-            font-weight: 300;
-    
-            :not(:last-child) {
-                border-right: 1px solid #ccc;
-            }
-            
+            display: flex;
+            justify-content: space-between;
+            font-weight: 300;            
             font-size: 12px;
             font-weight: 500;
             padding: 0 8px;
-            color: #777;
-            
+            color: #333332;
 
-            a {
-                text-decoration: none;
-                color: #484848;
-                font-size: .8rem;
-            }
-
-            p {
-
-                font-size: 15px;
-                line-height: 18px;
-                margin-bottom: 5px;
-                color: #484848;
-                text-align: center;
+            span {
+                font-size: 200;
+                margin-left: 2px;
             }
         }
     }

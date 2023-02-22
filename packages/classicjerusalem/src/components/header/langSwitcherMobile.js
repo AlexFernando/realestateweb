@@ -15,7 +15,6 @@ const LangSwitcherMobile = ({state, actions}) => {
     linkSpanish = state.router.link;
     // linkFrench = state.router.link.replace("/es/", "/fr/")
     arrayEnglish = state.router.link.split("/");
-    console.log("link : " , arrayEnglish);
     if(arrayEnglish.length >= 5){
       myLink += arrayEnglish[2] +"/"+ arrayEnglish[3];
     }

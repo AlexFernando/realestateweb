@@ -5,6 +5,9 @@ import Link from './Link';
 import Loading from './Loading';
 import { IconContext } from "react-icons";
 import {ImLocation} from 'react-icons/im';
+import {IoBedOutline} from 'react-icons/io5'
+import {FaShower} from 'react-icons/fa'
+import {TfiRulerAlt2} from 'react-icons/tfi'
 
 const Properties = ({state, actions, libraries}) => {
 
@@ -23,7 +26,6 @@ const Properties = ({state, actions, libraries}) => {
             const singlePost = state.source.properties[id];
             myPosts.push(singlePost);
         })
-        console.log("los post: ", myPosts)
     }
 
 
@@ -62,31 +64,47 @@ const Properties = ({state, actions, libraries}) => {
                             <SinglePropertyDetails>
                                 <div>
                                     <h4>
-                                        <a href="#">{property.acf.details_properties.property_name}</a>
+                                        {property.acf.details_properties.property_name}
                                     </h4>
 
                                     <p>
-                                        <span>
+                                  
                                         <IconContext.Provider value={{ color: "#df9b00", className: "global-class-name", size: "1rem" } }>
                                             <ImLocation />
                                         </IconContext.Provider>
-                                        </span>
+                                   
                                         {property.acf.details_properties.address}
                                     </p>
 
                                     <ul>
                                         <li>
-                                            <p>{property.acf.details_properties.beds}</p>
-                                            Beds
+                                            <span>
+                                                <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                                    <IoBedOutline />
+                                                </IconContext.Provider>
+                                            </span>
+                                            
+                                            <span>
+                                                {property.acf.details_properties.beds}
+                                            </span>
                                         </li>
 
                                         <li>
-                                            <p>{property.acf.details_properties.baths}</p>
-                                            Bathroom
+                                            <span>
+                                                <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                                    <FaShower />
+                                                </IconContext.Provider>
+                                            </span>
+                                            <span>{property.acf.details_properties.baths}</span>
                                         </li>
                                         <li>
-                                            <p>{property.acf.details_properties.sqm}</p>
-                                            Sqm
+                                            <span>
+                                                <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                                    <TfiRulerAlt2 />
+                                                </IconContext.Provider>
+                                            </span>
+                                            <span>{property.acf.details_properties.sqm}</span>
+                                            <span>Sqm</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -96,72 +114,6 @@ const Properties = ({state, actions, libraries}) => {
                     )
                 })
             }
-
-            {/* {
-                [0,1].map(element => {
-                    return(
-                        <Link href="/details">
-                        
-                            <SingleProperty key={element} >
-                                <SinglePropertyThumb>
-                                    <ImageCard src="https://realstate.wildfreewalkingtours.com/wp-content/uploads/2023/02/image00001-1-768x512.jpeg" />
-                                    <ImageContent>
-                                        <ul>
-                                            <li>
-                                                <a>Featured</a>
-                                            </li>
-
-                                            <li>
-                                                <a>Rent</a>
-                                            </li>
-                                        </ul>
-
-                                        <p>
-                                            $
-                                            1400
-                                            <small>/mo</small>
-                                        </p>
-
-                                    </ImageContent>
-                                </SinglePropertyThumb>
-
-                                <SinglePropertyDetails>
-                                    <div>
-                                        <h4>
-                                            <a href="#"> Renovated Aparment</a>
-                                        </h4>
-
-                                        <p>
-                                            <span>
-                                            <IconContext.Provider value={{ color: "#df9b00", className: "global-class-name", size: "1rem" } }>
-                                                <ImLocation />
-                                            </IconContext.Provider>
-                                            </span>
-                                            The German Colony, Jerusalem.
-                                        </p>
-
-                                        <ul>
-                                            <li>
-                                                <p>4</p>
-                                                Beds
-                                            </li>
-
-                                            <li>
-                                                <p>2</p>
-                                                Bathroom
-                                            </li>
-                                            <li>
-                                                <p>190</p>
-                                                Sqm
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </SinglePropertyDetails>
-                            </SingleProperty>
-                        </Link>
-                    )
-                })
-            } */}
         
         </PropertiesGrid>
     )
@@ -178,16 +130,15 @@ export const PropertiesGrid = styled.div`
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 1rem;
     color: #444;
- 
     font-family: 'Lato';
-    margin-top: 4rem;
+    margin-top: 2rem;
 
     @media (max-width: 576px){
         grid-template-columns: repeat(1, 1fr);
         grid-gap: 1rem;
         margin: 2rem 0;
         padding-left: calc(1.5rem/2);
-    padding-right: calc(1.5rem/2);
+        padding-right: calc(1.5rem/2);
     }
 
     @media (min-width: 576px) and (max-width: 968px){
@@ -195,7 +146,7 @@ export const PropertiesGrid = styled.div`
         grid-gap: 1rem;
         margin: 2rem 0;
         padding-left: calc(1.5rem/2);
-    padding-right: calc(1.5rem/2);
+        padding-right: calc(1.5rem/2);
     }
 `
 
@@ -207,7 +158,6 @@ export const SingleProperty = styled.div`
     overflow: hidden;
     position: relative;
     transition: all .3s ease;
-  
 `
 
 export const SinglePropertyThumb = styled.div`
@@ -218,13 +168,11 @@ export const SinglePropertyThumb = styled.div`
     overflow: hidden;
     margin: 10px 9px 0 10px;
     position: relative;
-    max-height: 28vh;
 `
-
 export const ImageCard = styled(Image)`
     opacity: .7;
     vertical-align: middle;
-    min-height: 220px;
+    min-height: 250px;
     max-width: 100%;
 `
 export const ImageContent = styled.div`
@@ -294,23 +242,17 @@ export const SinglePropertyDetails = styled.div`
     position: relative;
 
     div{
-        padding: 20px;
+        padding: 0 20px 20px 20px;
         text-align: center;
 
         h4 {
             font-size: 1.2rem;
             font-family: Lato;
-            color: #484848;
+            color: #333332;
             font-weight: 600;
             line-height: 1.2;
             margin-bottom: 15px;
             text-transform: capitalize;
-
-            a {
-                text-decoration: none;
-                color: #484848;
-            }
-
         }
 
         p {
@@ -322,8 +264,6 @@ export const SinglePropertyDetails = styled.div`
             text-transform: uppercase;
         }
 
- 
-
         ul {
             display: flex;
             justify-content: center;
@@ -331,34 +271,19 @@ export const SinglePropertyDetails = styled.div`
             margin: 0;
             padding: 0;
         }
-
+     
         li {
-            display: inline-block;
-            font-weight: 300;
-    
-            :not(:last-child) {
-                border-right: 1px solid #ccc;
-            }
-            
+            display: flex;
+            justify-content: space-between;
+            font-weight: 300;            
             font-size: 12px;
             font-weight: 500;
             padding: 0 8px;
-            color: #777;
-            
+            color: #333332;
 
-            a {
-                text-decoration: none;
-                color: #484848;
-                font-size: .8rem;
-            }
-
-            p {
-
-                font-size: 15px;
-                line-height: 18px;
-                margin-bottom: 5px;
-                color: #484848;
-                text-align: center;
+            span {
+                font-size: 200;
+                margin-left: 2px;
             }
         }
     }

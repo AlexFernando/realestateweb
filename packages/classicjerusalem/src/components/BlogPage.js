@@ -29,8 +29,6 @@ const Blog = ({state, actions, libraries}) => {
 
             const singlePost = state.source.blog[id];
             myPosts.push(singlePost);
-
-            console.log("los post: ", myPosts)
         })
     }
 
@@ -164,7 +162,9 @@ const Container = styled.div`
     padding-left: 15px;
 
     @media(max-width: 768px) { 
-        max-width: 300px;
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
     }
 `
 
@@ -193,6 +193,7 @@ export const FeaturedMedia = styled.div`
     position: relative;
     overflow: hidden;
     width: 100%;
+    height: auto;
 
     img {
         transition: all 0.8s ease-in 0s;
@@ -202,9 +203,9 @@ export const FeaturedMedia = styled.div`
 `
 export const StyledImage = styled(Image)`
     display: block;
-    height: 100%;
     width: 100%;
-    object-fit: cover;
+    height: auto;
+    object-fit: contain;
 
 
 `

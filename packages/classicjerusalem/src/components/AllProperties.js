@@ -6,6 +6,10 @@ import {SingleProperty, SinglePropertyThumb, SinglePropertyDetails, ImageCard, I
 import Link from './Link';
 import { IconContext } from "react-icons";
 import {ImLocation} from 'react-icons/im';
+import {IoBedOutline} from 'react-icons/io5'
+import {FaShower} from 'react-icons/fa'
+import {TfiRulerAlt2} from 'react-icons/tfi'
+
 import Loading from './Loading';
 
 const AllProperties = ({state, actions, libraries}) => {
@@ -29,7 +33,6 @@ const AllProperties = ({state, actions, libraries}) => {
             const singlePost = state.source.properties[id];
             myPosts.push(singlePost);
         })
-        console.log("los post: ", myPosts)
     }
 
     return ( 
@@ -151,7 +154,7 @@ const AllProperties = ({state, actions, libraries}) => {
                                             <SinglePropertyDetails>
                                                 <div>
                                                     <h4>
-                                                        <a href="#">{property.acf.details_properties.property_name}</a>
+                                                        {property.acf.details_properties.property_name}
                                                     </h4>
 
                                                     <p>
@@ -163,28 +166,36 @@ const AllProperties = ({state, actions, libraries}) => {
                                                         {property.acf.details_properties.address}
                                                     </p>
 
+                                   
                                                     <ul>
                                                         <li>
-                                                            <a href="#">
-                                                                Beds
-                                                                :   
-                                                                {` `+property.acf.details_properties.beds}
-                                                            </a>
+                                                            <span>
+                                                                <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                                                    <IoBedOutline />
+                                                                </IconContext.Provider>
+                                                            </span>
+                                                            
+                                                            <span>
+                                                                {property.acf.details_properties.beds}
+                                                            </span>
                                                         </li>
 
                                                         <li>
-                                                            <a href="#">
-                                                                Baths 
-                                                                :   
-                                                                {` `+property.acf.details_properties.baths}
-                                                            </a>
+                                                            <span>
+                                                                <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                                                    <FaShower />
+                                                                </IconContext.Provider>
+                                                            </span>
+                                                            <span>{property.acf.details_properties.baths}</span>
                                                         </li>
                                                         <li>
-                                                            <a href="#">
-                                                                sqm 
-                                                                :
-                                                                {` `+property.acf.details_properties.sqm}
-                                                            </a>
+                                                            <span>
+                                                                <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                                                    <TfiRulerAlt2 />
+                                                                </IconContext.Provider>
+                                                            </span>
+                                                            <span>{property.acf.details_properties.sqm}</span>
+                                                            <span>Sqm</span>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -224,7 +235,7 @@ const AllProperties = ({state, actions, libraries}) => {
                                             <SinglePropertyDetails>
                                                 <div>
                                                     <h4>
-                                                        <a href="#">Luxury Aparment</a>
+                                                        Luxury Aparment
                                                     </h4>
 
                                                     <p>
@@ -238,26 +249,33 @@ const AllProperties = ({state, actions, libraries}) => {
 
                                                     <ul>
                                                         <li>
-                                                            <a href="#">
-                                                                Beds
-                                                                :   
-                                                                1 
-                                                            </a>
+                                                            <span>
+                                                                <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                                                    <IoBedOutline />
+                                                                </IconContext.Provider>
+                                                            </span>
+                                                            
+                                                            <span>
+                                                                2
+                                                            </span>
                                                         </li>
 
                                                         <li>
-                                                            <a href="#">
-                                                                Baths 
-                                                                :   
-                                                                1 
-                                                            </a>
+                                                            <span>
+                                                                <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                                                    <FaShower />
+                                                                </IconContext.Provider>
+                                                            </span>
+                                                            <span>2</span>
                                                         </li>
                                                         <li>
-                                                            <a href="#">
-                                                                sqm 
-                                                                :   
-                                                                100
-                                                            </a>
+                                                            <span>
+                                                                <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                                                    <TfiRulerAlt2 />
+                                                                </IconContext.Provider>
+                                                            </span>
+                                                            <span>100</span>
+                                                            <span>Sqm</span>
                                                         </li>
                                                     </ul>
                                                 </div>

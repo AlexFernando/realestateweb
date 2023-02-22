@@ -91,17 +91,26 @@ const SearchTabContent = styled.div`
 `
 
 const SearchForm = styled.div`
-    background-color: #fff;
+    /* background-color: #fff; */
     border-radius: 8px;
     padding: 30px 20px;
     position: relative;
     z-index: 9;
-    background-color: transparent;
-    background-image: linear-gradient(180deg, #FFFFFF 0%, #FFFFFFCC 100%);
-
+    /* background-color: transparent; */
+    /* background-image: linear-gradient(180deg, #000 0%, #000 100%); */
+    /* background-image: linear-gradient(180deg, #3e4c66 0%, #3e4c66 100%); */
+    /* background-image: linear-gradient(180deg, #1c2641 0%, #1c2641 100%); */
+    /* background-color: #1c2641; */
+    /* background-color: #000; */
+    box-shadow: 0px 0px 10px 0px rgb(255 255 255 / 85%);
+    background-color: #0c0c0c;
+    /* background-image: linear-gradient(180deg, #000 0%, #000 100%); */
+    border-style: solid;
+    border-color: #0c0c0c; 
+/* 
     &:before {
         background-color: hsla(0,0%,100%,.15);
-        /* background-color: hsla(224, 40%, 18%, .9); */
+        background-color: hsla(224, 40%, 18%, .9);
         border-radius: 8px;
         bottom: -10px;
         content: "";
@@ -110,7 +119,7 @@ const SearchForm = styled.div`
         right: -10px;
         top: -10px;
         z-index: -1;
-    }
+    } */
 `
 const SearchMultiFilter = styled.div`
     /* position: relative; */
@@ -196,21 +205,6 @@ const ProperyType = styled.div`
 
     div {
         width: 100%;
-        /* select {
-            background-color: #fff;
-            border: 1px solid #bcbcbc;
-            border-radius: 8px;
-            font-size: 14px;
-            color: #777;
-            line-height: 1.2;
-            height: 50px;
-            width: 215px;
-            padding: 1rem;
-            width: 100%;
-            box-sizing: border-box;
-  
-       
-        } */
 
         select {
             background: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='DimGray' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>") no-repeat;
@@ -223,7 +217,7 @@ const ProperyType = styled.div`
             border: 1px solid #bcbcbc;
             border-radius: 8px;
             font-size: 14px;
-            color: #777;
+            color: #484848;
             line-height: 1.2;
             height: 50px;
             /* width: 215px; */
