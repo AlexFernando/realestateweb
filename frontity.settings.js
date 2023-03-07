@@ -14,10 +14,44 @@ const settings = {
       "state": {
         "theme": {
           "menu": [
-            ["Home", "/"],
-            ["Properties", "/properties/"],
-            ["Blog", "/blogposts/"],       
-            ["Contact", "/contact/"]
+            {
+              name: "Home", 
+              link : "/",
+              submenu: []
+            },
+  
+            {
+              name: "For Rent",
+              link: "/#/",
+              submenu: [
+                {
+                  name: 'Furnished',
+                  link: '/furnished/'
+                },
+                {
+                  name: 'Unfurnished',
+                  link: '/unfurnished/'
+                },
+              ]
+            },
+
+            {
+              name: "For Sell",
+              link: "/sell/",
+              submenu: []
+            },
+
+            {
+              name: "Blog",
+              link: "/blogposts/",
+              submenu: []
+            },
+
+            {
+              name: "Contact",
+              link: "/contact/",
+              submenu: []
+            }
           ],
           "featured": {
             "showOnList": true,

@@ -5,7 +5,7 @@ import Nav from "./nav";
 import MobileMenu from "./menu";
 import Image from "@frontity/components/image";
 import LangSwitcher from './langSwitcher';
-import { FaTripadvisor, FaInstagram, FaFacebook, FaWhatsapp } from 'react-icons/fa';
+import {FaInstagram, FaFacebook, FaWhatsapp } from 'react-icons/fa';
 import { IconContext } from "react-icons";
 
 import logo from '../../images/logo.png'
@@ -65,10 +65,6 @@ const AllNavbar = styled.div`
     top: 0; /* Position the navbar at the top of the page */
     z-index: 10;
     background-color: #0c0c0c;
-    /* background-color: #101627; */
-    /* background-color: #323b54; */
-    /* background-color: #131a2d; */
-    /* background-color: #191919; */
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -116,8 +112,8 @@ export const ImageStyled = styled.div`
     margin-top: 5px;
 
     @media(min-width: 1024px) {
-          max-width: 80px;
-          height: 80px;
+          max-width: clamp(5.49rem, calc(2.22rem + 1.33vw), 8.82rem);
+          height: auto;
     }
 
     img {
@@ -126,8 +122,6 @@ export const ImageStyled = styled.div`
       object-fit: cover;
       height: auto;
     }
-
-
 `
 
 export const SocialMediaSuperior = styled.ul`
@@ -155,3 +149,4 @@ export const SocialMediaSuperior = styled.ul`
       }
     }
 `
+  

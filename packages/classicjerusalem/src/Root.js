@@ -5,23 +5,16 @@ import Footer from './components/footer';
 import FooterOne from './components/footer-one'
 import Home from './components/home';
 import Properties from './components/AllProperties'
+import RentFurnished from './components/RentFurnished';
+import RentUnfurnished from './components/RentUnfurnished'
+import SellProperties from './components/SellProperties'
 import Details from './components/Details';
 import Blog from './components/BlogPage';
 import BlogDetails from './components/BlogDetails'
 import GeneralContact from './components/MainContact';
 
-/**Root */
-import LatoLight from './google-fonts/S6u9w4BMUTPHh7USSwaPGQ3q5d0N7w.woff2'
-import LatoLight2 from './google-fonts/S6u9w4BMUTPHh7USSwiPGQ3q5d0.woff2'
-import LatoRegular from './google-fonts/S6uyw4BMUTPHjxAwXiWtFCfQ7A.woff2';
-import LatoRegular2 from './google-fonts/S6uyw4BMUTPHjx4wXiWtFCc.woff2';
-import LatoBold from './google-fonts/S6u9w4BMUTPHh6UVSwaPGQ3q5d0N7w.woff2';
-import LatoBold2 from './google-fonts/S6u9w4BMUTPHh6UVSwiPGQ3q5d0.woff2';
-import MontserratCyrrilicExt from './google-fonts/JTUSjIg1_i6t8kCHKm459WRhyyTh89ZNpQ.woff2'
-import MontserratCyrrilic from './google-fonts/JTUSjIg1_i6t8kCHKm459W1hyyTh89ZNpQ.woff2'
-import MontserratVietnamese from './google-fonts/JTUSjIg1_i6t8kCHKm459WZhyyTh89ZNpQ.woff2'
-import MontserratLatinExt from './google-fonts/JTUSjIg1_i6t8kCHKm459WdhyyTh89ZNpQ.woff2'
-import MontserratLatin from './google-fonts/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2';
+import WhatsAppFloating from './components/WhatsAppFloating';
+
 
 
 const Root = ({state, actions}) => {
@@ -46,215 +39,25 @@ const Root = ({state, actions}) => {
                         --blue-elegant : #3e4c66;
                         --blue-dark: #1C2641;
                         --bodycolor: #343434;
-                    }
 
-                    /* latin-ext */
-                    @font-face {
-                        font-family: 'Lato';
-                        font-style: normal;
-                        font-weight: 300;
-                        font-display: swap;
-                        src: url(${LatoLight}) format('woff2');
-                        unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+                        --step--2: clamp(0.69rem, calc(0.67rem + 0.11vw), 0.80rem);
+                        --step--1: clamp(0.83rem, calc(0.80rem + 0.17vw), 1.00rem);
+                        --step-0: clamp(1.00rem, calc(0.95rem + 0.25vw), 1.25rem);
+                        --step-1: clamp(1.20rem, calc(1.13rem + 0.36vw), 1.56rem);
+                        --step-2: clamp(1.44rem, calc(1.34rem + 0.51vw), 1.95rem);
+                        --step-3: clamp(1.73rem, calc(1.59rem + 0.71vw), 2.44rem);
+                        --step-4: clamp(2.07rem, calc(1.88rem + 0.98vw), 3.05rem);
+                        --step-5: clamp(2.49rem, calc(2.22rem + 1.33vw), 3.82rem);
                     }
-
-                      /* latin */
-                    @font-face {
-                        font-family: 'Lato';
-                        font-style: normal;
-                        font-weight: 300;
-                        font-display: swap;
-                        src: url(${LatoLight2}) format('woff2');
-                        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-                    }
-
-                      /* latin-ext */
-                    @font-face {
-                        font-family: 'Lato';
-                        font-style: normal;
-                        font-weight: 400;
-                        font-display: swap;
-                        src: url(${LatoRegular}) format('woff2');
-                        unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-                    }
-
-                     /* latin */
-                    @font-face {
-                        font-family: 'Lato';
-                        font-style: normal;
-                        font-weight: 400;
-                        font-display: swap;
-                        src: url(${LatoRegular2}) format('woff2');
-                        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-                    }
-
-                      /* latin-ext */
-                    @font-face {
-                        font-family: 'Lato';
-                        font-style: normal;
-                        font-weight: 700;
-                        font-display: swap;
-                        src: url(${LatoBold}) format('woff2');
-                        unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-                    }
-
-                      /* latin */
-                    @font-face {
-                        font-family: 'Lato';
-                        font-style: normal;
-                        font-weight: 700;
-                        font-display: swap;
-                        src: url(${LatoBold2}) format('woff2');
-                        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-                    }
-
-                      /* cyrillic-ext */
-                    @font-face {
-                        font-family: 'Montserrat';
-                        font-style: normal;
-                        font-weight: 300;
-                        font-display: swap;
-                        src: url(${MontserratCyrrilicExt}) format('woff2');
-                        unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-                    }
-
-                    /* cyrillic */
-                    @font-face {
-                        font-family: 'Montserrat';
-                        font-style: normal;
-                        font-weight: 300;
-                        font-display: swap;
-                        src: url(${MontserratCyrrilic}) format('woff2');
-                        unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-                    }
-
-                      /* vietnamese */
-                    @font-face {
-                        font-family: 'Montserrat';
-                        font-style: normal;
-                        font-weight: 300;
-                        font-display: swap;
-                        src: url(${MontserratVietnamese}) format('woff2');
-                        unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
-                    }
-
-                      /* latin-ext */
-                    @font-face {
-                        font-family: 'Montserrat';
-                        font-style: normal;
-                        font-weight: 300;
-                        font-display: swap;
-                        src: url(${MontserratLatinExt}) format('woff2');
-                        unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-                    }
-
-                      /* latin */
-                    @font-face {
-                        font-family: 'Montserrat';
-                        font-style: normal;
-                        font-weight: 300;
-                        font-display: swap;
-                        src: url(${MontserratLatin}) format('woff2');
-                        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-                    }
-
-                                        /* cyrillic-ext */
-                    @font-face {
-                        font-family: 'Montserrat';
-                        font-style: normal;
-                        font-weight: 400;
-                        font-display: swap;
-                        src: url(${MontserratCyrrilicExt}) format('woff2');
-                        unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-                    }
-                    /* cyrillic */
-                    @font-face {
-                        font-family: 'Montserrat';
-                        font-style: normal;
-                        font-weight: 400;
-                        font-display: swap;
-                        src: url(${MontserratCyrrilic}) format('woff2');
-                        unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-                    }
-                    /* vietnamese */
-                    @font-face {
-                        font-family: 'Montserrat';
-                        font-style: normal;
-                        font-weight: 400;
-                        font-display: swap;
-                        src: url(${MontserratVietnamese}) format('woff2');
-                        unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
-                    }
-                    /* latin-ext */
-                    @font-face {
-                        font-family: 'Montserrat';
-                        font-style: normal;
-                        font-weight: 400;
-                        font-display: swap;
-                        src: url(${MontserratLatinExt}) format('woff2');
-                        unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-                    }
-                    /* latin */
-                    @font-face {
-                        font-family: 'Montserrat';
-                        font-style: normal;
-                        font-weight: 400;
-                        font-display: swap;
-                        src: url(${MontserratLatin}) format('woff2');
-                        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-                    }
-                    /* cyrillic-ext */
-                    @font-face {
-                        font-family: 'Montserrat';
-                        font-style: normal;
-                        font-weight: 700;
-                        font-display: swap;
-                        src: url(${MontserratCyrrilicExt}) format('woff2');
-                        unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
-                    }
-                    /* cyrillic */
-                    @font-face {
-                        font-family: 'Montserrat';
-                        font-style: normal;
-                        font-weight: 700;
-                        font-display: swap;
-                        src: url(${MontserratCyrrilic}) format('woff2');
-                        unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-                    }
-                    /* vietnamese */
-                    @font-face {
-                        font-family: 'Montserrat';
-                        font-style: normal;
-                        font-weight: 700;
-                        font-display: swap;
-                        src: url(${MontserratVietnamese}) format('woff2');
-                        unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+1EA0-1EF9, U+20AB;
-                    }
-                    /* latin-ext */
-                    @font-face {
-                        font-family: 'Montserrat';
-                        font-style: normal;
-                        font-weight: 700;
-                        font-display: swap;
-                        src: url(${MontserratLatinExt}) format('woff2');
-                        unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-                    }
-                    /* latin */
-                    @font-face {
-                        font-family: 'Montserrat';
-                        font-style: normal;
-                        font-weight: 700;
-                        font-display: swap;
-                        src: url(${MontserratLatin}) format('woff2');
-                        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-                    }
-  
 
                     body {
                         margin: 0;
                         font-family: 'Montserrat', sans-serif;
                         overflow-x: hidden;
                         width: 100%;
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                        -webkit-text-stroke: 0.3px;
                         /*height: 100%;*/
                     }
 
@@ -264,12 +67,17 @@ const Root = ({state, actions}) => {
                     }      */
                      
                     p {
-                        font-family: 'Montserrat', sans-serif;
-                        font-weight: 400;
+                        font-family: 'Montserrat', sans-serif; 
+                        font-size: 400;
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
+                
                     }
 
                     h1,h2,h3,h4,h5,h6 {
                         font-family: 'Lato', sans-serif;
+                        -webkit-font-smoothing: antialiased;
+                        -moz-osx-font-smoothing: grayscale;
                     }
                 `}
             />
@@ -277,17 +85,24 @@ const Root = ({state, actions}) => {
             <Head>
                 <title>{state.frontity.title}</title>
                 <meta name="description" content={state.frontity.description} />
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+                <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,700;1,600&family=Nunito+Sans:wght@200;300;400;700&display=swap" rel="stylesheet" />
                 <html lang="en" />
                 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
             </Head>
             
             <Header />
+            <WhatsAppFloating />
 
             {data.isHomePage && <Home /> }
             {/* {data.isDetails && <Details />} */}
             {/* {data.isProperties && <Properties />} */}
-            {state.router.link === "/properties/" && <Properties /> }
+            {/* {state.router.link === "/properties/" && <Properties /> } */}
             {data.isProperties && <Details /> }
+            {state.router.link === "/furnished/" && <RentFurnished /> } 
+            {state.router.link === "/unfurnished/" && <RentUnfurnished/>}
+            {state.router.link === "/sell/" && <SellProperties/>}
             {state.router.link === "/blogposts/" && <Blog />}
             {data.isBlog && <BlogDetails />}
             {state.router.link === "/contact/" && <GeneralContact />}  

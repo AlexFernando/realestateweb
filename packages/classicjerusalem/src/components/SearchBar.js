@@ -64,9 +64,9 @@ const SearchBar = ({state, actions, libraries}) => {
                                 </ItemList>
 
                           
-                                    <div>
+                                    <ItemList>
                                         <button>Search</button>
-                                    </div>
+                                    </ItemList>
                                 
                             </ListFilter>
                         </SearchMultiFilter>
@@ -96,30 +96,15 @@ const SearchForm = styled.div`
     padding: 30px 20px;
     position: relative;
     z-index: 9;
-    /* background-color: transparent; */
-    /* background-image: linear-gradient(180deg, #000 0%, #000 100%); */
-    /* background-image: linear-gradient(180deg, #3e4c66 0%, #3e4c66 100%); */
-    /* background-image: linear-gradient(180deg, #1c2641 0%, #1c2641 100%); */
-    /* background-color: #1c2641; */
-    /* background-color: #000; */
     box-shadow: 0px 0px 10px 0px rgb(255 255 255 / 85%);
     background-color: #0c0c0c;
     /* background-image: linear-gradient(180deg, #000 0%, #000 100%); */
     border-style: solid;
     border-color: #0c0c0c; 
-/* 
-    &:before {
-        background-color: hsla(0,0%,100%,.15);
-        background-color: hsla(224, 40%, 18%, .9);
-        border-radius: 8px;
-        bottom: -10px;
-        content: "";
-        left: -10px;
-        position: absolute;
-        right: -10px;
-        top: -10px;
-        z-index: -1;
-    } */
+
+    @media (min-width: 1025px) and (max-width: 1367px) {
+        padding: 15px 10px;
+    }
 `
 const SearchMultiFilter = styled.div`
     /* position: relative; */
@@ -134,31 +119,33 @@ const ListFilter = styled.ul`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-
-    div {
-
+      
+    button {
+        border-radius: 8px;
+        background-color: var(--golden);
+        font-size: 14px;
+        font-size: clamp(.8rem, calc(0.40rem + 0.54vw), 1.20rem);
+        font-family: 'Lato', sans-serif;
+        color: #fff;
+        font-weight: 700;
+        line-height: 1.2;
+        height: 50px;
+        width: 215px;
+        /**add new lines styles */
+        width: 10vw;
+        height: 5vh;
+        /**new lines added */
+        transition: all .3s ease;
+        cursor: pointer;
+        border: none;
+    
         @media (max-width: 1200px) {
             width: 100%;
         }
-      
-        button {
-            border-radius: 8px;
-            background-color: var(--golden);
-            font-size: 16px;
-            color: #fff;
-            font-weight: 700;
-            line-height: 1.2;
-            height: 50px;
-            width: 215px;
-            transition: all .3s ease;
-            cursor: pointer;
-            border: none;
-       
-
-            @media (max-width: 1200px) {
-                width: 100%;
-            }
-        }
+    }
+    
+    @media (min-width: 1200px) and (max-width: 1367px) {
+        justify-content: center;
     }
 `
 const ItemList = styled.li`
@@ -167,25 +154,41 @@ const ItemList = styled.li`
     margin-right: 30px;
     margin-left: 30px;
     vertical-align: text-top;
+    /**add new lines styles */
+   
+    width: 10vw;
+    /**new lines added */
 
     @media (max-width: 1200px) {
         margin-bottom: 1rem;
         width: 40%;
         margin-right: 0;
         margin-left: 0;
+
+        &:nth-of-type(5){
+            width: 100%;
+        }
     }
+
+
 `
 const EnterSearchInput = styled.div`
+    
     margin-bottom: 0;
 
     div {
+        
         width: 100%;
+            /**add new lines styles */
+  
+    /**new lines added */
 
         input {
             background-color: #fff;
             border: 1px solid #bcbcbc;
             border-radius: 8px;
-            font-size: 14px;
+            font-size: clamp(.8rem, calc(0.40rem + 0.54vw), 1.20rem);
+            font-family: 'Lato', sans-serif;
             color: #484848;
             line-height: 1.2;
             height: 50px;
@@ -194,12 +197,17 @@ const EnterSearchInput = styled.div`
             box-sizing: border-box; 
             width: 100%;
 
-        &:focus {
-           outline: none;
-        }  
-    }
-    }
+            /**new style line added */
+            /* font-size: .8vw; */
+            height: 5vh;
+            /**end style added */
 
+            &:focus {
+                outline: none;
+            }  
+            
+        }
+    }
 `
 const ProperyType = styled.div`
 
@@ -217,12 +225,20 @@ const ProperyType = styled.div`
             border: 1px solid #bcbcbc;
             border-radius: 8px;
             font-size: 14px;
+            font-size: clamp(.83rem, calc(0.40rem + 0.54vw), 1.20rem);
+            font-family: 'Lato', sans-serif;
             color: #484848;
             line-height: 1.2;
             height: 50px;
             /* width: 215px; */
-            padding: 1rem;
+            padding: 1vh 1vw;
             width: 100%;
+            /**add new lines styles */
+            height: 5vh;
+            /* font-size: .8vw; */
+            align-self: center;
+            /**new lines added */
+
 
             &:focus {
                 outline: none;
@@ -231,6 +247,7 @@ const ProperyType = styled.div`
             &:after {
                 margin-right: 2rem;
             }
+
         }
     }
 `

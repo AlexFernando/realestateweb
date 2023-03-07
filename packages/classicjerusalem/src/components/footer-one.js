@@ -21,29 +21,7 @@ const InfoFooter = () => {
                     <li><a href="#">Blog Info</a> </li>
                 </ul>
             </ContactElement>
-            <ContactElement>
-                <h4>Stay in touch</h4>
-                <ul>
-                  
-                    <li>
-                        <a href="mailto:scohenben@gmail.com/" alt="gmail" aria-label="Link to gmail" target="_blank" rel="noreferrer">
-                        scohenben@gmail.com
-                        </a>
-                    </li>
 
-                    <li>
-                        <a href="#" alt="address" aria-label="address"  rel="noreferrer">
-                            San Sebastian Street, City Center, Jerusalem.
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://wa.me/+972586540969" alt="WhatsApp" aria-label="Link to WhatsApp" target="_blank" rel="noreferrer">
-                        +972586540969
-                        </a>
-                    </li>
-
-                </ul>
-            </ContactElement>
 
             <IconsContainer>
 
@@ -75,6 +53,30 @@ const InfoFooter = () => {
                     </li>
                 </ul>
             </IconsContainer>
+
+            <ContactElement>
+                <h4>Stay in touch</h4>
+                <ul>
+                  
+                    <li>
+                        <a href="mailto:scohenben@gmail.com/" alt="gmail" aria-label="Link to gmail" target="_blank" rel="noreferrer">
+                        scohenben@gmail.com
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" alt="address" aria-label="address"  rel="noreferrer">
+                            San Sebastian Street, City Center, Jerusalem.
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://wa.me/+972586540969" alt="WhatsApp" aria-label="Link to WhatsApp" target="_blank" rel="noreferrer">
+                        +972586540969
+                        </a>
+                    </li>
+
+                </ul>
+            </ContactElement>
         </ContactContainer >
 
     );
@@ -83,45 +85,52 @@ const InfoFooter = () => {
 export default InfoFooter;
 
 const ContactContainer = styled.div`
-    display: flex;
-    /* background-color: #333333; */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 2rem 8rem;
+    grid-gap: 1rem;
     background-color: #000;
     color: #fff;
-    justify-content: space-around;
-    align-content: center;
-    padding-right: calc(1rem + 1.5625vw);
-    padding-left: calc(1rem + 1.5625vw);
- 
+    justify-items: center;
+    
+    @media (max-width: 576px){
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 1rem;
+        padding: 1rem;
+        justify-items: normal;
+    }
 
-    @media(max-width: 768px) {
-        flex-direction: column;
-        justify-content: center;
+    @media (min-width: 576px) and (max-width: 1024px){
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1rem;
+        padding: 1rem 1.5rem;
+        justify-items: stretch;
+    }
+
+    @media (min-width: 1025px) and (max-width: 1440px){
+        padding: 1rem 2rem;
     }
 `;
 
 const ContactElement = styled.div`
 
-    display: flex;
-    flex-basis: 15%;
-    flex-wrap: wrap;
-    flex-direction: column;
-    justify-content: flex-start;
-    margin: 2rem 0;
+    display: block;
     line-height: 2;
 
     @media(max-width: 768px) {
         flex-basis: 100%;
         margin: 1rem 0;
-        line-height: 2.5;
     }
 
     h4 {
         font-size: 1rem;
+        font-size: var(--step-0);
     }
    
     p {
         font-size: 14px;
-        margin-top: 0;
+        font-size: var(--step--1);
+        margin-top: 0;      
     }
     /* @media(max-width: 768px) {
         padding: 1rem;
@@ -143,6 +152,7 @@ const ContactElement = styled.div`
             a {
                 color : #fff;
                 font-size: 14px;
+                font-size: var(--step--1);
                 text-decoration: none;
             }
         }
@@ -152,12 +162,8 @@ const ContactElement = styled.div`
 
 export const IconsContainer = styled.div`
 
-    display: flex;
-    flex-basis: 15%;
-    flex-direction: column;
-    flex-wrap: wrap;
-    margin: 2rem 0;
-    line-height: 2;
+    display: block;
+    line-height: 2;    
 
     @media(max-width: 768px) {
         flex-basis: 100%;
@@ -167,10 +173,12 @@ export const IconsContainer = styled.div`
 
     h4 {
         font-size: 1rem;
+        font-size: var(--step-0);
     }
    
     p {
         font-size: 14px;
+        font-size: var(--step--1);
         margin-top: 0;
     }
 
@@ -189,6 +197,7 @@ export const IconsContainer = styled.div`
             a {
                 color : #fff;
                 font-size: 14px;
+                font-size: var(--step--1);
                 text-decoration: none;
             }
         }

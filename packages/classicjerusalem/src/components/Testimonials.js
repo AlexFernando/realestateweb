@@ -134,17 +134,17 @@ const ContainerSection = styled.div`
     h2 {
         font-family: 'Lato';
         font-size: 35px;
+        font-size: var(--step-2);
         font-weight: 400;
-        letter-spacing: -1px;
         margin-bottom: 10px;
         text-align: center;
     }
 
     p {
-        color: #7A7A7A;
         text-align: center;
-        letter-spacing: -1px;
-        margin-bottom: 3rem;
+        margin-bottom: clamp(1rem, calc(.5rem + 1.98vw), 3.05rem);
+        font-size: var(--step--1);
+        color: #303030;
     }
 `
 
@@ -161,7 +161,7 @@ const ContainerTestimonial = styled.div`
         margin: 2rem 0;
     }
 
-    @media (min-width: 576px) and (max-width: 968px){
+    @media (min-width: 576px) and (max-width: 1024px){
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 1rem;
         margin: 2rem 0;
@@ -171,15 +171,14 @@ const ContainerTestimonial = styled.div`
 const CardTestimonial = styled.div`
     height: fit-content;
     background-color: #EDF9FF;
-    padding: 2rem;
+    padding: clamp(.8rem, calc(.5rem + .5vw), 2rem);
     box-sizing: border-box;
-    font-weight: 300;
     height: 100%;
 `
-const TestimonialParagraphs = styled.div`
+const TestimonialParagraphs = styled.p`
     line-height: 1.8;
     margin: 1rem auto;
-    font-size: 14px;
+    font-size: var(--step--1);
     text-align: justify;
 `
 
@@ -189,7 +188,7 @@ const ImageContainer = styled.div`
     align-items: center;
 
     strong {
-        font-size: 14px;
+        font-size: var(--step--1);
     }
 `
 

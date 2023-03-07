@@ -4,6 +4,7 @@ import Image from "@frontity/components/image";
 import Link from './Link';
 
 import Loading from './Loading';
+import Loader from './Loading2'
 import Properties from './properties';
 import RentSell from './RentSellComponent'
 import SearchBar from './SearchBar'
@@ -12,6 +13,8 @@ import logo from '../images/logo.png';
 
 import { IconContext } from "react-icons";
 import {GiFamilyHouse, GiSpookyHouse, GiHouse} from 'react-icons/gi';
+
+import Hero from './ParallaxBg';
 
 const Home = ({state, actions, libraries}) => {
 
@@ -58,8 +61,9 @@ const Home = ({state, actions, libraries}) => {
                                 </Overlay>
                         
                             </Main>
-                 
-            
+
+
+        
 
                 
             
@@ -172,28 +176,26 @@ export const Main = styled.section`
   position: relative;
   /* margin-top: 7vh; */
 
+    @media (min-width: 1025px) and (max-width: 1367px) {
+        height: 450px;
+    }
 
-    @media(max-width: 1672px) {
+    @media (min-width: 1368px) and (max-width: 1672px) {
         height: 600px;
     }
   
 `
 
 export const Overlay = styled.div`
+
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-size: cover;
-
     font-family: 'Lato';
-    /* background-image: linear-gradient(180deg, #2B3547  0%, rgba(0, 66, 116, 0.55) 100%); */
-
-    /* background-image: linear-gradient(180deg, #485977  0%, rgba(0, 66, 116, 0.55) 100%); */
-    /* background-image: linear-gradient(180deg, #485977  0%, rgba(226,143,45, 0.55) 100%); */
-    /* background-image: linear-gradient(180deg, rgba(0,0,0,.8)  0%, rgba(203,166,49, 0.4) 100%); */
-    background-image: linear-gradient(180deg, rgba(0,0,0,.8)  0%, rgba(200,139,0, 0.4) 100%);
+    background-image: linear-gradient(180deg, rgba(0,0,0,.5)  0%, rgba(200,139,0, 0.4) 100%);
     background-repeat: no-repeat;
 
     @media(max-width: 768px) {
@@ -259,38 +261,38 @@ const TextoImagenContainer = styled.div`
 `
 const TextoImagen = styled.div`
 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        align-content: center;
-   
-        h2 {
-            text-transform: uppercase;
-            font-size: 1.5rem;
-            margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+
+    h2 {
+        text-transform: uppercase;
+        font-size: 1.5rem;
+        margin-top: 5rem;
+        font-weight: 500;
+
+        @media(min-width: 1368px) {
+            font-size: 2rem;
+            padding-top: 0;
             font-weight: 900;
-
-            @media(min-width: 768px) {
-                font-size: 2rem;
-                padding-top: 0;
-            }
         }
+    }
 
-        h3 {
-            text-transform: uppercase;
+    h3 {
+        text-transform: uppercase;
+        font-size: 1.2rem;
+        font-weight: 300;
+        margin-top: 0;
+        margin-bottom: 2rem;
+        line-height: 1.8;
+
+        @media(min-width: 1368px) {
             font-size: 1.5rem;
-            font-weight: 300;
-            margin-top: 0;
+            font-weight: 500;
             margin-bottom: 2rem;
-            line-height: 1.8;
-
-            @media(min-width: 768px) {
-                font-size: 1.5rem;
-                font-weight: 500;
-                margin-bottom: 2rem;
-            }
         }
-     
+    }
 `
 
 
@@ -318,6 +320,11 @@ const ButtonParallax = styled.div`
         font-weight: 500;
         font-size: 1rem;
 
+        @media(max-width: 1368px) {
+            padding: .8rem 1rem;
+            font-size: .8rem;
+        }
+
         &:hover {
             background-color: #0c0c0c;
             transition: all 0.4s;
@@ -327,49 +334,10 @@ const ButtonParallax = styled.div`
 
 /**ENDS BACKGROUND VIDEO */
   
-/**ABOUT SECTION */
-
-export const HeaderContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    p {
-        text-transform: uppercase;
-        font-size: 1.5rem;
-        padding: 1rem 5rem;
-
-        @media(max-width: 768px) {
-            font-size: 1.2rem;
-            padding: 1rem;
-        }
-    }
-`
-export const Title = styled.h2`
-
-    font-weight: 500;
-    line-height: 1;
-    letter-spacing: 2px;
-    margin: 1.5rem 15%;
-    text-transform: capitalize;
-    text-align: center;
- 
-    @media(min-width: 768px) {
-        font-size: 2.5rem;
-    }
-
-    @media(max-width: 768px) {
-        font-size: 1.9rem;
-        text-align: center;
-        margin: 1rem 15%;
-    }
-`
-
 /*SECTION ABOUT */
 export const SectionAbout = styled.section`
     background-color: #fff;
-    padding: 1rem 0 10rem 0;
+    padding: 1rem 0 1rem 0;
     position: relative;
     color: #fff;
     background: linear-gradient(180deg, rgba(0,0,0,.8)  0%, rgba(200,139,0, 0.4) 100%);
@@ -383,19 +351,20 @@ export const SectionAbout = styled.section`
 const CardAbout = styled.div`
     padding: 2rem;
     box-sizing: border-box;
-    font-weight: 300;
     height: 100%;
 `
 const AboutParagraph = styled.div`
     line-height: 1.8;
     margin: 1rem auto;
-    font-size: 14px;
     text-align: justify;
 
     p {
-        font-size: 1rem;
+        font-size: var(--step--1);
+
+        @media (min-width: 1024px) and (max-width: 1440px){
+            font-size: var(--step--2);
+        }
     }
-   
 `
 
 const IconsContainer = styled.div`
@@ -415,21 +384,40 @@ const IconText = styled.div`
    flex-direction: column;
    flex-basis: 30%;
    align-items: center;
+   text-align: center;
+
+   p {
+     font-size: var(--step--1);
+
+        @media (min-width: 1024px) and (max-width: 1440px){
+            font-size: var(--step--2);
+        }
+   }
 `
 
 /**SECTION FEATURED PROPERTIES */
 export const SectionTitle = styled.h2`
     font-family: 'Lato';
     font-size: 35px;
+    font-size: var(--step-2);
     font-weight: 400;
     letter-spacing: -1px;
     margin-bottom: 10px;
     text-align: center;
+    
+    @media (min-width: 1024px) and (max-width: 1440px){
+        font-size: var(--step-1);
+    }
 `
 export const UnderlineTitle = styled.div`
     height: 35px;
+    height: var(--step-2);
     position: relative;
     text-align: center;
+
+    @media (min-width: 1024px) and (max-width: 1440px){
+        height: var(--step-1);
+    }
 
     span {
         position: absolute;
@@ -441,6 +429,7 @@ export const UnderlineTitle = styled.div`
 
         &:before {
             width: 140px;
+            width: clamp(4.49rem, calc(5.62rem + 1.33vw), 7.82rem);
             height: 1px;
             background-color: #cba631;
             position: absolute;
@@ -449,10 +438,16 @@ export const UnderlineTitle = styled.div`
             content: '';
             background-color: #c0962d;
             transform: translateX(-50%);
+
+            @media (min-width: 1024px) and (max-width: 1440px){
+                width: clamp(2.49rem, calc(3.62rem + 1.33vw), 5.82rem);
+            }
+
         }
 
         &:after {
             width: 100px;
+            width: clamp(2.49rem, calc(2.62rem + 1.33vw), 4.82rem);
             height: 1px;
             position: absolute;
             left: 50%;
@@ -460,6 +455,10 @@ export const UnderlineTitle = styled.div`
             content: '';
             background-color: #c0962d;
             transform: translateX(-50%);
+
+            @media (min-width: 1024px) and (max-width: 1440px){
+                width: clamp(1.49rem, calc(1.62rem + 1.33vw), 3.82rem);
+            }
         }
     }
 `
@@ -471,9 +470,29 @@ export const SectionFeaturedProperties = styled.section`
 `
 
 export const MarginPaddingContainer = styled.div`
-    max-width: 77.5rem;
-    margin: 2% auto;
-    text-align: center;
+    width: min(98%, 77.5rem + 10vw);
+    margin-inline: auto;
+    text-align: center; 
+    /* margin: 2% auto;
+    text-align: center; */
+
+    @media (min-width: 1199px) and (max-width: 1440px){
+        width: min(98%, 57.5rem + 10vw);
+    }
+
+
+    /* @media (min-width: 1280px) and (max-width: 1368px){
+        max-width: 80vw;
+    }
+
+    @media (min-width: 1280px) and (max-width: 1420px){
+        max-width: 80vw;
+    }
+
+
+    @media (min-width: 1420px){
+        max-width: 67vw;
+    } */
 
 `
 
@@ -482,21 +501,18 @@ export const ContactBackgroundImage = styled.section`
     background-image:url('https://realstate.wildfreewalkingtours.com/wp-content/uploads/2023/01/aparment_background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-
     /* Set a specific height */
     min-height: 400px; 
-
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: center;
-
 `
 
 const ContactLayerGradient = styled.div`
     display: flex;
     color: #FFF;
     display: flex;
-    padding: 1.5rem;
+    padding: 1.5rem 2rem;
     justify-content: center;
     align-content: flex-start;
     overflow-wrap: break-word;
@@ -505,51 +521,62 @@ const ContactLayerGradient = styled.div`
     background-image: linear-gradient(180deg, rgba(0,0,0,.8)  0%, rgba(200,139,0, 0.4) 100%);
     height: 100%;
     
-
     @media(max-width: 768px) {
         flex-direction: column;
         align-content: center;
     }
-
 `
 
 const ContactText = styled.div`
     margin: auto 2rem;
     flex-basis: 30%;
+    
     @media(max-width: 768px) {
         margin: auto 0rem;
     }
 
+    h2 {
+        font-size: var(--step-2);
+        font-weight: 400;
+
+        @media (min-width: 1024px) and (max-width: 1440px){
+            font-size: var(--step-1);
+        }
+    }
+
     p {
-        line-height: 1.5;
+        line-height: 1.8;
+        font-size: var(--step--1);
+        font-weight: 300;
+        letter-spacing: 1px;
+
+        @media (min-width: 1024px) and (max-width: 1440px){
+            font-size: var(--step--2);
+        }
     }
 `
 
 const ContactForm = styled.div`
 
     display: flex;
-    flex-basis: 30%;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     background: rgba(255, 255, 255, 1);
     border-radius: .4rem;
-    padding: 3rem;
+    padding: 2rem;
     font-size: 1.1rem;
     border: 1px solid #ebebeb;
     line-height: 1.2;
     margin: 3rem 2rem;
 
-    h4{
-        font-size: 18px;
-        color: #484848;
-        line-height: 1.2;
-        margin-bottom: 20px;
-        font-weight: 600;
+    @media (min-width: 1024px) and (max-width: 1440px){
+        padding: 1.5rem;
     }
 
     p {
         font-size: 14px;
+        font-size: clamp(.8rem, calc(0.40rem + 0.54vw), 1.20rem);
         color: #484848;
         line-height: 1.714;
         margin-bottom: 20px;
@@ -560,7 +587,7 @@ const ContactForm = styled.div`
         justify-content: space-around;
         align-items: center;
         padding: 1rem;
-        margin: auto 0rem;
+        margin: auto;
     }
 
     .wp-block-group {
@@ -585,8 +612,6 @@ const ContactForm = styled.div`
 
         h3 {
             margin-bottom: 4rem;
-
-
         }
     }
 
@@ -600,16 +625,15 @@ const ContactForm = styled.div`
 
 
     input, textarea, select {
-    
         height: 100%;
         padding:10px;
         color: #484848;
         margin: 0; 
         border: 1px solid rgba(97, 97, 97, 0.4);
         border-radius:5px;
-        width:90%;
-        font-family:inherit;
-        font-size: 1rem;
+        max-width:100%;
+        margin-inline: auto;
+        font-family: 'Lato', sans-serif;
     }
 
     @media(max-width: 768px) {
@@ -631,6 +655,7 @@ const ContactForm = styled.div`
         border: 1px solid #fff;
         font-weight: 500;
         font-size: 1rem;
+        font-size: clamp(.8rem, calc(0.40rem + 0.54vw), 1.20rem);
         text-transform: capitalize;
         color: #FFF;
         cursor: pointer;

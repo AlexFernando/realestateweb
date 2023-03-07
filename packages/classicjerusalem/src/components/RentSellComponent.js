@@ -286,6 +286,10 @@ const ListItem = styled.li`
     margin: auto 3rem;
     color: ${props => (props.active ? "#0c0c0c" : "#a6a6a6")};
     border-bottom: ${props => props.active ? "2px solid #0c0c0c": "unset"};
+
+    @media (min-width: 1024px) and (max-width: 1440px){
+        font-size: var(--step--1);
+    }
 `
 
 export const SingleProperty = styled.div`   
@@ -310,9 +314,9 @@ export const SinglePropertyThumb = styled.div`
 `
 
 export const ImageCard = styled(Image)`
-    opacity: .7;
+    opacity: .6;
     vertical-align: middle;
-    min-height: 250px;
+    min-height: 220px;
     max-width: 100%;
 `
 export const ImageContent = styled.div`
@@ -365,15 +369,20 @@ export const ImageContent = styled.div`
     p {
         bottom: 15px;
         font-size: 22px;
+        font-size: var(--step-0);
         /* font-family: Nunito; */
         color: #fff;
-        font-weight: 700;
+        font-weight: 600;
         left: 20px;
         line-height: 1.2;
         position: absolute;
 
         small {
             font-size: 14px;
+        }
+
+        @media (min-width: 1024px) and (max-width: 1440px){
+            font-size: var(--step--1);
         }
     }
 `
@@ -387,22 +396,32 @@ export const SinglePropertyDetails = styled.div`
 
         h4 {
             font-size: 1.2rem;
+            font-size: var(--step-0);
             font-family: Lato;
             color: #333332;
-            font-weight: 600;
+            font-weight: 400;
             line-height: 1.2;
             margin-bottom: 15px;
             text-transform: capitalize;
+
+            @media (min-width: 1024px) and (max-width: 1440px){
+                font-size: var(--step--1);
+            }
         }
 
 
         p {
             font-size: 1rem;
+            font-size: var(--step--1);
             font-family: Lato;
             color: var(--golden);
             line-height: 1;
             font-weight: 400;
             text-transform: uppercase;
+
+            @media (min-width: 1024px) and (max-width: 1440px){
+                font-size: var(--step--2);
+            }
         }
 
  
@@ -420,6 +439,7 @@ export const SinglePropertyDetails = styled.div`
             justify-content: space-between;
             font-weight: 300;            
             font-size: 12px;
+            font-size: var(--step--2);
             font-weight: 500;
             padding: 0 8px;
             color: #333332;

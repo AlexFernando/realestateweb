@@ -158,6 +158,8 @@ export const SingleProperty = styled.div`
     overflow: hidden;
     position: relative;
     transition: all .3s ease;
+
+
 `
 
 export const SinglePropertyThumb = styled.div`
@@ -170,9 +172,10 @@ export const SinglePropertyThumb = styled.div`
     position: relative;
 `
 export const ImageCard = styled(Image)`
-    opacity: .7;
+    opacity: .6;
+
     vertical-align: middle;
-    min-height: 250px;
+    min-height: 200px;/**to make responsive */
     max-width: 100%;
 `
 export const ImageContent = styled.div`
@@ -225,12 +228,17 @@ export const ImageContent = styled.div`
     p {
         bottom: 15px;
         font-size: 22px;
+        font-size: var(--step-0);
         /* font-family: Nunito; */
         color: #fff;
-        font-weight: 700;
+        font-weight: 600;
         left: 20px;
         line-height: 1.2;
         position: absolute;
+
+        @media (min-width: 1024px) and (max-width: 1440px){
+            font-size: var(--step--1);
+        }
 
         small {
             font-size: 14px;
@@ -247,21 +255,32 @@ export const SinglePropertyDetails = styled.div`
 
         h4 {
             font-size: 1.2rem;
-            font-family: Lato;
+            font-size: var(--step-0);
+            font-family: 'Lato';
             color: #333332;
-            font-weight: 600;
+            font-weight: 400;
             line-height: 1.2;
             margin-bottom: 15px;
             text-transform: capitalize;
+
+
+            @media (min-width: 1024px) and (max-width: 1440px){
+                font-size: var(--step--1);
+            }
         }
 
         p {
             font-size: 1rem;
+            font-size: var(--step--1);
             font-family: Lato;
             color: var(--golden);
             line-height: 1;
             font-weight: 400;
             text-transform: uppercase;
+
+            @media (min-width: 1024px) and (max-width: 1440px){
+                font-size: var(--step--2);
+            }
         }
 
         ul {
@@ -277,7 +296,8 @@ export const SinglePropertyDetails = styled.div`
             justify-content: space-between;
             font-weight: 300;            
             font-size: 12px;
-            font-weight: 500;
+            font-size: var(--step--2);
+            font-weight: 400;
             padding: 0 8px;
             color: #333332;
 
