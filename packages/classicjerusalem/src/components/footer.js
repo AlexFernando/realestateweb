@@ -2,7 +2,8 @@ import React from 'react';
 import {styled} from "frontity";
 
 const FooterContainer = styled.div`
-    background-color: #000;
+    /* background-color: #000; */
+    background-color: var(--main-color);
     display: flex;
     flex-direction: column;
     border-top: 1px solid var(--golden);

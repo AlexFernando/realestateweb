@@ -14,7 +14,7 @@ const SearchBar = ({state, actions, libraries}) => {
                                 <ItemList>
                                     <EnterSearchInput>
                                         <div>
-                                            <input type="text" placeholder="Enter keyword" />
+                                            <input type="text" placeholder="Property ID" />
                                         </div>
 
                                     </EnterSearchInput>
@@ -24,11 +24,28 @@ const SearchBar = ({state, actions, libraries}) => {
                                     <ProperyType>
                                         <div>
                                             <select>
-                                                <option value>Property Type</option>
-                                                <option>Apartment</option>
-                                                <option>House</option>
-                                                <option>Condo</option>
-                                                <option>Bungalows</option>
+                                                <option value>Neighborhood</option>
+                                                <option>Abu Tor</option>
+                                      
+                                                <option>
+                                
+                                                    Arnona
+                                                </option>
+                                                <option >
+                                                    Baka
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </ProperyType>
+                                </ItemList>
+
+                                <ItemList>
+                                    <ProperyType>
+                                        <div>
+                                            <select>
+                                                <option value>Type</option>
+                                                <option>For Rent</option>
+                                                <option>For Sale</option>
                                             </select>
                                         </div>
                                     </ProperyType>
@@ -39,10 +56,11 @@ const SearchBar = ({state, actions, libraries}) => {
                                         <div>
                                             <select>
                                                 <option value>Bedrooms</option>
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4 or more</option>
+                                                <option>1 bedroom</option>
+                                                <option>2 bedrooms</option>
+                                                <option>3 bedrooms</option>
+                                                <option>4 bedrooms</option>
+                                                <option>5 bedrooms</option>
                                             </select>
                                         </div>
                                     </ProperyType>
@@ -85,7 +103,7 @@ const MarginTop = styled.div`
 `
 
 const SearchTabContent = styled.div`
-    margin-top: 30px;
+    margin-top: 0px;
     display: flex;
     justify-content: center;
 `
@@ -95,13 +113,15 @@ const SearchForm = styled.div`
     border-radius: 8px;
     padding: 30px 20px;
     position: relative;
-    z-index: 9;
+    z-index: 0;
     box-shadow: 0px 0px 10px 0px rgb(255 255 255 / 85%);
-    background-color: #0c0c0c;
-    /* background-image: linear-gradient(180deg, #000 0%, #000 100%); */
-    border-style: solid;
-    border-color: #0c0c0c; 
-
+    /* background-color: #0c0c0c; */
+    background-color: transparent;
+    /* background-color: var(--main-color); */
+    background-image: linear-gradient(180deg, #3e4c66 0%, #1c2641 20%);
+    /* background-image: linear-gradient(180deg, #FFFFFF 0%, #FFFFFFCC 100%); */
+    border-style: .5px solid #3e4c66;
+     
     @media (min-width: 1025px) and (max-width: 1367px) {
         padding: 15px 10px;
     }
@@ -122,7 +142,7 @@ const ListFilter = styled.ul`
       
     button {
         border-radius: 8px;
-        background-color: var(--golden);
+        background-color: var(--golden-color);
         font-size: 14px;
         font-size: clamp(.8rem, calc(0.40rem + 0.54vw), 1.20rem);
         font-family: 'Lato', sans-serif;

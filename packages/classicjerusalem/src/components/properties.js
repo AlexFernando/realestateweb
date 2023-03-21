@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { connect, styled, css, Global } from "frontity";
+import { connect, styled, css, Global, keyframes } from "frontity";
 import Image from "@frontity/components/image";
 import Link from './Link';
 import Loading from './Loading';
@@ -8,6 +8,8 @@ import {ImLocation} from 'react-icons/im';
 import {IoBedOutline} from 'react-icons/io5'
 import {FaShower} from 'react-icons/fa'
 import {TfiRulerAlt2} from 'react-icons/tfi'
+import LinkButtonHome from './LinkButtonHome';
+import ZoomInOnScroll from './ZoomInEffect'
 
 const Properties = ({state, actions, libraries}) => {
 
@@ -28,8 +30,6 @@ const Properties = ({state, actions, libraries}) => {
         })
     }
 
-
-
     return(
 
         <PropertiesGrid>
@@ -37,11 +37,17 @@ const Properties = ({state, actions, libraries}) => {
             {
                 myPosts.slice(0,3).map(property => {
                     return(
+                    <ZoomInOnScroll delay={0.2} duration={1} distance="200px">
                     <Link href={property.link}>
                         <SingleProperty key={property.id}>
                             <SinglePropertyThumb>
+                                <Ribbon>
+                                    <span>
+                                        Exclusivity
+                                    </span>
+                                </Ribbon>
                                 <ImageCard src={property.acf.images_carousel.img_one.sizes.medium_large} />
-                                <ImageContent>
+                                {/* <ImageContent>
                                     <ul>
                                         <li>
                                             <a>Featured</a>
@@ -58,7 +64,12 @@ const Properties = ({state, actions, libraries}) => {
                                         <small>/mo</small>
                                     </p>
 
-                                </ImageContent>
+                                </ImageContent> */}
+
+                                <TextBand>
+                                    <span>$1230 </span>
+                                    | FOR SALE
+                                </TextBand>
                             </SinglePropertyThumb>
 
                             <SinglePropertyDetails>
@@ -107,10 +118,15 @@ const Properties = ({state, actions, libraries}) => {
                                             <span>Sqm</span>
                                         </li>
                                     </ul>
+
+                                    <LinkButtonHome href={property.link}>
+                                        View Details
+                                    </LinkButtonHome>
                                 </div>
                             </SinglePropertyDetails>
                         </SingleProperty>
                         </Link>
+                        </ZoomInOnScroll>
                     )
                 })
             }
@@ -153,31 +169,118 @@ export const PropertiesGrid = styled.div`
 export const SingleProperty = styled.div`   
     background-color: #fff;
     border: 1px solid #ebebeb;
-    border-radius: 8px;
+    /* border-radius: 8px; */
     margin-bottom: 30px;
     overflow: hidden;
     position: relative;
     transition: all .3s ease;
-
-
 `
 
 export const SinglePropertyThumb = styled.div`
     display: block;
     box-sizing: border-box;
     background: #1d293e;
-    border-radius: 8px;
+    /* border-radius: 8px; */
     overflow: hidden;
-    margin: 10px 9px 0 10px;
+    /* margin: 10px 9px 0 10px; */
     position: relative;
 `
-export const ImageCard = styled(Image)`
-    opacity: .6;
 
+export const zoomOut = keyframes`
+    from {
+        transform: scale(1.1);
+    }
+    to {
+        transform: scale(1);
+    }
+`;
+
+export const ImageCard = styled(Image)`
     vertical-align: middle;
     min-height: 200px;/**to make responsive */
     max-width: 100%;
+    transform: scale(1.1);
+
+    &:hover {
+        animation: ${zoomOut} .5s ease-in-out forwards;
+    }
 `
+
+export const TextBand = styled.div`
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(203, 166, 49, 0.7);
+    padding: 5px 10px;
+    color: #FFF;
+    font-weight: 400;
+    font-size: 15px;
+    text-align: start;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 1px #000;
+    vertical-align: middle;
+
+    span {
+        font-weight: 700;
+        text-shadow: 1px 1px 1px #000;
+        font-size: 17px;
+    }
+`
+
+export const Ribbon = styled.div`
+    position: fixed;
+    left: -4px;
+    top: -2px;
+    z-index: 1;
+    overflow: hidden;
+    width: 200px;
+    height: 175px;
+    text-align: right;
+
+    span {
+        font-size: 10px;
+        font-weight: bold;
+        color: #FFF;
+        text-transform: uppercase;
+        text-align: center;
+        line-height: 20px;
+        transform: rotate(-45deg);
+        width: 100px;
+        display: block;
+        background: var(--golden-color);
+        box-shadow: 0 3px 10px -5px rgb(0 0 0);
+        position: absolute;
+        top: 19px;
+        left: -21px;
+  
+        &:before  {
+            content: "";
+            position: absolute;
+            left: 5px;
+            top: 100%;
+            z-index: -1;
+            border-left: 3px solid var(--golden-color);
+            border-right: 3px solid transparent;
+            border-bottom: 3px solid transparent;
+            border-top: 3px solid var(--golden-color);
+        }
+
+        &:after {
+            content: "";
+            position: absolute;
+            right: 0px;
+            top: 100%;
+            z-index: -1;
+            border-left: 3px solid transparent;
+            border-right: 3px solid var(--golden-color);
+            border-bottom: 3px solid transparent;
+            border-top: 3px solid var(--golden-color);
+        }
+    }
+    
+`
+
 export const ImageContent = styled.div`
     bottom: 0;
     left: 10px;
@@ -262,11 +365,6 @@ export const SinglePropertyDetails = styled.div`
             line-height: 1.2;
             margin-bottom: 15px;
             text-transform: capitalize;
-
-
-            @media (min-width: 1024px) and (max-width: 1440px){
-                font-size: var(--step--1);
-            }
         }
 
         p {
@@ -277,10 +375,6 @@ export const SinglePropertyDetails = styled.div`
             line-height: 1;
             font-weight: 400;
             text-transform: uppercase;
-
-            @media (min-width: 1024px) and (max-width: 1440px){
-                font-size: var(--step--2);
-            }
         }
 
         ul {

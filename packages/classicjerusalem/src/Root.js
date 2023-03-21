@@ -9,12 +9,15 @@ import RentFurnished from './components/RentFurnished';
 import RentUnfurnished from './components/RentUnfurnished'
 import SellProperties from './components/SellProperties'
 import Details from './components/Details';
+import Neighborhood from './components/NeighborhoodPage'
+import NeighborhoodDeatils from './components/NeighborhoodDetails';
+import NewDevelopment from './components/NewDevelopment';
 import Blog from './components/BlogPage';
 import BlogDetails from './components/BlogDetails'
 import GeneralContact from './components/MainContact';
-
+import HeaderAlt from './components/header/headerAlternative'
 import WhatsAppFloating from './components/WhatsAppFloating';
-
+import SubscribeIcon from './components/SubscribeIcon';
 
 
 const Root = ({state, actions}) => {
@@ -39,6 +42,14 @@ const Root = ({state, actions}) => {
                         --blue-elegant : #3e4c66;
                         --blue-dark: #1C2641;
                         --bodycolor: #343434;
+                        --main-color: #1c2641;
+                        --golden-color: #cba631;
+                        --white-color: #fff;
+                        --gray-color: #939393;
+                        --golden-icons: #c0962d;
+                        --background-color-headband: rgba(203, 166, 49, 0.7);
+                        --background-color-cards: rgba(28, 38, 65, 0.7);
+                        --border-color-card: #4d5468;
 
                         --step--2: clamp(0.69rem, calc(0.67rem + 0.11vw), 0.80rem);
                         --step--1: clamp(0.83rem, calc(0.80rem + 0.17vw), 1.00rem);
@@ -92,17 +103,23 @@ const Root = ({state, actions}) => {
                 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
             </Head>
             
-            <Header />
+            {/* <Header /> */}
+            <HeaderAlt />
             <WhatsAppFloating />
+            <SubscribeIcon />
 
             {data.isHomePage && <Home /> }
             {/* {data.isDetails && <Details />} */}
             {/* {data.isProperties && <Properties />} */}
             {/* {state.router.link === "/properties/" && <Properties /> } */}
             {data.isProperties && <Details /> }
-            {state.router.link === "/furnished/" && <RentFurnished /> } 
-            {state.router.link === "/unfurnished/" && <RentUnfurnished/>}
+            {state.router.link === "/long-term-rentals/" && <RentFurnished /> } 
+            {state.router.link === "/short-term-rentals/" && <RentUnfurnished/>}
+            {state.router.link === "/pesach-and-succot-rentals/" && <RentUnfurnished/>}
             {state.router.link === "/sell/" && <SellProperties/>}
+            {state.router.link === "/neighborhoods/" && <Neighborhood />} 
+            {data.isNeighborhood && <NeighborhoodDeatils />}
+            {state.router.link === "/new-development/" && <NewDevelopment />}
             {state.router.link === "/blogposts/" && <Blog />}
             {data.isBlog && <BlogDetails />}
             {state.router.link === "/contact/" && <GeneralContact />}  

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import {Global, connect, styled, css } from "frontity";
 import Image from "@frontity/components/image";
-// import SpanishImage from '../../static/images/es.svg';
-// import EnglishImage from '../../static/images/us.svg';
+import SpanishImage from '../../images/es.svg';
+import EnglishImage from '../../images/us.svg';
 
 const LangSwitcher = ({state, actions}) => {
 
@@ -42,8 +42,14 @@ const LangSwitcher = ({state, actions}) => {
   return(
 
       <FlagContainer>
-          <a href={myLink}><ImageFlagStyles src={'https://restapi.wildfreewalkingtours.com/wp-content/uploads/2022/04/US-flag.png'}/></a>
-          <a href={linkSpanish}> <ImageFlagStyles src={'https://restapi.wildfreewalkingtours.com/wp-content/uploads/2022/04/spanish_flag.png'}/> </a>
+     
+          <a href="#"><ImageFlagStyles src={EnglishImage}/></a>
+       
+
+     
+          <a href="#"> <ImageFlagStyles src={SpanishImage}/> </a>
+     
+        
           {/* <a href={linkFrench}><ImageFlagStyles src={FrenchImage}/> </a>  */}
       </FlagContainer>
   
@@ -55,9 +61,11 @@ export default connect(LangSwitcher);
 
 const FlagContainer = styled.div`
   display: flex;
-  margin-left: 2%;
+  align-items: center;
   z-index: 999;
   justify-content: center;
+  margin-left: auto;
+
 
   @media(max-width: 768px) {
     display: none;
@@ -69,6 +77,6 @@ const FlagContainer = styled.div`
   }
 `
 const ImageFlagStyles = styled(Image)`
-  width: 40px;
-  height: 25px;
+  width: 35px;
+  height: 20px;
 `

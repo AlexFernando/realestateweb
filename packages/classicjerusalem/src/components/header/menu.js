@@ -32,7 +32,7 @@ const MenuToggle = styled.button`
   background: transparent;
   border: 0;
   color: var(--white);
-  z-index: 5;
+  z-index: 1501;
   height: 40px;
   width: 40px;
   display: none;

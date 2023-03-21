@@ -3,80 +3,51 @@ import {styled } from "frontity";
 import { IconContext } from "react-icons";
 import { FaTripadvisor, FaInstagram, FaWhatsapp, FaFacebook, FaEnvelope } from 'react-icons/fa';
 import {SocialMediaSuperior} from '../components/header/header'
- 
+import Image from "@frontity/components/image";
+import Rent from '../images/rent.jpg';
+import Buy from '../images/buy_couple.jpg';
+import Sell from '../images/sell_adult.jpg';
+import RealEstateAgent from '../images/real_estate_agent.jpg'
+import logo from '../images/logo.png';
+
 const InfoFooter = () => {
 
     return ( 
         <ContactContainer>
-            <ContactElement>
-                <h4>About Site</h4>
-                <p>We’re reimagining how you buy, sell and rent. It’s now easier to get into a place you love. So let’s do this, together.</p>
-            </ContactElement>
+ 
+            <ContainerImageFooter>
+                <ImageStyled>
+                    <Image alt="logo" src={logo} />  
+                </ImageStyled>
 
-            <ContactElement>
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li> <a href= "#"> Terms &amp; Conditions</a> </li>
-                    <li><a href="#">Blog Info</a> </li>
-                </ul>
-            </ContactElement>
-
-
-            <IconsContainer>
-
-                <h4>Follow us</h4>
-                <ul>
+                <p>We’re reimagining how you buy, sell and rent. It’s now easier to get into a place you love.</p>
+            </ContainerImageFooter>
                 
-                    <li>
-                        <a href="https://wa.me/+972586540969" alt="WhatsApp" aria-label="Link to WhatsApp" target="_blank" rel="noreferrer">
-                        <IconContext.Provider value={{ color: "white", className: "global-class-name", size: "1.7rem" } }>
-                            <FaWhatsapp />
-                        </IconContext.Provider>
-                        </a>
-                    </li>
 
-                    <li>
-                        <a href="https://www.facebook.com/ClassicJerusalem" alt="Share on Facebook" aria-label="Link to Facebook" target="_blank" rel="noreferrer">
-                        <IconContext.Provider value={{ color: "white", className: "global-class-name", size: "1.7rem" } }>
-                            <FaFacebook />
-                        </IconContext.Provider> 
-                        </a>
-                    </li>
+            <ContainerImageFooter>
+                <ImageFooter src={Rent} />
+                <h3>Rent</h3>
+                <p>Find a property for rent</p>
+            </ContainerImageFooter>
 
-                    <li>
-                        <a href="https://www.instagram.com/classicjerusalem/" alt="Share on Instagram" aria-label="Link to Instagram" target="_blank" rel="noreferrer">
-                        <IconContext.Provider value={{ color: "white", className: "global-class-name", size: "1.7rem" } }>
-                            <FaInstagram />
-                        </IconContext.Provider>
-                        </a>
-                    </li>
-                </ul>
-            </IconsContainer>
+            <ContainerImageFooter>
+                <ImageFooter src={Buy} />
+                <h3>Buy</h3>
+                <p>Buying a propety </p>
+            </ContainerImageFooter>
 
-            <ContactElement>
-                <h4>Stay in touch</h4>
-                <ul>
-                  
-                    <li>
-                        <a href="mailto:scohenben@gmail.com/" alt="gmail" aria-label="Link to gmail" target="_blank" rel="noreferrer">
-                        scohenben@gmail.com
-                        </a>
-                    </li>
+            <ContainerImageFooter>
+                <ImageFooter src={Sell} />
+                <h3>Sell</h3>
+                <p>Selling your apartment  </p>
+            </ContainerImageFooter>
 
-                    <li>
-                        <a href="#" alt="address" aria-label="address"  rel="noreferrer">
-                            San Sebastian Street, City Center, Jerusalem.
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://wa.me/+972586540969" alt="WhatsApp" aria-label="Link to WhatsApp" target="_blank" rel="noreferrer">
-                        +972586540969
-                        </a>
-                    </li>
-
-                </ul>
-            </ContactElement>
+            <ContainerImageFooter>
+                <ImageFooter src={RealEstateAgent} />
+                <h3>Airbnb</h3>
+                <p>We take care of Airbnb your apartment</p>
+            </ContainerImageFooter>
+            
         </ContactContainer >
 
     );
@@ -86,12 +57,13 @@ export default InfoFooter;
 
 const ContactContainer = styled.div`
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1fr 0.5fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
     padding: 2rem 8rem;
-    grid-gap: 1rem;
-    background-color: #000;
+    grid-gap: 2rem;
+    /* background-color: #000; */
+    background-color: var(--main-color);
     color: #fff;
-    justify-items: center;
     
     @media (max-width: 576px){
         grid-template-columns: repeat(1, 1fr);
@@ -108,34 +80,87 @@ const ContactContainer = styled.div`
     }
 
     @media (min-width: 1025px) and (max-width: 1440px){
-        padding: 1rem 2rem;
+        padding: 1rem 4rem;
     }
 `;
+
+const ContainerImageFooter = styled.div`
+    margin-left: auto;
+    margin-top: 2rem;
+    
+    h3 {
+        font-size: var(--step--1);
+        text-transform: uppercase;
+        color: var(--golden-color)
+    }
+   
+    p {
+        font-size: var(--step--1);
+        margin-top: 0;
+
+        font-size: var(--step--1);  
+        line-height: 1.8;
+        text-align: justify;
+    }
+
+    @media(min-width: 1025px) {
+        &:nth-of-type(2){
+            grid-column-start: 3;
+        }
+    }
+
+`
+
+export const ImageFooter = styled(Image)`
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+`
+
+export const ImageStyled = styled.div`
+    max-width: 120px;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+
+    img {
+
+      max-width: 100%;
+      object-fit: cover;
+      height: auto;
+    }
+`
+
 
 const ContactElement = styled.div`
 
     display: block;
-    line-height: 2;
+    margin-right: auto;
 
     @media(max-width: 768px) {
         flex-basis: 100%;
         margin: 1rem 0;
     }
 
+    h3 {
+        font-size: var(--step--1);
+        color: var(--golden-color)
+    }
+
     h4 {
         font-size: 1rem;
         font-size: var(--step-0);
+        margin-top: 0;
     }
    
     p {
         font-size: 14px;
-        font-size: var(--step--1);
-        margin-top: 0;      
+        font-size: var(--step--1);  
+        line-height: 1.8;
+        text-align: justify;
     }
-    /* @media(max-width: 768px) {
-        padding: 1rem;
-        margin: .5rem 0;
-    } */
+
 
     ul {
         margin: 0;
@@ -147,8 +172,6 @@ const ContactElement = styled.div`
 
         li {
             list-style: none;
-            margin-top: 0;
-
             a {
                 color : #fff;
                 font-size: 14px;
@@ -160,47 +183,19 @@ const ContactElement = styled.div`
     }
 `;
 
+
 export const IconsContainer = styled.div`
 
-    display: block;
-    line-height: 2;    
+    display: flex;
+    justify-content: space-around;   
+    margin-left: auto;
+    margin-right: auto;
 
-    @media(max-width: 768px) {
-        flex-basis: 100%;
-        margin: 1rem 0;
-        line-height: 2.5;
-    }
-
-    h4 {
-        font-size: 1rem;
-        font-size: var(--step-0);
-    }
-   
-    p {
+    a {
+        color : #fff;
         font-size: 14px;
         font-size: var(--step--1);
-        margin-top: 0;
+        text-decoration: none;
     }
 
-    ul {
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: flex-start;
-        align-content: center;
-
-        li {
-            list-style: none;
-            margin-top: 0;
-            margin-right: 1rem;
-
-            a {
-                color : #fff;
-                font-size: 14px;
-                font-size: var(--step--1);
-                text-decoration: none;
-            }
-        }
-
-    }
 `

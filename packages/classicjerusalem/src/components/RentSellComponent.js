@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { connect, styled, css, Global, useFills } from "frontity";
+import { connect, styled, css, Global, useFills, keyframes } from "frontity";
 import Image from "@frontity/components/image";
 import Link from './Link';
 import Loading from './Loading';
@@ -8,8 +8,10 @@ import {ImLocation} from 'react-icons/im';
 import {SectionFeaturedProperties, MarginPaddingContainer, SectionTitle, UnderlineTitle} from './home'
 import {IoBedOutline} from 'react-icons/io5'
 import {FaShower} from 'react-icons/fa'
-import {TfiRulerAlt2} from 'react-icons/tfi'
+import {TfiRulerAlt2} from 'react-icons/tfi';
+import ZoomInOnScroll from './ZoomInEffect'
 
+import LinkButtonHome from './LinkButtonHome';
 
 const RentSell = ({state, actions, libraries}) => {
 
@@ -60,7 +62,7 @@ const RentSell = ({state, actions, libraries}) => {
 
            
                 <ListContainer>
-                    <ListItem active={activeItem === 0} onClick={() => handleItemClick(0)}>For Rent </ListItem>
+                    <ListItem active={activeItem === 0} onClick={() => handleItemClick(0)}>To Rent </ListItem>
                     <ListItem active={activeItem === 1} onClick={() => handleItemClick(1)}>To Buy</ListItem>
                 </ListContainer>
 
@@ -69,79 +71,72 @@ const RentSell = ({state, actions, libraries}) => {
                         StateProperty === 'Sell' ? 
                         myPosts.slice(0,3).map(property => {
                             return(
-                            <Link href={property.link}>
-                                <SingleProperty key={property.id}>
-                                    <SinglePropertyThumb>
-                                        <ImageCard src={property.acf.images_carousel.img_one.sizes.medium_large} />
-                                        <ImageContent>
-                                            <ul>
-                                                <li>
-                                                    <a>Featured</a>
-                                                </li>
+                                <ZoomInOnScroll delay={0.2} duration={1} distance="200px">
+                                    <Link href={property.link}>
+                                        <SingleProperty key={property.id}>
+                                            <SinglePropertyThumb>
+                                                <ImageCard src={property.acf.images_carousel.img_one.sizes.medium_large} />
+                                   
+                                                <TextBand>
+                                                    <span>$1230 </span>
+                                                    | FOR SALE
+                                                </TextBand>
+                                            </SinglePropertyThumb>
 
-                                                <li>
-                                                    <a>Sale</a>
-                                                </li>
-                                            </ul>
-                                            {/* 
-                                            <p>
-                                                $
-                                                {` `+property.acf.details_properties.price_dollars}
-                                                <small>/mo</small>
-                                            </p> */}
+                                            <SinglePropertyDetails>
+                                                <div>
+                                                    <h4>
+                                                        {property.acf.details_properties.property_name}
+                                                    </h4>
+        
+                                                    <p>
+                                                        <span>
+                                                        <IconContext.Provider value={{ color: "#df9b00", className: "global-class-name", size: "1rem" } }>
+                                                            <ImLocation />
+                                                        </IconContext.Provider>
+                                                        </span>
+                                                        {property.acf.details_properties.address}
+                                                    </p>
+                                                    <ul>
+                                                        <li>
+                                                            <span>
+                                                                <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                                                    <IoBedOutline />
+                                                                </IconContext.Provider>
+                                                            </span>
+                                                            
+                                                            <span>
+                                                                {property.acf.details_properties.beds}
+                                                            </span>
+                                                        </li>
 
-                                        </ImageContent>
-                                    </SinglePropertyThumb>
+                                                        <li>
+                                                            <span>
+                                                                <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                                                    <FaShower />
+                                                                </IconContext.Provider>
+                                                            </span>
+                                                            <span>{property.acf.details_properties.baths}</span>
+                                                        </li>
+                                                        <li>
+                                                            <span>
+                                                                <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                                                    <TfiRulerAlt2 />
+                                                                </IconContext.Provider>
+                                                            </span>
+                                                            <span>{property.acf.details_properties.sqm}</span>
+                                                            <span>Sqm</span>
+                                                        </li>
+                                                    </ul>
 
-                                    <SinglePropertyDetails>
-                                            <div>
-                                                <h4>
-                                                    {property.acf.details_properties.property_name}
-                                                </h4>
-    
-                                                <p>
-                                                    <span>
-                                                    <IconContext.Provider value={{ color: "#df9b00", className: "global-class-name", size: "1rem" } }>
-                                                        <ImLocation />
-                                                    </IconContext.Provider>
-                                                    </span>
-                                                    {property.acf.details_properties.address}
-                                                </p>
-                                                <ul>
-                                                    <li>
-                                                        <span>
-                                                            <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
-                                                                <IoBedOutline />
-                                                            </IconContext.Provider>
-                                                        </span>
-                                                        
-                                                        <span>
-                                                            {property.acf.details_properties.beds}
-                                                        </span>
-                                                    </li>
-
-                                                    <li>
-                                                        <span>
-                                                            <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
-                                                                <FaShower />
-                                                            </IconContext.Provider>
-                                                        </span>
-                                                        <span>{property.acf.details_properties.baths}</span>
-                                                    </li>
-                                                    <li>
-                                                        <span>
-                                                            <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
-                                                                <TfiRulerAlt2 />
-                                                            </IconContext.Provider>
-                                                        </span>
-                                                        <span>{property.acf.details_properties.sqm}</span>
-                                                        <span>Sqm</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                    </SinglePropertyDetails>
-                                </SingleProperty>
-                                </Link>
+                                                    <LinkButtonHome href={property.link}>
+                                                        View Details
+                                                    </LinkButtonHome>
+                                                </div>
+                                            </SinglePropertyDetails>
+                                        </SingleProperty>
+                                    </Link>
+                                </ZoomInOnScroll>
                             )
                         })
 
@@ -150,79 +145,72 @@ const RentSell = ({state, actions, libraries}) => {
                            
                             myPosts.slice(0,3).reverse().map(property => {
                                 return(
-                                <Link href={property.link}>
-                                    <SingleProperty key={property.id}>
-                                        <SinglePropertyThumb>
-                                            <ImageCard src={property.acf.images_carousel.img_one.sizes.medium_large} />
-                                            <ImageContent>
-                                                <ul>
-                                                    <li>
-                                                        <a>Featured</a>
-                                                    </li>
-    
-                                                    <li>
-                                                        <a>Rent</a>
-                                                    </li>
-                                                </ul>
-    
-                                                <p>
-                                                    $
-                                                    {` `+property.acf.details_properties.price_dollars}
-                                                    <small>/mo</small>
-                                                </p>
-    
-                                            </ImageContent>
-                                        </SinglePropertyThumb>
-    
-                                        <SinglePropertyDetails>
-                                            <div>
-                                                <h4>
-                                                    {property.acf.details_properties.property_name}
-                                                </h4>
-    
-                                                <p>
-                                                    <span>
-                                                    <IconContext.Provider value={{ color: "#df9b00", className: "global-class-name", size: "1rem" } }>
-                                                        <ImLocation />
-                                                    </IconContext.Provider>
-                                                    </span>
-                                                    {property.acf.details_properties.address}
-                                                </p>
-                                                <ul>
-                                                    <li>
-                                                        <span>
-                                                            <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
-                                                                <IoBedOutline />
+                                    <ZoomInOnScroll delay={0.2} duration={1} distance="200px">
+                                        <Link href={property.link}>
+                                            <SingleProperty key={property.id}>
+                                                <SinglePropertyThumb>
+                                                    <ImageCard src={property.acf.images_carousel.img_one.sizes.medium_large} />
+                                    
+                                                    <TextBand>
+                                                        <span>$1230 </span>
+                                                        | FOR SALE
+                                                    </TextBand>
+                                                </SinglePropertyThumb>
+            
+                                                <SinglePropertyDetails>
+                                                    <div>
+                                                        <h4>
+                                                            {property.acf.details_properties.property_name}
+                                                        </h4>
+            
+                                                        <p>
+                                                            <span>
+                                                            <IconContext.Provider value={{ color: "#df9b00", className: "global-class-name", size: "1rem" } }>
+                                                                <ImLocation />
                                                             </IconContext.Provider>
-                                                        </span>
-                                                        
-                                                        <span>
-                                                            {property.acf.details_properties.beds}
-                                                        </span>
-                                                    </li>
+                                                            </span>
+                                                            {property.acf.details_properties.address}
+                                                        </p>
+                                                        <ul>
+                                                            <li>
+                                                                <span>
+                                                                    <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                                                        <IoBedOutline />
+                                                                    </IconContext.Provider>
+                                                                </span>
+                                                                
+                                                                <span>
+                                                                    {property.acf.details_properties.beds}
+                                                                </span>
+                                                            </li>
 
-                                                    <li>
-                                                        <span>
-                                                            <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
-                                                                <FaShower />
-                                                            </IconContext.Provider>
-                                                        </span>
-                                                        <span>{property.acf.details_properties.baths}</span>
-                                                    </li>
-                                                    <li>
-                                                        <span>
-                                                            <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
-                                                                <TfiRulerAlt2 />
-                                                            </IconContext.Provider>
-                                                        </span>
-                                                        <span>{property.acf.details_properties.sqm}</span>
-                                                        <span>Sqm</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </SinglePropertyDetails>
-                                    </SingleProperty>
-                                    </Link>
+                                                            <li>
+                                                                <span>
+                                                                    <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                                                        <FaShower />
+                                                                    </IconContext.Provider>
+                                                                </span>
+                                                                <span>{property.acf.details_properties.baths}</span>
+                                                            </li>
+                                                            <li>
+                                                                <span>
+                                                                    <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                                                        <TfiRulerAlt2 />
+                                                                    </IconContext.Provider>
+                                                                </span>
+                                                                <span>{property.acf.details_properties.sqm}</span>
+                                                                <span>Sqm</span>
+                                                            </li>
+                                                        </ul>
+
+                                                        <LinkButtonHome href={property.link}>
+                                                            View Details
+                                                        </LinkButtonHome>
+                                                    </div>
+                                                </SinglePropertyDetails>
+                                            </SingleProperty>
+                                        </Link>
+                                    </ZoomInOnScroll>
                                 )
                             })
                 
@@ -287,15 +275,12 @@ const ListItem = styled.li`
     color: ${props => (props.active ? "#0c0c0c" : "#a6a6a6")};
     border-bottom: ${props => props.active ? "2px solid #0c0c0c": "unset"};
 
-    @media (min-width: 1024px) and (max-width: 1440px){
-        font-size: var(--step--1);
-    }
 `
 
 export const SingleProperty = styled.div`   
     background-color: #fff;
     border: 1px solid #ebebeb;
-    border-radius: 8px;
+    /* border-radius: 8px; */
     margin-bottom: 30px;
     overflow: hidden;
     position: relative;
@@ -307,18 +292,55 @@ export const SinglePropertyThumb = styled.div`
     display: block;
     box-sizing: border-box;
     background: #1d293e;
-    border-radius: 8px;
+    /* border-radius: 8px; */
     overflow: hidden;
-    margin: 10px 9px 0 10px;
+    /* margin: 10px 9px 0 10px; */
     position: relative;
 `
+export const zoomOut = keyframes`
+    from {
+        transform: scale(1.1);
+    }
+    to {
+        transform: scale(1);
+    }
+`;
 
 export const ImageCard = styled(Image)`
-    opacity: .6;
+    /* opacity: .6; */
     vertical-align: middle;
-    min-height: 220px;
+    vertical-align: middle;
+    min-height: 200px;/**to make responsive */
     max-width: 100%;
+    transform: scale(1.1);
+
+    &:hover {
+        animation: ${zoomOut} .5s ease-in-out forwards;
+    }
 `
+
+export const TextBand = styled.div`
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(203, 166, 49, 0.7);
+    padding: 5px 10px;
+    color: #FFF;
+    font-weight: 400;
+    font-size: 15px;
+    text-align: start;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 1px #000;
+    vertical-align: middle;
+
+    span {
+        font-weight: 700;
+        text-shadow: 1px 1px 1px #000;
+        font-size: 17px;
+    }
+`
+
 export const ImageContent = styled.div`
     bottom: 0;
     left: 10px;
@@ -403,10 +425,6 @@ export const SinglePropertyDetails = styled.div`
             line-height: 1.2;
             margin-bottom: 15px;
             text-transform: capitalize;
-
-            @media (min-width: 1024px) and (max-width: 1440px){
-                font-size: var(--step--1);
-            }
         }
 
 
@@ -418,10 +436,6 @@ export const SinglePropertyDetails = styled.div`
             line-height: 1;
             font-weight: 400;
             text-transform: uppercase;
-
-            @media (min-width: 1024px) and (max-width: 1440px){
-                font-size: var(--step--2);
-            }
         }
 
  

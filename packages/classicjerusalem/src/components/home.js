@@ -14,7 +14,10 @@ import logo from '../images/logo.png';
 import { IconContext } from "react-icons";
 import {GiFamilyHouse, GiSpookyHouse, GiHouse} from 'react-icons/gi';
 
-import Hero from './ParallaxBg';
+import Hero from './heroComponent';
+import FadeInOnScroll from './FadeInScroll'
+import ZoomInOnScroll from './ZoomInEffect'
+import Slider from './loadingImages'
 
 const Home = ({state, actions, libraries}) => {
 
@@ -33,24 +36,34 @@ const Home = ({state, actions, libraries}) => {
                         <MarginTopContainer></MarginTopContainer>
                             <Main>
                                 <Overlay>
-                                    <video autoPlay playsInline muted loop>
+                                    {/* <video autoPlay playsInline muted loop>
                                         <source src="https://realstate.wildfreewalkingtours.com/wp-content/uploads/2023/01/backgorund_video.mp4" type="video/mp4" />
-                                    </video>
+                                    </video> */}
+
+                                    <Hero />
 
                                     <TextoImagenContainer>
                             
                                         <TextoImagen>
-                                            <h2>Your home, our priority</h2>
-                                            <h3>Classic Jerusalem</h3>
+                                            <FadeInOnScroll>
+                                                <h2>Your home, our priority</h2>
+                                            </FadeInOnScroll>
 
-                                            <ButtonContainer>
+                                            <FadeInOnScroll>
+                                                <h3>Classic Jerusalem</h3>
+                                            </FadeInOnScroll>
+                                            
+                                            <FirstUnderlineTitle>
+                                                <span></span>
+                                            </FirstUnderlineTitle>
+                                            {/* <ButtonContainer>
                                                 <ButtonParallax>
                                                     <a href="/properties/">Rent</a>
                                                 </ButtonParallax>  
                                                 <ButtonParallax>
                                                     <a href="/properties/">Sell</a>
                                                 </ButtonParallax>  
-                                            </ButtonContainer>
+                                            </ButtonContainer> */}
                                         
                                         </TextoImagen>
 
@@ -62,25 +75,29 @@ const Home = ({state, actions, libraries}) => {
                         
                             </Main>
 
+                            {/* <Slider/> */}
 
-        
-
-                
+                                            
             
                         <SectionFeaturedProperties>
                             <MarginPaddingContainer>
-                                <SectionTitle>Featured Properties</SectionTitle>
+                                <FadeInOnScroll>
+                                    <SectionTitle>Featured Properties</SectionTitle>
+                                </FadeInOnScroll>
                                 <UnderlineTitle>
                                     <span></span>
                                 </UnderlineTitle>
-                                <Properties />
+                           
+                                    <Properties />
+                           
                             </MarginPaddingContainer> 
                         </SectionFeaturedProperties>  
 
                         <SectionAbout>
+                            <LayerAbout>
                             <MarginPaddingContainer>
 
-                                <SectionTitle>About</SectionTitle>
+                                <FadeInOnScroll> <SectionTitle>About</SectionTitle></FadeInOnScroll>
                                 <UnderlineTitle>
                                     <span></span>
                                 </UnderlineTitle>
@@ -88,40 +105,49 @@ const Home = ({state, actions, libraries}) => {
 
                                 <CardAbout>
                                     <AboutParagraph>  
+                                    <FadeInOnScroll>
                                         <p>
                                         Classic Jerusalem is a certified, independent Real Estate Agency since 2010, connecting the right people with the right properties.
                                         Our goal is to help you find the perfect match, whether you are selling, buying, or renting.
                                         We believe in being and staying involved through all stages of the real estate process.
                                         Our growing network of buyers, owners, and tenants, will open doors for our partners on all sides of the real estate equation.
-                                        We will guide you every step of the way.</p>
+                                        We will guide you every step of the way.</p></FadeInOnScroll>
+                                        
                                     </AboutParagraph>
-
-                                    <IconsContainer>
+                                
+                                    <IconsContainer>    
                                         <IconText>
-                                            <IconContext.Provider value={{color: "#df9b00", className: "global-class-name", size: "4rem" } }>
+                                            <IconContext.Provider value={{color: "#cba631", className: "global-class-name", size: "4rem" } }>
                                                 <GiFamilyHouse />
                                             </IconContext.Provider>
-                                            <p>Find the perfect match</p>
+                                            <FadeInOnScroll>
+                                                <p>Find the perfect match</p>
+                                            </FadeInOnScroll>
                                         </IconText>
                                     
                                         <IconText>
-                                            <IconContext.Provider value={{ color: "#df9b00", className: "global-class-name", size: "4rem" } }>
+                                            <IconContext.Provider value={{ color: "#cba631", className: "global-class-name", size: "4rem" } }>
                                                 <GiSpookyHouse />
                                             </IconContext.Provider>
-                                            <p>Involved through all stages</p>
+                                            <FadeInOnScroll>
+                                                <p>Involved through all stages</p>
+                                            </FadeInOnScroll>
                                         </IconText>
-
+                            
                                         <IconText>
-                                            <IconContext.Provider value={{ color: "#df9b00", className: "global-class-name", size: "4rem" } }>
+                                            <IconContext.Provider value={{ color: "#cba631", className: "global-class-name", size: "4rem" } }>
                                                 <GiHouse />
                                             </IconContext.Provider>
-                                            <p>  We will guide you every step of the way.</p>
+                                            <FadeInOnScroll>
+                                                <p>We will guide you every step of the way.</p>
+                                            </FadeInOnScroll>
                                         </IconText>
                                     </IconsContainer>
 
                                 </CardAbout>
                              
                             </MarginPaddingContainer>
+                            </LayerAbout>
                         </SectionAbout>
 
               
@@ -129,28 +155,32 @@ const Home = ({state, actions, libraries}) => {
     
                         <ContactBackgroundImage>
                             <ContactLayerGradient>
-                            
-                                <ContactText>
-                                    <h2>Looking to Sell your Property?</h2>
-                                    <p> 
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                        Nunc ac luctus tellus, ut lobortis diam. Vestibulum dapibus condimentum ullamcorper. Suspendisse nec libero placerat, 
-                                        euismod felis a, faucibus enim. 
-                                    </p>
-                                </ContactText>
-                                <ContactForm>
-                                    <Html2react html={pageHomeData.content.rendered} />
-                                </ContactForm>
                              
+                                <ContactText>
+                                    <FadeInOnScroll>
+                                        <h2>Looking to Sell your Property?</h2>
+                                    </FadeInOnScroll>
+                                    
+                                    <FadeInOnScroll>
+                                        <p> 
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                                            Nunc ac luctus tellus, ut lobortis diam. Vestibulum dapibus condimentum ullamcorper. Suspendisse nec libero placerat, 
+                                            euismod felis a, faucibus enim. 
+                                        </p>
+                                    </FadeInOnScroll>
+                                </ContactText>
+                              
+                                <ZoomInOnScroll delay={0.2} duration={1} distance="200px">
+                                    <ContactForm>
+                                        <Html2react html={pageHomeData.content.rendered} />
+                                    </ContactForm>
+                                </ZoomInOnScroll>
                             </ContactLayerGradient>
                         </ContactBackgroundImage>
                         
                         <SectionTestimonial>
                             <Testimonials />  
                         </SectionTestimonial>
-                       
-                     
-                                   
                     </> 
                 }
             
@@ -172,17 +202,20 @@ export const MarginTopContainer = styled.div`
 /**BACKGROUND VIDEO */  
 export const Main = styled.section`
 
-  height: 620px;
+  height: 750px;
   position: relative;
   /* margin-top: 7vh; */
+    /* @media (max-width: 768px){
+        height: 750px;
+    } */
 
-    @media (min-width: 1025px) and (max-width: 1367px) {
-        height: 450px;
-    }
+    /* @media (min-width: 1025px) and (max-width: 1367px) {
+        height: 90vh
+    } 
 
     @media (min-width: 1368px) and (max-width: 1672px) {
-        height: 600px;
-    }
+        height: 90vh;
+    }  */
   
 `
 
@@ -195,7 +228,10 @@ export const Overlay = styled.div`
     height: 100%;
     background-size: cover;
     font-family: 'Lato';
-    background-image: linear-gradient(180deg, rgba(0,0,0,.5)  0%, rgba(200,139,0, 0.4) 100%);
+    /* background-image: linear-gradient(180deg, rgba(0,0,0,.5)  0%, rgba(200,139,0, 0.5) 100%);
+  */
+    background-image: linear-gradient(180deg, #000000D4 16%, #00000000 60%);
+
     background-repeat: no-repeat;
 
     @media(max-width: 768px) {
@@ -205,14 +241,14 @@ export const Overlay = styled.div`
     video {
         /* position: absolute; */
         position: fixed;
-        top: -30vh;
+        /* top: -30vh; */
         left: 0;
         width: 100vw;
         height: 100%;
         z-index: -1;
         background-repeat: no-repeat;
 
-        @media(max-width: 1024px) {
+        /* @media(max-width: 1024px) {
             height: 600px;
             top: 0;
         }
@@ -223,7 +259,7 @@ export const Overlay = styled.div`
 
         @media (min-width: 1281px) and (max-width: 1672px) {
             top: -10vh
-        }
+        } */
     }
 
     @media (min-aspect-ratio: 16/9) {
@@ -245,7 +281,7 @@ const TextoImagenContainer = styled.div`
     color: #FFF;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
     align-content: center;
     align-items: center;
     overflow-wrap: break-word;
@@ -265,33 +301,38 @@ const TextoImagen = styled.div`
     flex-direction: column;
     align-items: center;
     align-content: center;
+    margin-top: 5rem;
 
     h2 {
         text-transform: uppercase;
-        font-size: 1.5rem;
-        margin-top: 5rem;
+        font-size: var(--step-3);
+        margin-top: 1rem;
         font-weight: 500;
+        letter-spacing: 2px;
+        text-align: center;
 
-        @media(min-width: 1368px) {
+        /* @media(min-width: 1368px) {
             font-size: 2rem;
             padding-top: 0;
             font-weight: 900;
-        }
+        } */
     }
 
     h3 {
         text-transform: uppercase;
         font-size: 1.2rem;
+        font-size: var(--step-1);
         font-weight: 300;
         margin-top: 0;
         margin-bottom: 2rem;
-        line-height: 1.8;
+        line-height: 1.5;
+        letter-spacing: 2px;
 
-        @media(min-width: 1368px) {
+        /* @media(min-width: 1368px) {
             font-size: 1.5rem;
             font-weight: 500;
             margin-bottom: 2rem;
-        }
+        } */
     }
 `
 
@@ -337,15 +378,19 @@ const ButtonParallax = styled.div`
 /*SECTION ABOUT */
 export const SectionAbout = styled.section`
     background-color: #fff;
-    padding: 1rem 0 1rem 0;
     position: relative;
     color: #fff;
-    background: linear-gradient(180deg, rgba(0,0,0,.8)  0%, rgba(200,139,0, 0.4) 100%);
+    background-image: url("https://realstate.wildfreewalkingtours.com/wp-content/uploads/2023/03/background5-1024x684.jpg");
 
   /* background: linear-gradient(45deg, rgb(26, 1, 117) 0%, rgba(225, 5, 34, 0) 70%) repeat scroll 0% 0%, 
   linear-gradient(135deg, rgb(225, 5, 152) 10%, rgba(49, 5, 209, 0) 80%) repeat scroll 0% 0%, 
   linear-gradient(225deg, hsla(179, 81%, 45%, 1) 10%, rgba(10, 219, 216, 0) 80%) repeat scroll 0% 0%,
    rgba(0, 0, 0, 0) linear-gradient(315deg, rgb(189, 5, 245) 100%, rgba(9, 245, 5, 0) 70%) repeat scroll 0% 0%;*/
+`
+
+export const LayerAbout = styled.div`
+    background-image: linear-gradient(180deg, rgba(0,0,0,.8)  0%, rgba(28, 38, 65, 0.7) 100%);
+    padding: 1rem 0 1rem 0;
 `
 
 const CardAbout = styled.div`
@@ -404,11 +449,63 @@ export const SectionTitle = styled.h2`
     letter-spacing: -1px;
     margin-bottom: 10px;
     text-align: center;
-    
+`
+
+export const FirstUnderlineTitle = styled.div`
+    height: 35px;
+    height: var(--step-2);
+    position: relative;
+    text-align: center;
+
     @media (min-width: 1024px) and (max-width: 1440px){
-        font-size: var(--step-1);
+        height: var(--step-1);
+    }
+
+    span {
+        position: absolute;
+        background-color: #cba631;
+        bottom: 0;
+        top: 0;
+        width: 5px;
+        height: 100%;
+
+        &:before {
+            width: 140px;
+            width: max(12rem + .5vw, 4rem);
+            height: 2px;
+            background-color: #cba631;
+            position: absolute;
+            left: 50%;
+            top: 9px;
+            content: '';
+            background-color: #c0962d;
+            transform: translateX(-50%);
+
+            @media (min-width: 1024px) and (max-width: 1440px){
+                width: max(9rem + .5rem, 3rem)
+            }
+
+        }
+
+        &:after {
+            width: 100px;
+            width: max(7rem + .5vw, 2rem);
+            height: 2px;
+            position: absolute;
+            left: 50%;
+            top: 15px;
+            content: '';
+            background-color: #c0962d;
+            transform: translateX(-50%);
+
+            @media (min-width: 1024px) and (max-width: 1440px){
+                width: max(3.82rem + .5rem, 1.49rem);
+            }
+        }
     }
 `
+
+
 export const UnderlineTitle = styled.div`
     height: 35px;
     height: var(--step-2);
@@ -463,6 +560,60 @@ export const UnderlineTitle = styled.div`
     }
 `
 
+export const UnderlineTitleAlternative = styled.div`
+    height: 35px;
+    height: var(--step-2);
+    position: relative;
+    text-align: center;
+
+    @media (min-width: 1024px) and (max-width: 1440px){
+        height: var(--step-1);
+    }
+
+    span {
+        position: absolute;
+        background-color: #cba631;
+        bottom: 0;
+        top: 0;
+        width: 30px;
+        height: 10px;
+ 
+        &:before {
+            width: 140px;
+            width: clamp(4.49rem, calc(5.62rem + 1.33vw), 7.82rem);
+            height: 4px;
+            background-color: #cba631;
+            position: absolute;
+            left: 50%;
+            top: 3px;
+            content: '';
+            transform: translateX(-50%);
+       
+
+            @media (min-width: 1024px) and (max-width: 1440px){
+                width: clamp(2.49rem, calc(3.62rem + 1.33vw), 5.82rem);
+            }
+
+        }
+/* 
+        &:after {
+            width: 100px;
+            width: clamp(2.49rem, calc(2.62rem + 1.33vw), 4.82rem);
+            height: 1px;
+            position: absolute;
+            left: 50%;
+            top: 15px;
+            content: '';
+            background-color: #c0962d;
+            transform: translateX(-50%);
+
+            @media (min-width: 1024px) and (max-width: 1440px){
+                width: clamp(1.49rem, calc(1.62rem + 1.33vw), 3.82rem);
+            }
+        } */
+    }
+`
+
 export const SectionFeaturedProperties = styled.section`
     background-color: #f7f7f7;
     padding: 1rem 0;
@@ -471,13 +622,14 @@ export const SectionFeaturedProperties = styled.section`
 
 export const MarginPaddingContainer = styled.div`
     width: min(98%, 77.5rem + 10vw);
-    margin-inline: auto;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center; 
     /* margin: 2% auto;
     text-align: center; */
 
     @media (min-width: 1199px) and (max-width: 1440px){
-        width: min(98%, 57.5rem + 10vw);
+        width: min(98%, 67.5rem + 10vw);
     }
 
 
@@ -493,7 +645,6 @@ export const MarginPaddingContainer = styled.div`
     @media (min-width: 1420px){
         max-width: 67vw;
     } */
-
 `
 
 /**SECTION CONTACT LOOKING FOR SALE */
@@ -502,7 +653,7 @@ export const ContactBackgroundImage = styled.section`
     background-repeat: no-repeat;
     background-size: cover;
     /* Set a specific height */
-    min-height: 400px; 
+    height: 100%;
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: center;
@@ -511,14 +662,12 @@ export const ContactBackgroundImage = styled.section`
 const ContactLayerGradient = styled.div`
     display: flex;
     color: #FFF;
-    display: flex;
-    padding: 1.5rem 2rem;
+    padding: 0 2rem;
     justify-content: center;
     align-content: flex-start;
     overflow-wrap: break-word;
-    height: auto;
     font-family: 'Lato';
-    background-image: linear-gradient(180deg, rgba(0,0,0,.8)  0%, rgba(200,139,0, 0.4) 100%);
+    background-image: linear-gradient(180deg, rgba(28, 38, 65, .7)  0%, rgba(28, 38, 65, .9) 100%);
     height: 100%;
     
     @media(max-width: 768px) {
@@ -526,6 +675,7 @@ const ContactLayerGradient = styled.div`
         align-content: center;
     }
 `
+
 
 const ContactText = styled.div`
     margin: auto 2rem;
@@ -556,7 +706,7 @@ const ContactText = styled.div`
     }
 `
 
-const ContactForm = styled.div`
+export const ContactForm = styled.div`
 
     display: flex;
     flex-direction: column;
@@ -580,6 +730,7 @@ const ContactForm = styled.div`
         color: #484848;
         line-height: 1.714;
         margin-bottom: 20px;
+        font-family: 'Lato', sans-serif;
     }
   
     @media(max-width: 768px) {
@@ -648,7 +799,7 @@ const ContactForm = styled.div`
 
     input[type="submit"] { 
         width: auto;
-        background-color: var(--golden);
+        background-color: var(--golden-color);
         height: 48px;  
         padding: 1.5rem;
         text-transform: none;

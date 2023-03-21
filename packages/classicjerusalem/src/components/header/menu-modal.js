@@ -67,20 +67,21 @@ const MenuModal = ({ state }) => {
 };
 
 const MenuOverlay = styled.div`
-  background-color: var(--black);//#1f38c5;
+  /* background-color: var(--black); */
+  background-color: var(--main-color);
   width: 100vw;
   height: 100vh;
   overflow: hidden auto;
   position: fixed;
-  z-index: 2;
+  z-index: 1500;
   top: 0;
   left: 0;
 `;
 
 const MenuContent = styled.div`
-position: absolute;
-top:0;
-  z-index: 3;
+  position: absolute;
+  top:0;
+  z-index: 1501;
   display:flex;
   flex-direction: column;
   flex-grow: 0;
@@ -91,26 +92,27 @@ top:0;
 
 const CustomLink = styled.div`
 
-    width: 100%;
-    outline: 0;
-    font-size: 20px;
-    text-align: center;
-    padding: 1.2rem 0;
-    color:var(--white);
-      display: block;
-      z-index: 999;
-      transition: all 0.3s ease 0s;
-    &:hover,
-    &:focus {
-      color: var(--golden);
-      background-color: #191919;
-    }
-    text-decoration: none;
-    /* styles for active link */
-    &[aria-current="page"] {
-      color: var(--golden);
-      font-weight: bold;
-    }
+  width: 100%;
+  outline: 0;
+  font-size: 20px;
+  text-align: center;
+  padding: 1.2rem 0;
+  color:var(--white);
+    display: block;
+    z-index: 999;
+    transition: all 0.3s ease 0s;
+  &:hover,
+  &:focus {
+    color: var(--golden);
+    /* background-color: #191919; */
+    background-color: var(--main-color);
+  }
+  text-decoration: none;
+  /* styles for active link */
+  &[aria-current="page"] {
+    color: var(--golden);
+    font-weight: bold;
+  }
   
 `
 const MenuLink = styled(Link)`
@@ -126,7 +128,8 @@ const MenuLink = styled(Link)`
   &:hover,
   &:focus {
     color: var(--golden);
-    background-color: #191919;
+    /* background-color: #191919; */
+    background-color: var(--main-color);
   }
   text-decoration: none;
   /* styles for active link */
@@ -142,7 +145,8 @@ const SubMenu = styled.ul`
   flex-direction: column;
 
   z-index: 3;
-  background-color: #0c0c0c;
+  /* background-color: #0c0c0c; */
+  background-color: var(--main-color);
   padding: .5rem;
   border: .5px solid var(--golden) ;
 

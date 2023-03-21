@@ -429,6 +429,7 @@ const SearchTabContent = styled.div`
     display: flex;
     justify-content: space-between;
     margin-bottom: 3rem;
+    z-index: 0;
 `
 
 const SearchForm = styled.div`
@@ -438,7 +439,7 @@ const SearchForm = styled.div`
     border-radius: 8px;
     padding: 10px 20px;
 width: 100%;
-    z-index: 9;
+z-index: 0;
 
 
 /*     &:before {

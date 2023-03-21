@@ -22,16 +22,20 @@ const settings = {
   
             {
               name: "For Rent",
-              link: "/#/",
+              link: "/long-term-rentals/",
               submenu: [
                 {
-                  name: 'Furnished',
-                  link: '/furnished/'
+                  name: 'Long Term Rentals',
+                  link: '/long-term-rentals/'
                 },
                 {
-                  name: 'Unfurnished',
-                  link: '/unfurnished/'
+                  name: 'Short Term Rentals',
+                  link: '/short-term-rentals/'
                 },
+                {
+                  name: 'Pesach and Succot Rentals',
+                  link: '/pesach-and-succot-rentals/'
+                }
               ]
             },
 
@@ -39,6 +43,35 @@ const settings = {
               name: "For Sell",
               link: "/sell/",
               submenu: []
+            },
+
+            {
+              name: "Neighborhoods",
+              link: "/neighborhoods/",
+              submenu : [
+                {
+                  name: 'Arnona',
+                  link: '/neighborhood/arnona/'
+                },
+                {
+                  name: 'City Center',
+                  link: '/neighborhood/city-center/'
+                },
+                {
+                  name: 'Germany Colony',
+                  link: '/neighborhood/germany-colony/'
+                },
+                {
+                  name: 'Old Katamon',
+                  link: '/neighborhood/old-katamon/'
+                }
+              ]
+            },
+
+            {
+              name: "New Development",
+              link: "/new-development/",
+              submenu : []
             },
 
             {
@@ -82,6 +115,11 @@ const settings = {
               type: "blog",
               endpoint: "blog",
               archive: "blog",
+            }, 
+            {
+              type: "neighborhood",
+              endpoint: "neighborhood",
+              archive: "neighborhood",
             }
           ],
         }

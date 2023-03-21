@@ -7,10 +7,10 @@ import Image from "@frontity/components/image";
 import LangSwitcher from './langSwitcher';
 import {FaInstagram, FaFacebook, FaWhatsapp } from 'react-icons/fa';
 import { IconContext } from "react-icons";
-
-import logo from '../../images/logo.png'
+import logo from '../../images/logo.png';
 
 const Header = ({ state }) => {
+
   return (
     <AllNavbar>
       <BrandContainer>
@@ -63,7 +63,7 @@ const AllNavbar = styled.div`
 
     position: fixed; /* Set the navbar to fixed position */
     top: 0; /* Position the navbar at the top of the page */
-    z-index: 10;
+    z-index: 9999;
     background-color: #0c0c0c;
     display: flex;
     justify-content: space-around;
