@@ -4,6 +4,12 @@ import Image from "@frontity/components/image";
 // import SpanishImage from '../../static/images/es.svg';
 // import EnglishImage from '../../static/images/us.svg';
 
+import SpanishImage from '../../images/es.svg';
+import EnglishImage from '../../images/us.svg';
+import FranceImage from '../../images/flag-fr.png'
+import HebrewImage from '../../images/flag-he.png'
+
+
 const LangSwitcherMobile = ({state, actions}) => {
 
   let myLink = "/";
@@ -42,9 +48,18 @@ const LangSwitcherMobile = ({state, actions}) => {
   return(
 
       <FlagContainer>
-          <a href={myLink}><ImageFlagStyles src={'https://restapi.wildfreewalkingtours.com/wp-content/uploads/2022/04/US-flag.png'}/></a>
-          <a href={linkSpanish}> <ImageFlagStyles src={'https://restapi.wildfreewalkingtours.com/wp-content/uploads/2022/04/spanish_flag.png'}/> </a>
+          {/* <a href={myLink}><ImageFlagStyles src={'https://restapi.wildfreewalkingtours.com/wp-content/uploads/2022/04/US-flag.png'}/></a>
+          <a href={linkSpanish}> <ImageFlagStyles src={'https://restapi.wildfreewalkingtours.com/wp-content/uploads/2022/04/spanish_flag.png'}/> </a> */}
           {/* <a href={linkFrench}><ImageFlagStyles src={FrenchImage}/> </a>  */}
+          <a href="#"><ImageFlagStyles src={EnglishImage}/></a>
+       
+
+     
+       <a href="#"> <ImageFlagStyles src={SpanishImage}/> </a>
+
+       <a href="#"> <ImageFlagStyles src={FranceImage}/> </a>
+
+       <a href="#"> <ImageFlagStyles src={HebrewImage}/> </a>
       </FlagContainer>
   
   

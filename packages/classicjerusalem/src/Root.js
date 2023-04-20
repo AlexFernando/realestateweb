@@ -5,9 +5,11 @@ import Footer from './components/footer';
 import FooterOne from './components/footer-one'
 import Home from './components/home';
 import Properties from './components/AllProperties'
+import RentComponent from './components/Rent'
 import RentFurnished from './components/RentFurnished';
 import RentUnfurnished from './components/RentUnfurnished'
 import SellProperties from './components/SellProperties'
+import PesachRentals from './components/PesachRentals'
 import Details from './components/Details';
 import Neighborhood from './components/NeighborhoodPage'
 import NeighborhoodDeatils from './components/NeighborhoodDetails';
@@ -18,12 +20,13 @@ import GeneralContact from './components/MainContact';
 import HeaderAlt from './components/header/headerAlternative'
 import WhatsAppFloating from './components/WhatsAppFloating';
 import SubscribeIcon from './components/SubscribeIcon';
-
+import ShorTermRentals from './components/ShortTermRentals'
+import ShortTermRentals from './components/ShortTermRentals';
 
 const Root = ({state, actions}) => {
 
     const data = state.source.get(state.router.link);
-    
+
     return (
       <>
       <Global
@@ -75,8 +78,8 @@ const Root = ({state, actions}) => {
                 
                      /* * {
                         border: 1px solid #f00 !important;
-                    }      */
-                     
+                    }     
+                      */
                     p {
                         font-family: 'Montserrat', sans-serif; 
                         font-size: 400;
@@ -113,9 +116,11 @@ const Root = ({state, actions}) => {
             {/* {data.isProperties && <Properties />} */}
             {/* {state.router.link === "/properties/" && <Properties /> } */}
             {data.isProperties && <Details /> }
-            {state.router.link === "/long-term-rentals/" && <RentFurnished /> } 
-            {state.router.link === "/short-term-rentals/" && <RentUnfurnished/>}
-            {state.router.link === "/pesach-and-succot-rentals/" && <RentUnfurnished/>}
+            {state.router.link === "/rent/" && <RentComponent /> } 
+            {state.router.link === "/rent/long-term-rentals/furnished/" && <RentFurnished /> } 
+            {state.router.link === "/rent/long-term-rentals/unfurnished/" && <RentUnfurnished/>}
+            {state.router.link === "/rent/short-term-rentals/" && <ShortTermRentals/>}
+            {state.router.link === "/rent/pesach-and-succot-rentals/" && <PesachRentals/>}
             {state.router.link === "/sell/" && <SellProperties/>}
             {state.router.link === "/neighborhoods/" && <Neighborhood />} 
             {data.isNeighborhood && <NeighborhoodDeatils />}

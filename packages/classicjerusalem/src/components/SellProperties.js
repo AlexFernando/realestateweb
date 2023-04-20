@@ -2,43 +2,50 @@ import React, {useState, useEffect} from 'react';
 import {Global, connect, styled, css } from "frontity";
 import Image from "@frontity/components/image";
 import {SectionFeaturedProperties} from './home';
-import {SingleProperty, SinglePropertyThumb, SinglePropertyDetails, ImageCard, ImageContent} from './properties'
+import {SingleProperty, SinglePropertyThumb, SinglePropertyDetails, ImageCard, TextBand} from './properties'
 import Link from './Link';
 import { IconContext } from "react-icons";
 import {ImLocation} from 'react-icons/im';
 import {IoBedOutline} from 'react-icons/io5'
 import {FaShower} from 'react-icons/fa'
 import {TfiRulerAlt2} from 'react-icons/tfi'
+import SearchBarSell from './SearchBarSell';
+
+import ZoomInOnScroll from './ZoomInEffect'
+import LinkButtonHome from './LinkButtonHome';
+
 
 import Loading from './Loading';
 
 const SellProperties = ({state, actions, libraries}) => {
-    
-    const pageProperties = state.source.page[71];
 
-    const Html2react = libraries.html2react.Component;
+    const exchangeRateValue = state.theme.coinExchange.exchange_rate;
+    const currencyPair = state.theme.coinExchange.currency_pair;
 
     useEffect( () => {
-        actions.source.fetch("/properties")
+        actions.source.fetch("/category/for-sale/");
     }, [])
 
-    const data = state.source.get('/properties');
+    // const data = state.source.get('/properties');
+    const dataPropertiesForSale = state.source.get("/category/for-sale/");
 
     let myPosts = [];
 
-    if(data.isReady) {
-        
-        data.items.map( ({id}) => {
+    if(dataPropertiesForSale.isCategory) {
 
-            const singlePost = state.source.properties[id];
-            myPosts.push(singlePost);
-        })
+        console.log("lenght :", dataPropertiesForSale.items.length )
+        
+            dataPropertiesForSale.items.map( ({type, id}) => {
+                const singleProperty = state.source[type][id];
+                myPosts.push(singleProperty);
+            }
+        )
     }
 
     return ( 
         <>
         {
-            data.isReady && myPosts.length > 0? 
+            dataPropertiesForSale.isReady && myPosts.length > 0? 
         <>
             {/* <ContainerBackgroundTour>
 
@@ -54,109 +61,37 @@ const SellProperties = ({state, actions, libraries}) => {
 
                 <ContainerPropertiesForm>
 
-                    <SearchTabContent>
-                        <SearchForm>
-                    
-                                <SearchMultiFilter>
-                                    <ListFilter>
-                                        <div>
-                                            <h3>Find a Property</h3>
-                                        </div>
-                                        <ItemList>
-                                            <EnterSearchInput>
-                                                <div>
-                                                    <input type="text" placeholder="Enter keyword" />
-                                                </div>
-
-                                            </EnterSearchInput>
-                                        </ItemList>
-
-                                        <ItemList>
-                                            <ProperyType>
-                                                <div>
-                                                    <select>
-                                                        <option value>Property Type</option>
-                                                        <option>Apartment</option>
-                                                        <option>House</option>
-                                                        <option>Condo</option>
-                                                        <option>Bungalows</option>
-                                                    </select>
-                                                </div>
-                                            </ProperyType>
-                                        </ItemList>
-
-                                        <ItemList>
-                                            <ProperyType>
-                                                <div>
-                                                    <select>
-                                                        <option value>Bedrooms</option>
-                                                        <option>1</option>
-                                                        <option>2</option>
-                                                        <option>3</option>
-                                                        <option>4 or more</option>
-                                                    </select>
-                                                </div>
-                                            </ProperyType>
-                                        </ItemList>
-
-
-                                        <ItemList>
-                                            <ProperyType>
-                                                <div>
-                                                    <select>
-                                                        <option value>Price</option>
-                                                        <option>1000 - 2000 usd</option>
-                                                        <option>2000 - 4000 usd</option>
-                                                        <option>4000 - 8000 usd</option>
-                                                        <option>8000 usd or more</option>
-                                                    </select>
-                                                </div>
-                                            </ProperyType>
-                                        </ItemList>
-
-                                     
-                                            <div>
-                                                <button>Search</button>
-                                            </div>
-                                      
-                                    </ListFilter>
-                                </SearchMultiFilter>
-                        
-                        </SearchForm>
-                    </SearchTabContent>
-
+                    <SearchBarSell />
                     <PropertiesGrid>
+                        
                         {
                             myPosts.map(property => {
                                 return(
-                                    <Link href={property.link} >
-                                        <SingleProperty>
+                                    <ZoomInOnScroll delay={0.2} duration={1} distance="200px">
+                                    <Link href={property.link}>
+                                        <SingleProperty key={property.id}>
                                             <SinglePropertyThumb>
                                                 <ImageCard src={property.acf.images_carousel.img_one.sizes.medium_large} />
-                                                <ImageContent>
-                                                    <ul>
-                                                        <li>
-                                                            <a>Featured</a>
-                                                        </li>
+                                    
+                                                <TextBand>
+                                                    <span>{parseInt(Number(property.acf.details_properties.price_dollars)*Number(exchangeRateValue))} </span>
+                                                    {
+                                                        currencyPair === "USD_USD"? <span>$ </span> : currencyPair === "USD_EUR"? <span>€ </span> : <span>₪ </span>
+                                                    } 
+                                                    | FOR SALE
+                                                </TextBand>
 
-                                                        <li>
-                                                            <a>Sell</a>
-                                                        </li>
-                                                    </ul>
-
-                                                    <p>
-                                                        $
-                                                        {property.acf.details_properties.price_dollars}
-                                                        <small>/mo</small>
-                                                    </p>
-                                                </ImageContent>
+                                                <StatusPropertyTag>
+                                                    <h3>SOLD</h3>
+                                                </StatusPropertyTag>
                                             </SinglePropertyThumb>
+
                                             <SinglePropertyDetails>
                                                 <div>
                                                     <h4>
                                                         {property.acf.details_properties.property_name}
                                                     </h4>
-
+        
                                                     <p>
                                                         <span>
                                                         <IconContext.Provider value={{ color: "#df9b00", className: "global-class-name", size: "1rem" } }>
@@ -165,8 +100,6 @@ const SellProperties = ({state, actions, libraries}) => {
                                                         </span>
                                                         {property.acf.details_properties.address}
                                                     </p>
-
-                                   
                                                     <ul>
                                                         <li>
                                                             <span>
@@ -198,94 +131,19 @@ const SellProperties = ({state, actions, libraries}) => {
                                                             <span>Sqm</span>
                                                         </li>
                                                     </ul>
+
+                                                    <LinkButtonHome href={property.link}>
+                                                        View Details
+                                                    </LinkButtonHome>
                                                 </div>
                                             </SinglePropertyDetails>
                                         </SingleProperty>
                                     </Link>
+                                </ZoomInOnScroll>
                                 )
                             })
                         }
-                        {
-                            [0,1].map(element => {
-                                return(
-                                    <Link href="/details">
-                                        <SingleProperty key={element}>
-                                            <SinglePropertyThumb>
-                                                <ImageCard src="https://findhousenextjs.vercel.app/assets/images/property/fp2.jpg" />
-                                                <ImageContent>
-                                                    <ul>
-                                                        <li>
-                                                            <a>Featured</a>
-                                                        </li>
-
-                                                        <li>
-                                                            <a>Sell</a>
-                                                        </li>
-                                                    </ul>
-
-                                                    <p>
-                                                        $
-                                                        1600
-                                                        <small>/mo</small>
-                                                    </p>
-
-                                                </ImageContent>
-                                            </SinglePropertyThumb>
-
-                                            <SinglePropertyDetails>
-                                                <div>
-                                                    <h4>
-                                                        Luxury Aparment
-                                                    </h4>
-
-                                                    <p>
-                                                        <span>
-                                                        <IconContext.Provider value={{ color: "#df9b00", className: "global-class-name", size: "1rem" } }>
-                                                            <ImLocation />
-                                                        </IconContext.Provider>
-                                                        </span>
-                                                        Talbiya, Jerusalem, Israel
-                                                    </p>
-
-                                                    <ul>
-                                                        <li>
-                                                            <span>
-                                                                <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
-                                                                    <IoBedOutline />
-                                                                </IconContext.Provider>
-                                                            </span>
-                                                            
-                                                            <span>
-                                                                2
-                                                            </span>
-                                                        </li>
-
-                                                        <li>
-                                                            <span>
-                                                                <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
-                                                                    <FaShower />
-                                                                </IconContext.Provider>
-                                                            </span>
-                                                            <span>2</span>
-                                                        </li>
-                                                        <li>
-                                                            <span>
-                                                                <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
-                                                                    <TfiRulerAlt2 />
-                                                                </IconContext.Provider>
-                                                            </span>
-                                                            <span>100</span>
-                                                            <span>Sqm</span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </SinglePropertyDetails>
-                                        </SingleProperty>
-                                        </Link>
-                                    )
-                                })
-                            }
-
+                            
                     </PropertiesGrid>
                     
                 </ContainerPropertiesForm>
@@ -568,6 +426,42 @@ const ProperyType = styled.div`
                 margin-right: 2rem;
             }
         }
+    }
+`
+
+
+const StatusPropertyTag = styled.div`
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    overflow: hidden;
+    text-align: right;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(203, 166, 49, 0.9);
+    padding: 5px 10px;
+    color: #FFF;
+    font-weight: 400;
+    font-size: 15px;
+    text-align:center;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 1px #000;
+    vertical-align: middle;
+
+    h3 {
+        font-size: var(--step-4);
+        font-weight: bold;
+        color: #FFF;
+        text-transform: uppercase;
+        text-align: center;
+        line-height: 20px;
+        /* transform: rotate(-45deg); */
+        display: block;
+        box-shadow: 0 3px 10px -5px rgb(0 0 0);
+        position: absolute;
     }
 `
 

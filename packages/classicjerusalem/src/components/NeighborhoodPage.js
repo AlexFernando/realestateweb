@@ -32,57 +32,55 @@ const Neighborhood = ({state, actions, libraries}) => {
     const Html2react = libraries.html2react.Component;
 
     return(
-        <MarginTop>
-     
-        <SearchBar />
+        <>
 
         {!data.isReady && typeof pageNeighborhood === "undefined" ? <Loading /> : 
 
+            <MarginTop>
         
-        <PropertiesGridContainer>
+                <SearchBar />
+                
+                <PropertiesGridContainer>
 
-            {
-                myPosts.reverse().map(property => {
+                    {
+                        myPosts.reverse().map(property => {
 
-                    const newParagraph = property.content.rendered.substring(0, 250);
-                    
-                    return(
-                        <ZoomInOnScroll delay={0.2} duration={1} distance="200px">
-                            <Link href={property.link}>
-                                <SingleProperty key={property.id}>
-                                    <SinglePropertyThumb>
-                                
-                                        <ImageCard src={property.acf.image_card.sizes.medium_large} />
+                            const newParagraph = property.content.rendered.substring(0, 250);
+                            
+                            return(
+                                <ZoomInOnScroll delay={0.2} duration={1} distance="200px">
+                                    <Link href={property.link}>
+                                        <SingleProperty key={property.id}>
+                                            <SinglePropertyThumb>
+                                        
+                                                <ImageCard src={property.acf.image_card.sizes.medium_large} />
 
-                                    </SinglePropertyThumb>
+                                            </SinglePropertyThumb>
 
-                                    <NeighborhoodDetails>
-                                
-                                            <h4>
-                                            {property.title.rendered}
-                                            </h4>
+                                            <NeighborhoodDetails>
+                                        
+                                                    <h4>
+                                                    {property.title.rendered}
+                                                    </h4>
 
-                                            <p>
-                                                <Html2react html={newParagraph} />
-                                            </p>
-                                    
-                                    </NeighborhoodDetails>
-                                </SingleProperty>
-                            </Link>
-                        </ZoomInOnScroll>
-                    )
-                })
-            }
-        
-        
-        </PropertiesGridContainer>
+                                                    <p>
+                                                        <Html2react html={newParagraph} />
+                                                    </p>
+                                            
+                                            </NeighborhoodDetails>
+                                        </SingleProperty>
+                                    </Link>
+                                </ZoomInOnScroll>
+                            )
+                        })
+                    }
+                
+                </PropertiesGridContainer>
 
+            </MarginTop>
         }
-
-        </MarginTop>
+        </>
     )
-
-
 }
 
 const NeighborhoodDetails = styled.div`

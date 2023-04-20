@@ -2,11 +2,11 @@ import React, {useState, useEffect} from 'react';
 import { connect, styled, css, Global, loadable } from "frontity";
 import Loading from './Loading';
 
-const SearchBarSell = ({state, actions, libraries}) => {
+const SearchBar = ({state, actions, libraries}) => {
 
     const exchangeRateValue = state.theme.coinExchange.exchange_rate;
     const currencyPair = state.theme.coinExchange.currency_pair;
-    
+
     return ( 
         <MarginTop>
             <SearchTabContent>
@@ -42,35 +42,8 @@ const SearchBarSell = ({state, actions, libraries}) => {
                                     </ProperyType>
                                 </ItemList>
 
+                    
                                 <ItemList>
-                                    <ProperyType>
-                                        <div>
-                                            <select>
-                                                <option value>Type</option>
-                                                <option>For Rent</option>
-                                                <option>For Sale</option>
-                                            </select>
-                                        </div>
-                                    </ProperyType>
-                                </ItemList>
-
-                                <ItemList>
-                                    <ProperyType>
-                                        <div>
-                                            <select>
-                                                <option value>Bedrooms</option>
-                                                <option>1 bedroom</option>
-                                                <option>2 bedrooms</option>
-                                                <option>3 bedrooms</option>
-                                                <option>4 bedrooms</option>
-                                                <option>5 bedrooms</option>
-                                            </select>
-                                        </div>
-                                    </ProperyType>
-                                </ItemList>
-
-
-                                <ItemPrice>
                                     <ProperyType>
                                         <div>
                                             <select>
@@ -89,9 +62,9 @@ const SearchBarSell = ({state, actions, libraries}) => {
                                             </select>
                                         </div>
                                     </ProperyType>
-                                </ItemPrice>
+                                </ItemList>
 
-                                <ItemPrice>
+                                <ItemList>
                                     <ProperyType>
                                         <div>
                                             <select>
@@ -110,7 +83,7 @@ const SearchBarSell = ({state, actions, libraries}) => {
                                             </select>
                                         </div>
                                     </ProperyType>
-                                </ItemPrice>
+                                </ItemList>
 
                           
                                     <ItemList>
@@ -202,35 +175,12 @@ const ListFilter = styled.ul`
 const ItemList = styled.li`
     display: inline-block;
     line-height: 3;
-    margin-right: 20px;
-    margin-left: 20px;
+    margin-right: 30px;
+    margin-left: 30px;
     vertical-align: text-top;
     /**add new lines styles */
    
     width: 10vw;
-    /**new lines added */
-
-    @media (max-width: 1200px) {
-        margin-bottom: 1rem;
-        width: 40%;
-        margin-right: 0;
-        margin-left: 0;
-
-        &:nth-of-type(5){
-            width: 100%;
-        }
-    }
-`
-
-const ItemPrice = styled.li`
-    display: inline-block;
-    line-height: 3;
-    margin-right: 10px;
-    margin-left: 10px;
-    vertical-align: text-top;
-    /**add new lines styles */
-   
-    width: 8vw;
     /**new lines added */
 
     @media (max-width: 1200px) {
@@ -260,7 +210,7 @@ const EnterSearchInput = styled.div`
             background-color: #fff;
             border: 1px solid #bcbcbc;
             border-radius: 8px;
-            font-size: clamp(.8rem, calc(0.40rem + 0.54vw), 1rem);
+            font-size: clamp(.8rem, calc(0.40rem + 0.54vw), 1.20rem);
             font-family: 'Lato', sans-serif;
             color: #484848;
             line-height: 1.2;
@@ -298,7 +248,7 @@ const ProperyType = styled.div`
             border: 1px solid #bcbcbc;
             border-radius: 8px;
             font-size: 14px;
-            font-size: clamp(.83rem, calc(0.40rem + 0.54vw), 1rem);
+            font-size: clamp(.83rem, calc(0.40rem + 0.54vw), 1.20rem);
             font-family: 'Lato', sans-serif;
             color: #484848;
             line-height: 1.2;
@@ -312,6 +262,7 @@ const ProperyType = styled.div`
             align-self: center;
             /**new lines added */
 
+
             &:focus {
                 outline: none;
             }  
@@ -323,46 +274,6 @@ const ProperyType = styled.div`
         }
     }
 `
-const PriceType = styled.div`
-    div {
-        width: 50%;
 
-        select {
-            background: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='DimGray' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>") no-repeat;
-            background-position: calc(100% - 0.75rem) center !important;
-            -moz-appearance:none !important;
-            -webkit-appearance: none !important; 
-            appearance: none !important;
-            padding-right: 2rem !important;
-            background-color: #fff;
-            border: 1px solid #bcbcbc;
-            border-radius: 8px;
-            font-size: 14px;
-            font-size: clamp(.83rem, calc(0.40rem + 0.54vw), 1rem);
-            font-family: 'Lato', sans-serif;
-            color: #484848;
-            line-height: 1.2;
-            height: 50px;
-            /* width: 215px; */
-            padding: 1vh 1vw;
-            width: 100%;
-            /**add new lines styles */
-            height: 5vh;
-            /* font-size: .8vw; */
-            align-self: center;
-            /**new lines added */
 
-            &:focus {
-                outline: none;
-            }  
-
-            &:after {
-                margin-right: 2rem;
-            }
-
-      
-        }
-    }
-`
-
-export default connect(SearchBarSell);
+export default connect(SearchBar);

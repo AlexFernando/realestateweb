@@ -6,18 +6,18 @@ const Anchor = styled.a`
     justify-content: center;
     background-color: var(--golden-color) ;
     align-self: center;
-    padding: .8rem 0.5rem;
+    padding: .5rem 1.5rem;
     box-sizing: border-box;
     border: 1px solid #fff;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     font-size: var(--step--2);
     text-transform: uppercase;
     color: #FFF;
     cursor: pointer;
     text-decoration: none;
     font-family: 'Montserrat', sans-serif;
-    width: 7rem;
-    margin: 1rem auto;
+    /* width: 7rem; */
+    margin: 1rem 0 1rem 1rem ;
 
     @media(min-width: 768px) {
         margin-bottom: 0rem;

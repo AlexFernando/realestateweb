@@ -3,6 +3,8 @@ import {Global, connect, styled, css } from "frontity";
 import Image from "@frontity/components/image";
 import SpanishImage from '../../images/es.svg';
 import EnglishImage from '../../images/us.svg';
+import FranceImage from '../../images/flag-fr.png'
+import HebrewImage from '../../images/flag-he.png'
 
 const LangSwitcher = ({state, actions}) => {
 
@@ -48,6 +50,10 @@ const LangSwitcher = ({state, actions}) => {
 
      
           <a href="#"> <ImageFlagStyles src={SpanishImage}/> </a>
+
+          <a href="#"> <ImageFlagStyles src={FranceImage}/> </a>
+
+          <a href="#"> <ImageFlagStyles src={HebrewImage}/> </a>
      
         
           {/* <a href={linkFrench}><ImageFlagStyles src={FrenchImage}/> </a>  */}
@@ -77,6 +83,6 @@ const FlagContainer = styled.div`
   }
 `
 const ImageFlagStyles = styled(Image)`
-  width: 35px;
-  height: 20px;
+  width: 30px;
+  height: 25px;
 `

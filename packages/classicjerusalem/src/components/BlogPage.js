@@ -207,7 +207,6 @@ export const StyledImage = styled(Image)`
     height: auto;
     object-fit: contain;
 
-
 `
 export const AuthorBio = styled.div`
     margin-top: -3.5rem;

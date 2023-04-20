@@ -60,7 +60,7 @@ const MenuModal = ({ state }) => {
             </>
           ))}
           <SocialMediaSuperiorMobile />
-          {/* <LangSwitcherMobile /> */}
+          <LangSwitcherMobile />
       </MenuContent>
     </>
   );

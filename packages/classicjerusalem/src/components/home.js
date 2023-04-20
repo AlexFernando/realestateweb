@@ -4,7 +4,8 @@ import Image from "@frontity/components/image";
 import Link from './Link';
 
 import Loading from './Loading';
-import Loader from './Loading2'
+// import Loader from './Loading2';
+// import LoadingComponent from './Loader3'
 import Properties from './properties';
 import RentSell from './RentSellComponent'
 import SearchBar from './SearchBar'
@@ -19,6 +20,15 @@ import FadeInOnScroll from './FadeInScroll'
 import ZoomInOnScroll from './ZoomInEffect'
 import Slider from './loadingImages'
 
+/**MORE IMAGES LOADED */
+import Rent from '../images/rent.jpg';
+import Buy from '../images/buy_couple.jpg';
+import Sell from '../images/sell_adult.jpg';
+import RealEstateAgent from '../images/real_estate_agent.jpg'
+import {ImageFooter} from './footer-one';
+import LinkViewMore from './LinkViewMore'
+import AboutSection from './AboutSection'
+
 const Home = ({state, actions, libraries}) => {
 
     useEffect(() => {
@@ -28,7 +38,7 @@ const Home = ({state, actions, libraries}) => {
     const pageHomeData = state.source.page[12];
 
     const Html2react = libraries.html2react.Component;
-
+    
     return ( 
         <>     
                 {typeof pageHomeData === "undefined" ? <Loading /> :     
@@ -36,9 +46,6 @@ const Home = ({state, actions, libraries}) => {
                         <MarginTopContainer></MarginTopContainer>
                             <Main>
                                 <Overlay>
-                                    {/* <video autoPlay playsInline muted loop>
-                                        <source src="https://realstate.wildfreewalkingtours.com/wp-content/uploads/2023/01/backgorund_video.mp4" type="video/mp4" />
-                                    </video> */}
 
                                     <Hero />
 
@@ -53,17 +60,10 @@ const Home = ({state, actions, libraries}) => {
                                                 <h3>Classic Jerusalem</h3>
                                             </FadeInOnScroll>
                                             
-                                            <FirstUnderlineTitle>
+                                            <UnderlineFullBackground>
                                                 <span></span>
-                                            </FirstUnderlineTitle>
-                                            {/* <ButtonContainer>
-                                                <ButtonParallax>
-                                                    <a href="/properties/">Rent</a>
-                                                </ButtonParallax>  
-                                                <ButtonParallax>
-                                                    <a href="/properties/">Sell</a>
-                                                </ButtonParallax>  
-                                            </ButtonContainer> */}
+                                            </UnderlineFullBackground>
+                            
                                         
                                         </TextoImagen>
 
@@ -74,9 +74,6 @@ const Home = ({state, actions, libraries}) => {
                                 </Overlay>
                         
                             </Main>
-
-                            {/* <Slider/> */}
-
                                             
             
                         <SectionFeaturedProperties>
@@ -87,97 +84,71 @@ const Home = ({state, actions, libraries}) => {
                                 <UnderlineTitle>
                                     <span></span>
                                 </UnderlineTitle>
-                           
+                             
                                     <Properties />
                            
                             </MarginPaddingContainer> 
                         </SectionFeaturedProperties>  
-
-                        <SectionAbout>
-                            <LayerAbout>
-                            <MarginPaddingContainer>
-
-                                <FadeInOnScroll> <SectionTitle>About</SectionTitle></FadeInOnScroll>
-                                <UnderlineTitle>
-                                    <span></span>
-                                </UnderlineTitle>
-
-
-                                <CardAbout>
-                                    <AboutParagraph>  
-                                    <FadeInOnScroll>
-                                        <p>
-                                        Classic Jerusalem is a certified, independent Real Estate Agency since 2010, connecting the right people with the right properties.
-                                        Our goal is to help you find the perfect match, whether you are selling, buying, or renting.
-                                        We believe in being and staying involved through all stages of the real estate process.
-                                        Our growing network of buyers, owners, and tenants, will open doors for our partners on all sides of the real estate equation.
-                                        We will guide you every step of the way.</p></FadeInOnScroll>
-                                        
-                                    </AboutParagraph>
-                                
-                                    <IconsContainer>    
-                                        <IconText>
-                                            <IconContext.Provider value={{color: "#cba631", className: "global-class-name", size: "4rem" } }>
-                                                <GiFamilyHouse />
-                                            </IconContext.Provider>
-                                            <FadeInOnScroll>
-                                                <p>Find the perfect match</p>
-                                            </FadeInOnScroll>
-                                        </IconText>
-                                    
-                                        <IconText>
-                                            <IconContext.Provider value={{ color: "#cba631", className: "global-class-name", size: "4rem" } }>
-                                                <GiSpookyHouse />
-                                            </IconContext.Provider>
-                                            <FadeInOnScroll>
-                                                <p>Involved through all stages</p>
-                                            </FadeInOnScroll>
-                                        </IconText>
-                            
-                                        <IconText>
-                                            <IconContext.Provider value={{ color: "#cba631", className: "global-class-name", size: "4rem" } }>
-                                                <GiHouse />
-                                            </IconContext.Provider>
-                                            <FadeInOnScroll>
-                                                <p>We will guide you every step of the way.</p>
-                                            </FadeInOnScroll>
-                                        </IconText>
-                                    </IconsContainer>
-
-                                </CardAbout>
-                             
-                            </MarginPaddingContainer>
-                            </LayerAbout>
-                        </SectionAbout>
-
+                    
+                        <AboutSection />
               
                         <RentSell />
     
-                        <ContactBackgroundImage>
-                            <ContactLayerGradient>
-                             
+                        <SectionServices>
+                            <MarginPaddingContainer>
                                 <ContactText>
                                     <FadeInOnScroll>
-                                        <h2>Looking to Sell your Property?</h2>
+                                        <SectionTitle>ARE YOU LOOKING  TO SELL / RENT/ AIRBNB YOUR PROPERTY? </SectionTitle>
+                                        <UnderlineTitle><span></span></UnderlineTitle>
                                     </FadeInOnScroll>
                                     
                                     <FadeInOnScroll>
                                         <p> 
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                                            Nunc ac luctus tellus, ut lobortis diam. Vestibulum dapibus condimentum ullamcorper. Suspendisse nec libero placerat, 
-                                            euismod felis a, faucibus enim. 
+                                            we have qualified clients ready to go . let’s start working
                                         </p>
                                     </FadeInOnScroll>
                                 </ContactText>
-                              
-                                <ZoomInOnScroll delay={0.2} duration={1} distance="200px">
-                                    <ContactForm>
-                                        <Html2react html={pageHomeData.content.rendered} />
-                                    </ContactForm>
-                                </ZoomInOnScroll>
-                            </ContactLayerGradient>
-                        </ContactBackgroundImage>
-                        
+                                
+                                <ContainerServices>
+                                    <FadeInOnScroll>
+                                    <CardService>
+                                        <ImageFooter src={Rent} />
+                                        <h3>Sell</h3>
+                                        <p>Sell your Aparment</p>
+                                        <LinkViewMore href="#">View More</LinkViewMore>
+                                    </CardService>
+                                    </FadeInOnScroll>
+
+                                    <FadeInOnScroll>
+                                    <CardService>
+                                        <ImageFooter src={Buy} />
+                                        <h3>Airbnb</h3>
+                                        <p>Airbnb your aparment </p>
+                                        <LinkViewMore href="#">View More</LinkViewMore>
+                                    </CardService>
+                                    </FadeInOnScroll>
+
+                                    <FadeInOnScroll>
+                                    <CardService>
+                                        <ImageFooter src={Sell} />
+                                        <h3>Rent</h3>
+                                        <p>Rent your aparment long term </p>
+                                        <LinkViewMore href="#">View More</LinkViewMore>
+                                    </CardService>
+                                    </FadeInOnScroll>
+
+                                    <FadeInOnScroll>
+                                    <CardService>
+                                        <ImageFooter src={RealEstateAgent} />
+                                        <h3>Market</h3>
+                                        <p>Value your property</p>
+                                        <LinkViewMore href="#">View More</LinkViewMore>
+                                    </CardService>
+                                    </FadeInOnScroll>
+                                </ContainerServices>
+                            </MarginPaddingContainer>
+                        </SectionServices>
+                             
                         <SectionTestimonial>
                             <Testimonials />  
                         </SectionTestimonial>
@@ -189,6 +160,14 @@ const Home = ({state, actions, libraries}) => {
 }
 
 export default connect(Home)
+
+const Text = styled.p`
+  font-size: 18px;
+  margin: 0;
+  padding: 20px;
+  background-color: #ddd;
+`;
+
 
 export const MarginTopContainer = styled.div`
     margin-top: 90px;
@@ -375,70 +354,6 @@ const ButtonParallax = styled.div`
 
 /**ENDS BACKGROUND VIDEO */
   
-/*SECTION ABOUT */
-export const SectionAbout = styled.section`
-    background-color: #fff;
-    position: relative;
-    color: #fff;
-    background-image: url("https://realstate.wildfreewalkingtours.com/wp-content/uploads/2023/03/background5-1024x684.jpg");
-
-  /* background: linear-gradient(45deg, rgb(26, 1, 117) 0%, rgba(225, 5, 34, 0) 70%) repeat scroll 0% 0%, 
-  linear-gradient(135deg, rgb(225, 5, 152) 10%, rgba(49, 5, 209, 0) 80%) repeat scroll 0% 0%, 
-  linear-gradient(225deg, hsla(179, 81%, 45%, 1) 10%, rgba(10, 219, 216, 0) 80%) repeat scroll 0% 0%,
-   rgba(0, 0, 0, 0) linear-gradient(315deg, rgb(189, 5, 245) 100%, rgba(9, 245, 5, 0) 70%) repeat scroll 0% 0%;*/
-`
-
-export const LayerAbout = styled.div`
-    background-image: linear-gradient(180deg, rgba(0,0,0,.8)  0%, rgba(28, 38, 65, 0.7) 100%);
-    padding: 1rem 0 1rem 0;
-`
-
-const CardAbout = styled.div`
-    padding: 2rem;
-    box-sizing: border-box;
-    height: 100%;
-`
-const AboutParagraph = styled.div`
-    line-height: 1.8;
-    margin: 1rem auto;
-    text-align: justify;
-
-    p {
-        font-size: var(--step--1);
-
-        @media (min-width: 1024px) and (max-width: 1440px){
-            font-size: var(--step--2);
-        }
-    }
-`
-
-const IconsContainer = styled.div`
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: space-around;
-
-    @media(max-width: 768px) {
-        flex-direction: column;
-        justify-content: center;
-    }
-`
-
-const IconText = styled.div`
-   display: flex;
-   flex-direction: column;
-   flex-basis: 30%;
-   align-items: center;
-   text-align: center;
-
-   p {
-     font-size: var(--step--1);
-
-        @media (min-width: 1024px) and (max-width: 1440px){
-            font-size: var(--step--2);
-        }
-   }
-`
 
 /**SECTION FEATURED PROPERTIES */
 export const SectionTitle = styled.h2`
@@ -449,6 +364,7 @@ export const SectionTitle = styled.h2`
     letter-spacing: -1px;
     margin-bottom: 10px;
     text-align: center;
+    position: relative; 
 `
 
 export const FirstUnderlineTitle = styled.div`
@@ -505,119 +421,151 @@ export const FirstUnderlineTitle = styled.div`
     }
 `
 
+const UnderlineFullBackground = styled.div`
+    height: 35px;
+    height: var(--step-2);
+    position: relative;
+    /* text-align: center; */
+ 
+    @media (min-width: 1024px) and (max-width: 1440px){
+        height: var(--step-1);
+    }
+
+    span {
+        position: absolute;
+        background-color: #c0962d;
+        bottom: 0;
+        top: 0;
+        left: 50%;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: transparent;
+        border: 3px solid #c0962d;
+      
+        /* height: 100%; */
+
+        &:before {
+            width: 140px;
+            width: clamp(4.49rem, calc(5.62rem + 1.33vw), 9.82rem);
+            height: 3px;
+            background-color: #cba631;
+            position: absolute;
+            top: 2px;
+            content: '';
+            background-color: #c0962d;
+            transform: translateX(-110%);
+            width: 14rem;
+        
+            @media (min-width: 1024px) and (max-width: 1440px){
+                width: clamp(2.49rem, calc(3.62rem + 1.33vw), 9.82rem);
+                width: 7rem;
+            }
+
+            @media (max-width: 1023px){
+                width: 4rem;
+            }
+
+        }
+
+        &:after {
+            width: 100px;
+            width: clamp(2.49rem, calc(2.62rem + 1.33vw), 4.82rem);
+            height: 3px;
+            position: absolute;
+            top: 2px;
+            content: '';
+            background-color: #c0962d;
+            transform: translateX(10%);
+            width: 14rem;
+
+            @media (min-width: 1024px) and (max-width: 1440px){
+                width: clamp(1.49rem, calc(1.62rem + 1.33vw), 3.82rem);
+                width: 7rem;
+            }
+
+            @media (max-width: 1023px){
+                width: 4rem;
+            }
+        }
+    }
+
+`
+
 
 export const UnderlineTitle = styled.div`
     height: 35px;
     height: var(--step-2);
     position: relative;
-    text-align: center;
-
-    @media (min-width: 1024px) and (max-width: 1440px){
-        height: var(--step-1);
-    }
-
-    span {
-        position: absolute;
-        background-color: #cba631;
-        bottom: 0;
-        top: 0;
-        width: 1px;
-        height: 100%;
-
-        &:before {
-            width: 140px;
-            width: clamp(4.49rem, calc(5.62rem + 1.33vw), 7.82rem);
-            height: 1px;
-            background-color: #cba631;
-            position: absolute;
-            left: 50%;
-            top: 9px;
-            content: '';
-            background-color: #c0962d;
-            transform: translateX(-50%);
-
-            @media (min-width: 1024px) and (max-width: 1440px){
-                width: clamp(2.49rem, calc(3.62rem + 1.33vw), 5.82rem);
-            }
-
-        }
-
-        &:after {
-            width: 100px;
-            width: clamp(2.49rem, calc(2.62rem + 1.33vw), 4.82rem);
-            height: 1px;
-            position: absolute;
-            left: 50%;
-            top: 15px;
-            content: '';
-            background-color: #c0962d;
-            transform: translateX(-50%);
-
-            @media (min-width: 1024px) and (max-width: 1440px){
-                width: clamp(1.49rem, calc(1.62rem + 1.33vw), 3.82rem);
-            }
-        }
-    }
-`
-
-export const UnderlineTitleAlternative = styled.div`
-    height: 35px;
-    height: var(--step-2);
-    position: relative;
-    text-align: center;
-
-    @media (min-width: 1024px) and (max-width: 1440px){
-        height: var(--step-1);
-    }
-
-    span {
-        position: absolute;
-        background-color: #cba631;
-        bottom: 0;
-        top: 0;
-        width: 30px;
-        height: 10px;
+    /* text-align: center; */
  
+    @media (min-width: 1024px) and (max-width: 1440px){
+        height: var(--step-1);
+    }
+
+    span {
+        position: absolute;
+        background-color: #c0962d;
+        bottom: 0;
+        top: 0;
+        left: 50%;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: transparent;
+        border: 2px solid #c0962d;
+      
+        /* height: 100%; */
+
         &:before {
             width: 140px;
-            width: clamp(4.49rem, calc(5.62rem + 1.33vw), 7.82rem);
-            height: 4px;
+            width: clamp(4.49rem, calc(5.62rem + 1.33vw), 9.82rem);
+            height: 2px;
             background-color: #cba631;
             position: absolute;
-            left: 50%;
-            top: 3px;
+            top: 2px;
             content: '';
-            transform: translateX(-50%);
-       
-
+            background-color: #c0962d;
+            transform: translateX(-110%);
+            width: 14rem;
+        
             @media (min-width: 1024px) and (max-width: 1440px){
-                width: clamp(2.49rem, calc(3.62rem + 1.33vw), 5.82rem);
+                width: clamp(2.49rem, calc(3.62rem + 1.33vw), 9.82rem);
+                width: 7rem;
+            }
+
+            @media (max-width: 1023px){
+                width: 4rem;
             }
 
         }
-/* 
+
         &:after {
             width: 100px;
             width: clamp(2.49rem, calc(2.62rem + 1.33vw), 4.82rem);
-            height: 1px;
+            height: 2px;
             position: absolute;
-            left: 50%;
-            top: 15px;
+            top: 2px;
             content: '';
             background-color: #c0962d;
-            transform: translateX(-50%);
+            transform: translateX(10%);
+            width: 14rem;
 
             @media (min-width: 1024px) and (max-width: 1440px){
                 width: clamp(1.49rem, calc(1.62rem + 1.33vw), 3.82rem);
+                width: 7rem;
             }
-        } */
+
+            @media (max-width: 1023px){
+                width: 4rem;
+            }
+        }
     }
 `
 
 export const SectionFeaturedProperties = styled.section`
     background-color: #f7f7f7;
     padding: 1rem 0;
-    position: relative;
 `
 
 export const MarginPaddingContainer = styled.div`
@@ -648,6 +596,55 @@ export const MarginPaddingContainer = styled.div`
 `
 
 /**SECTION CONTACT LOOKING FOR SALE */
+
+const SectionServices = styled.section`
+    background-color: var(--main-color);
+    color: #fff;
+    padding: 3rem 0;
+`
+
+const ContainerServices = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-gap: 2rem;
+    color: #fff;
+
+    @media (max-width: 576px){
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 1rem;
+        justify-items: normal;
+    }
+
+    @media (min-width: 576px) and (max-width: 1024px){
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1rem;
+        justify-items: stretch;
+    }
+`
+
+const CardService = styled.div`
+    margin-left: auto;
+    margin-top: 2rem;
+    text-align: left;
+    
+    h3 {
+        font-size: var(--step--1);
+        text-transform: uppercase;
+        color: var(--golden-color);
+    }
+   
+    p {
+        font-size: var(--step--1);
+        margin-top: 0;
+
+        font-size: var(--step--1);  
+        line-height: 1.8;
+        text-align: justify;
+    }
+`
+
+
 export const ContactBackgroundImage = styled.section`
     background-image:url('https://realstate.wildfreewalkingtours.com/wp-content/uploads/2023/01/aparment_background.jpg');
     background-repeat: no-repeat;
@@ -659,31 +656,7 @@ export const ContactBackgroundImage = styled.section`
     background-position: center;
 `
 
-const ContactLayerGradient = styled.div`
-    display: flex;
-    color: #FFF;
-    padding: 0 2rem;
-    justify-content: center;
-    align-content: flex-start;
-    overflow-wrap: break-word;
-    font-family: 'Lato';
-    background-image: linear-gradient(180deg, rgba(28, 38, 65, .7)  0%, rgba(28, 38, 65, .9) 100%);
-    height: 100%;
-    
-    @media(max-width: 768px) {
-        flex-direction: column;
-        align-content: center;
-    }
-`
-
-
 const ContactText = styled.div`
-    margin: auto 2rem;
-    flex-basis: 30%;
-    
-    @media(max-width: 768px) {
-        margin: auto 0rem;
-    }
 
     h2 {
         font-size: var(--step-2);
@@ -696,12 +669,13 @@ const ContactText = styled.div`
 
     p {
         line-height: 1.8;
-        font-size: var(--step--1);
+        font-size: var(--step-0);
         font-weight: 300;
         letter-spacing: 1px;
+        text-transform: capitalize;
 
         @media (min-width: 1024px) and (max-width: 1440px){
-            font-size: var(--step--2);
+            font-size: var(--step--1);
         }
     }
 `

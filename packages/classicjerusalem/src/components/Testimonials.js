@@ -12,11 +12,13 @@ import testimonial2 from '../images/testimonial2.jpg'
 import testimonial3 from '../images/testimonial3.jpg'
 import Loading from './Loading';
 
-import {UnderlineTitle} from './home'
+import {SectionTitle, UnderlineTitle} from './home'
 
 import FadeInOnScroll from './FadeInScroll'
 import ZoomInOnScroll from './ZoomInEffect'
 import {CloseButton} from './SuscribeForm';
+
+import TestimonialSlider from './TestimonialSlider'
 
 const Testimonials = ({state, actions, libraries}) => {
 
@@ -37,18 +39,14 @@ const Testimonials = ({state, actions, libraries}) => {
     return(
         <ContainerSection>
             <FadeInOnScroll>
-                <h2>Testimonials</h2>
+                <SectionTitle>Testimonials</SectionTitle>
             </FadeInOnScroll>
 
             <UnderlineTitle>
                 <span></span>
             </UnderlineTitle>
 
-            <FadeInOnScroll>
-                <p>Check some of our references. Addtional references on request</p>
-            </FadeInOnScroll>
-
-            <ContainerTestimonial>
+            <TestimonialSlider>
                 <ZoomInOnScroll delay={0.5} duration={1} distance="200px">
                     <CardTestimonial>
                         <div>
@@ -56,14 +54,15 @@ const Testimonials = ({state, actions, libraries}) => {
                                 <RiDoubleQuotesL />
                             </IconContext.Provider>
                         </div>
-                        <TestimonialParagraphs>
+                        <TextTestimonal>
+                            <p>
                             Classic Jerusalem was recommended to me by both my sons. They insisted that I use Classic Jerusalem and when 
                             I was ready to buy they were there with me every step of the way. 
-                            I am very pleased with their services, they always had an answer to any of my question. Thank you.
+                            I am very pleased with their services, they always had an answer to any of my question. Thank you.</p>
 
-                            <p><strong>~Elianna Toledano</strong></p>
-                            <p><span>Israel, Jerusalem</span></p>
-                        </TestimonialParagraphs>
+                            <strong>~Elianna Toledano</strong>
+                            <span>Israel, Jerusalem</span>
+                        </TextTestimonal>
 
                         {/* <ImageContainer>
                             <ImageTestimonial alt="logo" src={testimonial1} /> 
@@ -80,17 +79,16 @@ const Testimonials = ({state, actions, libraries}) => {
                                 <RiDoubleQuotesL />
                             </IconContext.Provider>
                         </div>
-                        <TestimonialParagraphs>
+                        <TextTestimonal>
+                            <p>
                             Very efficient, clear, professional, helpful and polite. 
                             They helped me to find the perfect apartment within a week and have communicated superbly every step of the way. 
-                            I am extremely thankful, particularly to the agent Samuel Cohen
-
-                            <p>
-                                <strong>~Hadass Obadia</strong>
-                            </p>
-
-                            <p><span>Israel, Jerusalem</span></p>
-                        </TestimonialParagraphs>
+                            I am extremely thankful, particularly to the agent Samuel Cohen</p>
+                            
+                            <strong>~Hadass Obadia</strong>
+                        
+                            <span>Israel, Jerusalem</span>
+                        </TextTestimonal>
 
                         {/* <ImageContainer>
                             <ImageTestimonial alt="logo" src={testimonial2} /> 
@@ -107,14 +105,20 @@ const Testimonials = ({state, actions, libraries}) => {
                                 <RiDoubleQuotesL />
                             </IconContext.Provider>
                         </div>
-                        <TestimonialParagraphs>
+
+                        <TextTestimonal>
+                        <p>
                             Very tireless Realtor, that will respond to your queries and concerns. 
                             I live in Emek Refaim and I found the perfect home. 
                             Classic Jerusalem is very committed and professional; keeps you in the loop at all time. 
-                            <p><strong>~Eliahu Medina</strong></p>
+                            
+                        </p>
 
-                            <p><span>Israel, Jerusalem</span></p>
-                        </TestimonialParagraphs>
+                        <strong>~Eliahu Medina</strong>
+
+                        <span>Israel, Jerusalem</span>
+
+                        </TextTestimonal>
 
                         {/* <ImageContainer>
                             <ImageTestimonial alt="logo" src={testimonial3} /> 
@@ -123,7 +127,7 @@ const Testimonials = ({state, actions, libraries}) => {
                         
                     </CardTestimonial>
                 </ZoomInOnScroll>
-            </ContainerTestimonial>
+            </TestimonialSlider>
             {
                 showModalForm? 
                 <ModalForm>
@@ -144,43 +148,12 @@ const Testimonials = ({state, actions, libraries}) => {
 export default connect(Testimonials)
 
 const ContainerSection = styled.div`
-    
-    margin-left: calc(14rem + 1.5625vw);
-    margin-right: calc(14rem + 1.5625vw);
+     max-width: min(800px, 95%);
+    margin-left: auto;
+        margin-right: auto;
     margin-top: 3rem;
-    max-width: 1800px;
+   
 
-    @media (min-width: 1201px) and (max-width: 1420px){
-        max-width: 1400px;
-        margin-left: calc(5rem + 1.5625vw);
-        margin-right: calc(5rem + 1.5625vw);
-    }
-
-    @media (min-width: 993px) and (max-width: 1200px) {
-        max-width: 1140px;
-        margin-left: calc(3rem + 1.5625vw);
-        margin-right: calc(3rem + 1.5625vw);
-    }
-
-    @media (min-width: 769px)  and (max-width: 992px){
-        max-width: 960px;
-        margin-left: calc(2rem + 1.5625vw);
-        margin-right: calc(2rem + 1.5625vw);
-    }
-
-    @media (min-width: 576px) and (max-width: 768px){
-        max-width: 720px;
-        margin-left: calc(1rem + 1.5625vw);
-        margin-right: calc(1rem + 1.5625vw);   
-      
-    }
-
-    @media (max-width: 576px){
-        max-width: 540px;
-      
-        margin-left: 1rem;
-        margin-right: 1rem;  
-    }
 
     h2 {
         font-family: 'Lato';
@@ -190,27 +163,6 @@ const ContainerSection = styled.div`
         margin-bottom: 10px;
         text-align: center;
     }
-
-    p {
-        text-align: center;
-        margin-bottom:0;
-        /* margin-bottom: clamp(1rem, calc(.5rem + 1.98vw), 3.05rem); */
-        font-size: var(--step--1);
-        /* color: #303030; */
-        color: #fff;
-
-        strong {
-            font-size: var(--step--1);
-            color: var(--golden-color);
-            /* border-bottom: 1px solid var(--golden-color); */
-        }
-
-        span {
-            font-size: var(--step--1);
-            color: #fff;
-            border-bottom: 2px solid var(--golden-color);
-        }
-    }
 `
 
 const ContainerTestimonial = styled.div`
@@ -219,17 +171,18 @@ const ContainerTestimonial = styled.div`
     grid-gap: 1rem;
     padding-left: calc(1.5rem/2);
     padding-right: calc(1.5rem/2);
+    margin: 1rem auto;
 
     @media (max-width: 576px){
         grid-template-columns: repeat(1, 1fr);
         grid-gap: 1rem;
-        margin: 2rem 0;
+        margin: 1rem 0;
     }
 
     @media (min-width: 576px) and (max-width: 1024px){
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 1rem;
-        margin: 2rem 0;
+        margin: 1rem 0;
     }
 `
 
@@ -237,16 +190,45 @@ const CardTestimonial = styled.div`
     height: fit-content;
     /* background-color: #EDF9FF; */
     background-image: linear-gradient(180deg, rgba(28, 38, 65, .9) 0%, rgba(28, 38, 65, .9) 100%);
-    padding: clamp(.8rem, calc(.5rem + .5vw), 2rem);
+    padding: 1rem;
     box-sizing: border-box;
     height: 100%;
 `
-const TestimonialParagraphs = styled.p`
-    line-height: 1.8;
-    margin: 1rem auto;
-    font-size: var(--step--1);
-    text-align: justify;
+
+const TextTestimonal = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+    align-items: center;
+    font-family: 'Lato', sans-serif;
+
+    p {
+        text-align: center;
+        font-size: var(--step--2);
+        line-height: 1.8;
+        color: #fff;
+    }
+    strong {
+        font-size: var(--step--2);
+        color: var(--golden-color);
+        margin-bottom: .5rem;
+    }
+
+    span {
+        font-size: var(--step--2);
+        color: #fff;
+        border-bottom: 2px solid var(--golden-color);
+        margin-bottom: .5rem;
+    }
 `
+
+// const TestimonialParagraphs = styled.p`
+//     line-height: 1.8;
+//     margin: 1rem auto;
+//     font-size: .5rem;
+//     text-align: justify;
+// `
 
 const ImageContainer = styled.div`
     display: flex;
@@ -265,25 +247,27 @@ const ViewMoreButton = styled.button`
     justify-content: center;
     background-color: var(--golden-color) ;
     align-self: center;
-    padding: 1rem;
+    padding: .8rem;
     box-sizing: border-box;
     border: 1px solid #fff;
-    border-radius: 5px;
-    font-size: var(--step--1);
+    /* border-radius: 5px; */
+    font-size: var(--step--2);
     text-transform: uppercase;
     color: #FFF;
     cursor: pointer;
     text-decoration: none;
     font-family: 'Montserrat', sans-serif;
-    margin: 4rem auto 0 auto;
+    margin: 2rem auto 0 auto;
 
     @media(min-width: 768px) {
         margin-bottom: 0rem;
     }
 
     &:hover {
-        background-color: var(--golden-icons);
+        background-color: var(--white);
         transition: all 0.4s;
+        border: 1px solid var(--golden-icons);
+        color: var(--golden-color)
     }
 `
 

@@ -4,24 +4,21 @@ import Image from "@frontity/components/image";
 import {SectionFeaturedProperties} from './home';
 import SearchBarForm from './SearchBarSell';
 import Loading from './Loading';
-
 import SinglePropertyComponent from './SingleProperty';
 
-const RentUnfurnished = ({state, actions, libraries}) => {
-
+const ShorTermRentals = ({state, actions, libraries}) => {
+    
     useEffect( () => {
-        // actions.source.fetch("/properties")
-        actions.source.fetch("/category/long-term-rentals-unfurnished/");
+        actions.source.fetch("/category/short-term-rentals/");
     }, [])
 
-    // const data = state.source.get('/properties');
-    const dataPropertiesUnfurnished = state.source.get("/category/long-term-rentals-unfurnished/");
+    const dataPropertiesShortTerms = state.source.get("/category/short-term-rentals/");
 
     let myPosts = [];
 
-    if(dataPropertiesUnfurnished.isCategory) {
-        console.log("lenght :", dataPropertiesUnfurnished.items.length )
-            dataPropertiesUnfurnished.items.map( ({type, id}) => {
+    if(dataPropertiesShortTerms.isCategory) {
+        console.log("lenght :", dataPropertiesShortTerms.items.length )
+            dataPropertiesShortTerms.items.map( ({type, id}) => {
                 const singleProperty = state.source[type][id];
                 myPosts.push(singleProperty);
             }
@@ -31,7 +28,7 @@ const RentUnfurnished = ({state, actions, libraries}) => {
     return ( 
         <>
         {
-            dataPropertiesUnfurnished.isReady && myPosts.length >= 0? 
+            dataPropertiesShortTerms.isReady && myPosts.length >= 0? 
         <>
             {/* <ContainerBackgroundTour>
 
@@ -47,17 +44,18 @@ const RentUnfurnished = ({state, actions, libraries}) => {
 
                 <ContainerPropertiesForm>
 
-
                     <SearchBarForm />
                 
                     <PropertiesGrid>
                         {
-                            myPosts.map(property => {
-                                return(
-                                    <SinglePropertyComponent property={property} />
-                                )
-                            })
+                          myPosts.map(property => {
+                            return(
+                                <SinglePropertyComponent property={property} />
+                            )
+                        })
+
                         }
+         
                     </PropertiesGrid>
                     
                 </ContainerPropertiesForm>
@@ -195,155 +193,6 @@ export const PropertiesGrid = styled.div`
 
 /**End Properties */
 
-
-/**Search Form */
-const SearchTabContent = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 3rem;
-    z-index: 0;
-`
-
-const SearchForm = styled.div`
-    display: block;
-    background-color: #fff;
-    background-color: #1C2641;
-    border-radius: 8px;
-    padding: 10px 20px;
-width: 100%;
-z-index: 0;
-
-
-/*     &:before {
-        border-radius: 8px;
-        bottom: -10px;
-        content: "";
-        left: -10px;
-        position: absolute;
-        right: -10px;
-        top: -10px;
-        z-index: -1;
-    } */
-`
-const SearchMultiFilter = styled.div`
-    /* position: relative; */
-    display: flex;
-    justify-content: space-between;
-`
-
-const ListFilter = styled.ul`
-    position: relative;
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-
-    div {
-        flex-basis: 100%;
-  
-        @media (max-width: 1200px) {
-            width: 100%;
-        }
-
-        h3 {
-            color: #fff;
-            text-transform: uppercase;
-            width: 100%;
-        }
-
-        button {
-            border-radius: 8px;
-            background-color: var(--golden);
-            font-size: 16px;
-            color: #fff;
-            font-weight: 700;
-            line-height: 1.2;
-            height: 50px;
-            transition: all .3s ease;
-            cursor: pointer;
-            border: none;
-            width: 100%;
-
-
-            @media (max-width: 1200px) {
-                width: 100%;
-            }
-        }
-    }
-`
-
-const ItemList = styled.li`
-    display: inline-block;
-    line-height: 3;
-    vertical-align: text-top;
-    width: 100%;
-    margin: auto 1rem;
-
-    @media (max-width: 1200px) {
-        margin-bottom: 1rem;
-        width: 40%;
-        margin-right: 0;
-        margin-left: 0;
-    }
-`
-const EnterSearchInput = styled.div`
-    margin-bottom: 0;
-
-    div {
-        width: 100%;
-        
-        input {
-            background-color: #fff;
-            border: 1px solid #bcbcbc;
-            border-radius: 8px;
-            font-size: 14px;
-            color: #484848;
-            line-height: 1.2;
-            height: 50px;
-            /* width: 215px;   */
-            padding: 0 1rem;
-            box-sizing: border-box; 
-            width: 100%;
-
-        &:focus {
-           outline: none;
-        }  
-    }
-    }
-
-`
-const ProperyType = styled.div`
-
-    div {
-        width: 100%;
-        select {
-            background-color: #fff;
-            border: 1px solid #bcbcbc;
-            border-radius: 8px;
-            font-size: 14px;
-            color: #777;
-            line-height: 1.2;
-            height: 50px;
-            /* width: 215px; */
-            padding: 1rem;
-            width: 100%;
-            /* box-sizing: border-box; */
-  
-            &:focus {
-                outline: none;
-            }  
-
-            &:after {
-                margin-right: 2rem;
-            }
-        }
-    }
-`
-
-/**Search Form */
 /**END PROPERTY LISTING SECTION */
 
-export default connect(RentUnfurnished);
+export default connect(ShorTermRentals);

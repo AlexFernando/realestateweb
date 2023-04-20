@@ -9,7 +9,11 @@ export default {
     theme: Root
   },
   state: {
-    theme: {},
+    theme: {
+      coinExchange: [],
+      // usdEur: [],
+      // usdIls: []
+    },
     source: {
       data: {
         "/": {
@@ -33,6 +37,17 @@ export default {
           closeMobileMenu: ({ state }) => {
             state.theme.isMobileMenuOpen = false;
           },
+
+          // updateUsdEur: ({state}) => (usdEur) => {
+          //   state.theme.usdEur = usdEur;
+          // },
+          // updateUsdIls: ({state}) => (usdIls) => {
+          //   state.theme.usdIls = usdIls;
+          // },
+
+          updateExchangeRate: ({state}) => (coinExchange) => {
+            state.theme.coinExchange = coinExchange
+          }
         },
       },
   

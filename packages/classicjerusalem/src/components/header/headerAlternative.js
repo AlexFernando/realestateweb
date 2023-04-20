@@ -49,8 +49,7 @@ const AllNavbar = styled.div`
     z-index: 10;
     background-color: #0c0c0c;
     background-color: var(--main-color);
-    display: flex;
-    align-items: center;
+ 
     width: 100%;
     height: 90px;
     height: 120px;
@@ -58,6 +57,11 @@ const AllNavbar = styled.div`
   
     @media (max-width: 1024px) {
       height: 100px;
+    }
+
+    @media (min-width: 1024px) {
+      display: flex;
+      align-items: center;
     }
 
     /**
