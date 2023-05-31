@@ -16,7 +16,7 @@ const SliderContainer = styled.div`
 
 export const PropertiesGrid = styled.div`
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 1rem;
     color: #444;
     font-family: 'Lato';
@@ -102,7 +102,7 @@ const Slider = ({ children }) => {
     return groupedChildren;
   };
 
-  const [groupedChildren, setGroupedChildren] = useState(() => groupChildren(children, 3));
+  const [groupedChildren, setGroupedChildren] = useState(() => groupChildren(children, 1));
 
   return (
     <>

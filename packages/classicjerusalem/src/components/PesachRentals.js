@@ -5,6 +5,7 @@ import {SectionFeaturedProperties} from './home';
 import SearchBarForm from './SearchBarSell';
 import Loading from './Loading';
 import SinglePropertyComponent from './SingleProperty';
+import {MarginTopSearchBar, TextSearchFilter, TextNoPropertiesFound} from './Rent'
 
 const PesachRentals = ({state, actions, libraries}) => {
 
@@ -27,7 +28,7 @@ const PesachRentals = ({state, actions, libraries}) => {
     return ( 
         <>
         {
-            dataPropertiesFurnished.isReady && myPosts.length >= 0? 
+            dataPropertiesFurnished.isReady? 
         <>
             <SectionFeaturedProperties>
 
@@ -35,15 +36,28 @@ const PesachRentals = ({state, actions, libraries}) => {
 
                     <SearchBarForm />
                 
+               
                     <PropertiesGrid>
-                    {
-                            myPosts.map(property => {
-                                return(
-                                    <SinglePropertyComponent property={property} />
-                                )
-                            })
-                        }
+                        {myPosts.length > 0 && myPosts.map?(property => {
+                            return(
+                                <SinglePropertyComponent property={property} />
+                            )
+                        })
 
+                        
+                        : 
+                        
+                        <TextNoPropertiesFound>
+                           <p>
+                                No properties to show yet
+                            </p> 
+                            <p>
+                                This will be updated soon
+                            </p>
+                        </TextNoPropertiesFound>
+                        }
+         
+           
 
                     </PropertiesGrid>
                     

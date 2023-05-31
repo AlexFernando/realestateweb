@@ -12,7 +12,7 @@ const SubscribeIcon = () => {
       if (!showForm) {
         setShowForm(true);
       }
-    }, 40000);
+    }, 8000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -27,26 +27,26 @@ const SubscribeIcon = () => {
   //   }
   // };
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const windowHeight = window.innerHeight;
-      const bodyHeight = document.documentElement.scrollHeight;
-      const scrollPosition = window.scrollY + windowHeight;
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const windowHeight = window.innerHeight;
+  //     const bodyHeight = document.documentElement.scrollHeight;
+  //     const scrollPosition = window.scrollY + windowHeight;
       
-      if (scrollPosition >= (bodyHeight - 200)) {
-        // User has reached the bottom of the page
-        setShowForm(true);
-      }
+  //     if (scrollPosition >= (bodyHeight - 200)) {
+  //       // User has reached the bottom of the page
+  //       setShowForm(true);
+  //     }
 
-      else {
-        setShowForm(false);
-      }
-    };
+  //     else {
+  //       setShowForm(false);
+  //     }
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
+  //   window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [showForm]);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [showForm]);
 
 
   // useEffect(() => {

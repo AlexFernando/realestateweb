@@ -34,11 +34,25 @@ const SinglePropertyComponent = ({state, actions, libraries, property}) => {
                             :null
                         }
 
-                        <ImageCard src={property.acf.images_carousel.img_one.sizes.medium_large} />
+                        <ImageCard src={property.acf.image_card.sizes.medium_large} />
 
                         <TextBand>
-                            FOR SALE
+                            {property.acf.details_properties.ribbon_cintillo}
                         </TextBand>
+
+                        {
+                            property.acf.status_property === 'Sold'?
+                            <StatusPropertyTag>
+                                <h3>SOLD</h3>
+                            </StatusPropertyTag>
+
+                            :property.acf.status_property === 'Rented'?
+                            <StatusPropertyTag>
+                                <h3>RENT</h3>
+                            </StatusPropertyTag>
+
+                            :null
+                        }
                     </SinglePropertyThumb>
 
                     <SinglePropertyDetails>
@@ -53,13 +67,13 @@ const SinglePropertyComponent = ({state, actions, libraries, property}) => {
                                     <ImLocation />
                                 </IconContext.Provider>
                             
-                                {property.acf.details_properties.address}
+                                {property.acf.details_properties.neighborhood}
                             </p>
 
                             <ul>
                                 <li>
                                     <span>
-                                        <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                        <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1.3rem"} }>
                                             <IoBedOutline />
                                         </IconContext.Provider>
                                     </span>
@@ -71,7 +85,7 @@ const SinglePropertyComponent = ({state, actions, libraries, property}) => {
 
                                 <li>
                                     <span>
-                                        <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                        <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1.3rem"} }>
                                             <FaShower />
                                         </IconContext.Provider>
                                     </span>
@@ -79,7 +93,7 @@ const SinglePropertyComponent = ({state, actions, libraries, property}) => {
                                 </li>
                                 <li>
                                     <span>
-                                        <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1rem"} }>
+                                        <IconContext.Provider value={{ color: "#333332", className: "global-class-name", size: "1.1rem"} }>
                                             <TfiRulerAlt2 />
                                         </IconContext.Provider>
                                     </span>
@@ -92,8 +106,8 @@ const SinglePropertyComponent = ({state, actions, libraries, property}) => {
                                 <PriceTag>   
                                     {parseInt(Number(property.acf.details_properties.price_dollars)*Number(exchangeRateValue))} 
                                     {
-                                        currencyPair === "USD_USD"? 
-                                        " $"  : currencyPair === "USD_EUR"? " €" : " ₪" 
+                                        currencyPair === "ILS_ILS"? 
+                                        " ₪"  : currencyPair === "ILS_USD"? " $" : " €" 
                                     }
                                 </PriceTag>     
                                 <LinkButtonHome href={property.link}>
@@ -111,13 +125,12 @@ const SinglePropertyComponent = ({state, actions, libraries, property}) => {
 export default connect(SinglePropertyComponent);
 
 export const SinglePropertyContainer = styled.div`   
-    background-color: #fff;
-    border: 1px solid #ebebeb;
-    /* border-radius: 8px; */
-    margin-bottom: 30px;
+
     overflow: hidden;
     position: relative;
     transition: all .3s ease;
+    height: 100%;
+  width: 100%;
 `
 
 export const SinglePropertyThumb = styled.div`
@@ -128,7 +141,91 @@ export const SinglePropertyThumb = styled.div`
     overflow: hidden;
     /* margin: 10px 9px 0 10px; */
     position: relative;
+
 `
+
+
+export const SinglePropertyDetails = styled.div`
+    position: relative;
+    margin-left: .5rem;
+
+    div{
+        padding: 0 20px 20px 0px;
+        /* text-align: center; */
+        text-align: start;
+
+        h4 {
+            font-size: 1.2rem;
+            font-size: var(--step-0);
+            font-family: 'Lato';
+            color: #333332;
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            text-transform: capitalize;
+        }
+
+        p {
+            font-size: 1rem;
+            font-size: var(--step--1);
+            font-family: Lato;
+            color: var(--golden);
+            line-height: 1;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        ul {
+            display: flex;
+            /* justify-content: center; */
+            justify-content: flex-start;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+     
+        li {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 300;            
+            font-size: 12px;
+            font-size: var(--step--2);
+            font-weight: 400;
+            padding: 0 8px 0 0;
+            color: #333332;
+
+            span {
+                font-size: 200;
+                margin-left: 2px;
+            }
+        }
+    }
+`
+
+// export const ImageCard = styled(Image)`
+//     vertical-align: middle;
+//     min-height: 200px;/**to make responsive */
+//     max-width: 100%;
+//     height: 350px;
+//     transform: scale(1.1);
+
+
+//     @media (min-width: 1024px) and (max-width: 1440px){
+//         height: 300px;
+//     }
+
+//     @media (min-width: 768px) and (max-width: 1024px){
+//         height: 280px;
+//     }
+
+//     @media (max-width: 768px){
+//         height: 250px;
+//     }
+
+//     &:hover {
+//         animation: ${zoomOut} .5s ease-in-out forwards;
+//     }
+// `
 
 export const zoomOut = keyframes`
     from {
@@ -139,16 +236,45 @@ export const zoomOut = keyframes`
     }
 `;
 
+export const zoomIn = keyframes`
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
+`;
+
 export const ImageCard = styled(Image)`
     vertical-align: middle;
     min-height: 200px;/**to make responsive */
     max-width: 100%;
+    height: 350px;
     transform: scale(1.1);
+    animation: ${zoomIn} 1s ease-in-out forwards;
+
+    @media (min-width: 1024px) and (max-width: 1440px){
+        height: 300px;
+    }
+
+    @media (min-width: 768px) and (max-width: 1024px){
+        height: 280px;
+    }
+
+    @media (max-width: 768px){
+        height: 250px;
+    }
 
     &:hover {
         animation: ${zoomOut} .5s ease-in-out forwards;
     }
-`
+
+    &:not(:hover) {
+        animation: ${zoomIn} .5s ease-in-out forwards;
+    }
+`;
+
+
 
 export const TextBand = styled.div`
     width: 100%;
@@ -292,73 +418,18 @@ export const ImageContent = styled.div`
     }
 `
 
-export const SinglePropertyDetails = styled.div`
-    position: relative;
-    margin-left: .5rem;
-
-    div{
-        padding: 0 20px 20px 0px;
-        /* text-align: center; */
-        text-align: start;
-
-        h4 {
-            font-size: 1.2rem;
-            font-size: var(--step-0);
-            font-family: 'Lato';
-            color: #333332;
-            font-weight: 400;
-            line-height: 1.2;
-            margin-bottom: 15px;
-            text-transform: capitalize;
-        }
-
-        p {
-            font-size: 1rem;
-            font-size: var(--step--1);
-            font-family: Lato;
-            color: var(--golden);
-            line-height: 1;
-            font-weight: 400;
-            text-transform: uppercase;
-        }
-
-        ul {
-            display: flex;
-            /* justify-content: center; */
-            justify-content: flex-start;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-     
-        li {
-            display: flex;
-            justify-content: space-between;
-            font-weight: 300;            
-            font-size: 12px;
-            font-size: var(--step--2);
-            font-weight: 400;
-            padding: 0 8px 0 0;
-            color: #333332;
-
-            span {
-                font-size: 200;
-                margin-left: 2px;
-            }
-        }
-    }
-`
 
 const ButtonsInfoContainer = styled.div`
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-around;
     align-items: center;
     align-content: center;
     margin:0;
     padding: 0;
+    margin-top: 1rem;
 `
 
-const PriceTag = styled.a`
+export const PriceTag = styled.a`
     background-color: #323B54;
     /* background-color: #464e65; */
     display: block;
@@ -368,7 +439,7 @@ const PriceTag = styled.a`
     box-sizing: border-box;
     border: 1px solid #fff;
     /* border-radius: 5px; */
-    font-size: var(--step--2);
+    font-size: var(--step--1);
     text-transform: uppercase;
     color: #FFF;
     cursor: pointer;
@@ -376,8 +447,44 @@ const PriceTag = styled.a`
     font-family: 'Montserrat', sans-serif;
     /* width: 7rem; */
     margin: 1rem 0;
+    font-weight: bold;
 
     @media(min-width: 768px) {
         margin-bottom: 0rem;
+    }
+`
+
+const StatusPropertyTag = styled.div`
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 1;
+    overflow: hidden;
+    text-align: right;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(203, 166, 49, 0.9);
+    padding: 5px 10px;
+    color: #FFF;
+    font-weight: 400;
+    font-size: 15px;
+    text-align:center;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 1px #000;
+    vertical-align: middle;
+
+    h3 {
+        font-size: var(--step-4);
+        font-weight: bold;
+        color: #FFF;
+        text-transform: uppercase;
+        text-align: center;
+        line-height: 20px;
+        /* transform: rotate(-45deg); */
+        display: block;
+        box-shadow: 0 3px 10px -5px rgb(0 0 0);
+        position: absolute;
     }
 `

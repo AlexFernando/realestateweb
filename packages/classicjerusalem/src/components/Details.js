@@ -2,16 +2,11 @@ import React, {useState, useEffect} from 'react';
 import { connect, styled, css, Global, loadable } from "frontity";
 import Image from "@frontity/components/image";
 import Iframe from "@frontity/components/iframe";
-import { IconContext } from "react-icons";
-import { BsFillArrowDownCircleFill} from 'react-icons/bs'; 
-import {ImLocation} from 'react-icons/im';
-import {GrLanguage} from 'react-icons/gr'
-import {BiTimeFive} from 'react-icons/bi'
 import {BiCheck} from 'react-icons/bi';
-import {MarginPaddingContainer} from './home'
 import Loading from './Loading';
 import SamuelAgent from '../images/real-state-agent-v1.jpeg'
 import SamuelAgentTwo from '../images/real-state-agent-v2.jpeg'
+import {PriceTag} from './SingleProperty'
 
 //Image
 import ImageGallery from 'react-image-gallery';
@@ -25,6 +20,9 @@ import Link from './Link'
 import {IoLogoWhatsapp} from 'react-icons/io'
 
 const Details = ({state, actions, libraries}) => {
+
+    const exchangeRateValue = state.theme.coinExchange.exchange_rate;
+    const currencyPair = state.theme.coinExchange.currency_pair;
 
     useEffect( () => {
         actions.source.fetch("/contact-other")     
@@ -52,10 +50,6 @@ const Details = ({state, actions, libraries}) => {
         postProperty.acf.photo_gallery.map( elem => {
             arrImages.push({srcSet: elem.medium_srcset , thumbnail : elem.thumbnail_image_url})
         })
-
-        // Object.keys(postProperty.acf.images_carousel).map(elem => {
-        //     arrImages.push( {original : postProperty.acf.images_carousel[elem].sizes.medium_large, thumbnail : postProperty.acf.images_carousel[elem].sizes.thumbnail })
-        // })
     }
 
     const isCurrentPage = state.router.link === "properties";
@@ -82,10 +76,7 @@ const Details = ({state, actions, libraries}) => {
 
                             {postProperty.acf.exclusivity === 'Yes'? 
                                     <Ribbon>
-
-                                    
-                                            Exclusivity
-                                    
+                                        Exclusivity
                                     </Ribbon>
                                     :null
                                 }
@@ -100,12 +91,20 @@ const Details = ({state, actions, libraries}) => {
 
                                 <HeaderPriceTitle>
                                     <Neighboorhood>
-                                        <span>Jerusalem, </span>A Neighboorhood
+                                        <span>Jerusalem, </span>{postProperty.acf.details_properties.neighborhood}
                                     </Neighboorhood>
 
-                                    <Price>
+                                    {/* <Price>
                                         $ {postProperty.acf.details_properties.price_dollars}
-                                    </Price>
+                                    </Price> */}
+
+                                    <Price>   
+                                        {parseInt(Number(postProperty.acf.details_properties.price_dollars)*Number(exchangeRateValue))} 
+                                        {
+                                            currencyPair === "USD_USD"? 
+                                            " $"  : currencyPair === "USD_EUR"? " €" : " ₪" 
+                                        }
+                                    </Price> 
                                 </HeaderPriceTitle>
                                 
                                 <ListingDescription>
@@ -135,7 +134,14 @@ const Details = ({state, actions, libraries}) => {
                                                     Price
                                                 </p>
 
-                                                <span> {` `+postProperty.acf.details_properties.price_dollars}</span>
+                                                {/* <span> {` `+postProperty.acf.details_properties.price_dollars}</span> */}
+                                                <span>
+                                                {parseInt(Number(postProperty.acf.details_properties.price_dollars)*Number(exchangeRateValue))} 
+                                                {
+                                                    currencyPair === "USD_USD"? 
+                                                    " $"  : currencyPair === "USD_EUR"? " €" : " ₪" 
+                                                }
+                                                </span>
                                             </div>
                                             <div>
                                                 <p>
@@ -152,7 +158,7 @@ const Details = ({state, actions, libraries}) => {
                                                      
                                             <div>
                                                 <p>
-                                                    Bethroom
+                                                    Bathroom
                                                 </p>
                                                 <span> {` `+postProperty.acf.details_properties.baths}</span>
                                             </div> 
@@ -164,20 +170,13 @@ const Details = ({state, actions, libraries}) => {
                                         <h4>More Information </h4>
 
                                         <InfoDetails>
-                                          
-                                            <div>
-                                                <CheckIcon /> <span>Garden</span>
-                                            </div>
-                                            <div>
-                                                <CheckIcon /> <span>Terrace</span>
-                                            </div>
-                                            <div>
-                                                <CheckIcon /> <span>Air Conditioner</span>
-                                            </div>
-                                            <div>
-                                                <CheckIcon /> <span>Stunning View</span>
-                                            </div>
-                                                  
+                                            {postProperty.acf.more_information.map( elemList => {
+                                                return(
+                                                    <div>
+                                                    <CheckIcon /> <span>{elemList}</span>
+                                                </div>
+                                                )
+                                            })}
                                                      
                                         </InfoDetails>
                                     
@@ -187,11 +186,7 @@ const Details = ({state, actions, libraries}) => {
                                    
                                </AllInfoGrid>
 
-                               <ListingDetails>
-                                    <IframeMap src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d217152.94172576632!2d34.90260814069641!3d31.742799330483617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502c4edaeeb9e23%3A0x4ca1616bb452513d!2sDistrito%20de%20Jerusal%C3%A9n%2C%20Israel!5e0!3m2!1ses-419!2spe!4v1674433992414!5m2!1ses-419!2spe" 
-                                        width="800" height="600" style={{border:0}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                                    </IframeMap>
-                                </ListingDetails>
+        
                                 
                            </AllInfoContainer>
 
@@ -225,6 +220,15 @@ const Details = ({state, actions, libraries}) => {
                                             </AgentContact>
                                         </ContentForm>
                                     }
+
+                                    <MapDiv>
+                                    {/* <IframeMap src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d217152.94172576632!2d34.90260814069641!3d31.742799330483617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502c4edaeeb9e23%3A0x4ca1616bb452513d!2sDistrito%20de%20Jerusal%C3%A9n%2C%20Israel!5e0!3m2!1ses-419!2spe!4v1674433992414!5m2!1ses-419!2spe" 
+                                        width="800" height="600" style={{border:0}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                    </IframeMap> */}
+                                     
+                                        <Html2react html={postProperty.content.rendered} />
+                                    
+                                    </MapDiv>
                             </MainInfo>
                       
                         </Container>
@@ -267,20 +271,21 @@ const AllInfoContainer = styled.div`
 
 const ImageContainerSlider = styled.div`
 
-    background-color: var(--main-color);
-    padding: 1rem 8rem;
+    background-color: var(--white-color);
+    border: 1px solid var(--golden-color); 
+    padding: 2rem 4rem;
 
     @media (min-width: 1440px) and (max-width: 1680px) {
-        padding: 1rem 5rem;
+        padding: 1rem 3rem;
     }
 
     @media (min-width: 1201px) and (max-width: 1440px) {
-        padding: 1rem 3rem;
+        padding: 1rem 2rem;
     }
 
 
     @media (min-width: 993px) and (max-width: 1200px) {
-        padding: 1rem 2rem;
+        padding: 1rem 1rem;
     }
 
 
@@ -430,7 +435,57 @@ const IframeMap = styled(Iframe)`
             height: 250px;
         }
 `
+const MapDiv = styled.div`
 
+        /* width: 100%;
+        height: 400px;
+
+          @media(max-width: 576px) {
+            height: 250px;
+        } */
+
+        margin-top: 3rem;
+
+
+        iframe {
+            width: 500px;
+            height: 480px;
+            text-align: center;
+
+            @media (min-width: 1341px) and (max-width: 1500px){
+                width: 400px;
+                height: 380px;
+            }
+
+             @media (min-width: 1201px) and (max-width: 1340px){
+                width: 360px;
+                height: 320px;
+            }
+
+ @media (min-width: 993px) and (max-width: 1200px) {
+    width: 500px;
+            height: 480px;
+ }
+
+ /* @media (min-width: 769px)  and (max-width: 992px){
+    width: 400px;
+            height: 380px;
+} */
+
+
+
+ @media (min-width: 576px) and (max-width: 992px){
+    width: 550px;
+            height: 750px;
+ }
+
+ @media (max-width: 576px){
+    width: 350px;
+            height: 320px; 
+ } 
+
+        }
+`
 
 export const Ribbon = styled.span`
 
@@ -448,7 +503,7 @@ export const Ribbon = styled.span`
         position: absolute;
         top: 17px;
         left: -23px;
-        z-index: 1;
+     
         overflow: hidden;
   
         &:before  {
@@ -661,156 +716,6 @@ const Price = styled.span`
 
 export default connect(Details);
 
-/**INFO SECTION WITH CONTACT FORM */
-// export const Container = styled.div`
-//     display: flex;
-//     justify-content: space-between;
-//     align-items: flex-start;
-//     margin-left: calc(12rem + 1.5625vw);
-//     margin-right: calc(12rem + 1.5625vw);
-//     max-width: 1800px;
-
-//     @media (min-width: 1201px) and (max-width: 1420px){
-//         max-width: 1400px;
-//         margin-left: calc(5rem + 1.5625vw);
-//     margin-right: calc(5rem + 1.5625vw);
-//     }
-
-//     @media (min-width: 993px) and (max-width: 1200px) {
-//         max-width: 1140px;
-//         margin-left: calc(3rem + 1.5625vw);
-//         margin-right: calc(3rem + 1.5625vw);
-//     }
-
-//     @media (min-width: 769px)  and (max-width: 992px){
-//         max-width: 960px;
-//         margin-left: calc(2rem + 1.5625vw);
-//         margin-right: calc(2rem + 1.5625vw);
-//         flex-direction: column;
-//     }
-
-//     @media (min-width: 576px) and (max-width: 768px){
-//         max-width: 720px;
-//         margin-left: calc(1rem + 1.5625vw);
-//         margin-right: calc(1rem + 1.5625vw);   
-//         flex-direction: column;
-//     }
-
-//     @media (max-width: 576px){
-//         max-width: 540px;
-//         flex-direction: column;
-//         margin-left: 1rem;
-//         margin-right: 1rem;  
-//     }
-
-// `
-
-// const FirstColumn = styled.div`
-//     flex-basis: 65%;
-//     flex-wrap: wrap;
-// `
-
-// const TagList = styled.div`
-//     margin-bottom: 40px;
-//     position: relative;
-
-//     ul {
-//         margin: 0;
-//         padding: 0;
-//         list-style: none;
-
-//         li {
-//             display: inline-block;
-//             border-radius: 8px;
-//             background-color: #f7f7f7;
-//             background-color: var(--golden);
-      
-//             padding: 10px 25px;
-//             text-align: center;
-//             margin-right: 0.5rem;
-
-//             @media (max-width: 576px){
-//                 margin-bottom: .5rem;
-//             }
-
-//             @media (max-width: 768px){
-//                 padding: 5px 12px;
-//             }
-
-//             a{
-//                 font-size: 14px;
-//                 color: #484848;
-//                 color: #f7f7f7;
-//                 line-height: 1.2;
-//                 text-decoration: none;
-
-//                 @media (max-width: 768px){
-//                     font-size: 10px;
-//                     font-weight: 700;
-//                 }
-         
-//             }
-//         }
-//     }
-// `
-
-// /**Second Column, row in some devices */
-// const SecondColumn = styled.div`
-//     flex-basis: 30%;
-//     flex-wrap: wrap;
-
-//     @media(max-width: 992px) {
-//         margin-top: 2rem;
-//     }
-// `
-
-
-{/* <TagList>
-<ul>
-    <li><a href="#">Apartment</a></li>
-    <li><a href="#">Beds: {` `+ postProperty.acf.details_properties.beds}</a></li>
-    <li><a href="#">Bath: {` `+ postProperty.acf.details_properties.baths}</a></li>
-    <li><a href="#">Sqm: {` `+ postProperty.acf.details_properties.sqm}</a></li>
-</ul>
-</TagList> */}
-
-
-                            {/* <MainInfo>
-                                <div>
-                                    <h4>{postProperty.acf.details_properties.property_name}</h4>
-                                    <p>
-                                            <span>
-                                            <IconContext.Provider value={{ color: "#df9b00", className: "global-class-name", size: "1rem" } }>
-                                                <ImLocation />
-                                            </IconContext.Provider>
-                                            </span>
-                                            {postProperty.acf.details_properties.address}
-                                        </p>
-                                </div>
-
-                                <div>
-                                    <h4>{postProperty.acf.details_properties.price_dollars+` `} <small>/mo</small> </h4>
-                                    <StateProperty>
-                                        <li>
-                                            <a>For Sale</a>
-                                        </li>
-                                    </StateProperty>
-                                </div>
-                                
-                                <div>
-                              
-                                    <h4>{postProperty.acf.details_properties.sqm+ ` `} sqm</h4>
-                                    <TypePropertyTag>
-                                        <li>
-                                            <a>New Apartment</a>
-                                        </li>
-                                    </TypePropertyTag>
-                                </div>
-
-                            </MainInfo> */}
-
-
-
 
 // const LinkContainer = styled.div`
 // margin-top: 1rem;
@@ -873,91 +778,3 @@ export default connect(Details);
 // `
 
 
-// const StateProperty = styled.ul`
-  
-//         display: flex;
-//         list-style: none;
-//         margin:0;
-//         padding: 0;
-
-//         li {
-//             border-radius: 3px;
-//             height: 25px;
-//             line-height: 25px;
-//             text-align: center;
-//             width: 75px;
-//             background-color: var(--golden);
-
-//             a {
-//                 font-size: 14px;
-//                 color: #fff;
-//                 line-height: 1.2;
-//                 text-decoration: none;
-
-                      
-//                 @media (max-width: 768px){
-//                     font-size: .8rem;
-//                 }
-//             }
-//         }
-// `
-
-// const TypePropertyTag = styled.ul`
-    
-//         display: flex;
-//         list-style: none;
-//         margin:0;
-//         padding: 0;
-
-//         li {
-//             border-radius: 3px;
-//             height: 25px;
-//             line-height: 25px;
-//             text-align: center;
-//             width: 150px;
-        
-//             background-color: var(--golden);
-            
-
-//             a {
-//                 font-size: 14px;
-//                 color: #fff;
-//                 line-height: 1.2;
-//                 text-decoration: none;
-
-//                 @media (max-width: 768px){
-//                     font-size: .8rem;
-//                 }
-//             }
-//         }
-    
-// `
-
-
-
-// <Container>
-// <FirstColumn>
-//     <ListingDescription>
-   
-//         <h4>Description</h4>
-//         <p>
-//             {postProperty.acf.description.paragraph_1}
-//         </p>
-//         {postProperty.acf.description.paragraph_2 !== '' ?
-//             <p>
-//                 {postProperty.acf.description.paragraph_2}
-//             </p>
-//          : null
-//         }
-        
-//     </ListingDescription>
-
-
-   
-// </FirstColumn>
-
-// {/* <SecondColumn>
- 
-// </SecondColumn> */}
-
-// </Container>

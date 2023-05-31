@@ -11,8 +11,7 @@ export default {
   state: {
     theme: {
       coinExchange: [],
-      // usdEur: [],
-      // usdIls: []
+      myProperties: []
     },
     source: {
       data: {
@@ -20,6 +19,12 @@ export default {
           isReady: true,
           isFetching: false,
           isHomePage: true
+        },
+
+        "/admin-classic-jerusalem/": {
+          isReady: true,
+          isFetching: false,
+          isAdmin: true
         },
       }
     }
@@ -47,7 +52,12 @@ export default {
 
           updateExchangeRate: ({state}) => (coinExchange) => {
             state.theme.coinExchange = coinExchange
-          }
+          },
+
+          updateProperties: ({state}) => (properties) => {
+            state.theme.myProperties = properties
+          },
+
         },
       },
   

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { connect, styled } from "frontity";
 
 const ZoomInOnScroll = ({
   children,
@@ -34,15 +35,23 @@ const ZoomInOnScroll = ({
   };
 
   return (
-    <div
+    <ContainerZoomInEffect
       ref={ref}
-      style={{
-        ...transitionStyles[isVisible ? 'entered' : 'entering'],
+      style={{   
+        ...transitionStyles[isVisible ? 'entered' : 'entering'], 
       }}
     >
       {children}
-    </div>
+    </ContainerZoomInEffect>
   );
 };
+
+const ContainerZoomInEffect = styled.div`
+  background-color: #fff;
+  border: 1px solid #ebebeb;
+  overflow: hidden;
+  position: relative;
+  transition: all .3s ease;
+`
 
 export default ZoomInOnScroll;

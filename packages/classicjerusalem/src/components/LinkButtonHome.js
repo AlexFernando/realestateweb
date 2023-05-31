@@ -8,9 +8,11 @@ const Anchor = styled.a`
     align-self: center;
     padding: .5rem 1.5rem;
     box-sizing: border-box;
-    border: 1px solid #fff;
+    border: 1px solid #a28427;
+    /*#8d7422*/
     /* border-radius: 5px; */
-    font-size: var(--step--2);
+    font-size: var(--step--1);
+    
     text-transform: uppercase;
     color: #FFF;
     cursor: pointer;

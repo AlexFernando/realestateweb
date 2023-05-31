@@ -5,65 +5,122 @@ import {SectionFeaturedProperties} from './home';
 import SearchBarForm from './SearchBarSell';
 import Loading from './Loading';
 import SinglePropertyComponent from './SingleProperty';
+import SearchBarBgRent from './SearchBarBgRent';
+
+import {MarginPaddingContainer} from './home';
+import SearchBarRentPages from './SearchBarRentPages';
+import {MarginTopSearchBar, TextSearchFilter, TextNoPropertiesFound} from './Rent'
+import SliderDots from './Slider';
 
 const RentFurnished = ({state, actions, libraries}) => {
 
-    useEffect( () => {
-        // actions.source.fetch("/properties")
-        actions.source.fetch("/category/long-term-rentals-furnished/");
-    }, [])
+    const [arrResult, setArrResult] = useState([]);
+    const [allRentProperties, setAllRentProperties] = useState([]);
+    const [searchTerm, setSearchTerm] = useState({});
 
-    // const data = state.source.get('/properties');
-    const dataPropertiesFurnished = state.source.get("/category/long-term-rentals-furnished/");
+    // useEffect( () => {
+    //     actions.source.fetch("/category/long-term-rentals-furnished/");
+    // }, [])
 
-    let myPosts = [];
+    // const dataPropertiesFurnished = state.source.get("/category/long-term-rentals-furnished/");
 
-    if(dataPropertiesFurnished.isCategory) {
-        console.log("lenght :", dataPropertiesFurnished.items.length )
-            dataPropertiesFurnished.items.map( ({type, id}) => {
-                const singleProperty = state.source[type][id];
-                myPosts.push(singleProperty);
+    // let myPosts = [];
+
+    // if(dataPropertiesFurnished.isCategory) {
+    //     console.log("lenght :", dataPropertiesFurnished.items.length )
+    //         dataPropertiesFurnished.items.map( ({type, id}) => {
+    //             const singleProperty = state.source[type][id];
+    //             myPosts.push(singleProperty);
+    //         }
+    //     )
+    // }
+
+    useEffect(() => {
+        actions.source.fetch("/category/long-term-rentals-furnished/").then(() => {
+            const dataPropertiesFurnished = state.source.get("/category/long-term-rentals-furnished/");
+            if(dataPropertiesFurnished.isCategory) {
+            let myPostsFiltered = dataPropertiesFurnished.items.map(({ id }) => state.source.properties[id]);
+            setAllRentProperties(myPostsFiltered);
             }
-        )
+        });
+    }, []);
+
+    
+    const handleResults = (result) => {
+        setArrResult(result)
     }
+
+
     return ( 
+
         <>
         {
-            dataPropertiesFurnished.isReady && myPosts.length >= 0? 
-        <>
-            {/* <ContainerBackgroundTour>
+            allRentProperties.length > 0?
+        
 
-                <BackgroundColor>
-                    <div>
-                        <h3>Find your Property</h3>
-                    </div>
-                </BackgroundColor>
+            <MarginPaddingContainer>
 
-            </ContainerBackgroundTour> */}
 
-            <SectionFeaturedProperties>
+            <MarginTopSearchBar>
+                <SearchBarRentPages allRentProperties={allRentProperties} handleResults= {handleResults} setSearchTerm={setSearchTerm} setArrResult={setArrResult} />
+            </MarginTopSearchBar>
 
-                <ContainerPropertiesForm>
+            <TextSearchFilter>
+                {
+                    Object.keys(searchTerm).map(elem => {
+                        if(searchTerm[elem] !== '') {
+                            return(
+                                <p>{elem}: <span>{searchTerm[elem]}</span></p>
+                            )
+                        }
+                    })
+                }
 
-                    <SearchBarForm />
-                
-                    <PropertiesGrid>
+            </TextSearchFilter>
+
+            {
+   
+                    allRentProperties.length > 0 && Object.keys(searchTerm).length === 0 ?
+
+                    <>
+                        <SliderDots>
+                            {
+                                allRentProperties.map(property => {
+                                    return(
+                                        <SinglePropertyComponent property={property}/>
+                                    )
+                                })
+                            }
+                        </SliderDots> 
+                    </> 
+
+                    : arrResult.length > 0 && Object.keys(searchTerm).length > 0 ?
+                    
+                    <SliderDots>
                         {
-                            myPosts.map(property => {
+                            arrResult.map(property => {
                                 return(
-                                    <SinglePropertyComponent property = {property} />
+                                    <SinglePropertyComponent property={property}/>
                                 )
                             })
                         }
+                    </SliderDots> 
 
-                    </PropertiesGrid>
+                    : arrResult.length === 0 && Object.keys(searchTerm).length > 0 ?
                     
-                </ContainerPropertiesForm>
-            </SectionFeaturedProperties>
+                    <TextNoPropertiesFound>
+                        <p>No properties found with this critera</p>
+                        <p>Choose another set of filter or clear all the filters</p>
+                    </TextNoPropertiesFound>
 
-        </>
-        : <Loading/>
+                    : null
+            }
+        </MarginPaddingContainer>
+
+            : <Loading />
+
         }
+
         </>
      );
 }
@@ -189,6 +246,10 @@ export const PropertiesGrid = styled.div`
         grid-gap: 1rem;
         margin: 2rem 0;
     }
+`
+
+export const MarginBottomSearchBar = styled.div`
+    margin-bottom: 2rem;
 `
 
 /**End Properties */

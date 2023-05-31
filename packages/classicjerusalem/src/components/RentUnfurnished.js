@@ -6,66 +6,104 @@ import SearchBarForm from './SearchBarSell';
 import Loading from './Loading';
 
 import SinglePropertyComponent from './SingleProperty';
+import SearchBarBgRent from './SearchBarBgRent';
+import {MarginBottomSearchBar} from './RentFurnished'
+
+import {MarginPaddingContainer} from './home';
+import SearchBarRentPages from './SearchBarRentPages';
+import {MarginTopSearchBar, TextSearchFilter, TextNoPropertiesFound} from './Rent'
+import SliderDots from './Slider';
+
 
 const RentUnfurnished = ({state, actions, libraries}) => {
 
-    useEffect( () => {
-        // actions.source.fetch("/properties")
-        actions.source.fetch("/category/long-term-rentals-unfurnished/");
-    }, [])
+    const [arrResult, setArrResult] = useState([]);
+    const [allRentProperties, setAllRentProperties] = useState([]);
+    const [searchTerm, setSearchTerm] = useState({});
 
-    // const data = state.source.get('/properties');
-    const dataPropertiesUnfurnished = state.source.get("/category/long-term-rentals-unfurnished/");
-
-    let myPosts = [];
-
-    if(dataPropertiesUnfurnished.isCategory) {
-        console.log("lenght :", dataPropertiesUnfurnished.items.length )
-            dataPropertiesUnfurnished.items.map( ({type, id}) => {
-                const singleProperty = state.source[type][id];
-                myPosts.push(singleProperty);
+    useEffect(() => {
+        actions.source.fetch("/category/long-term-rentals-unfurnished/").then(() => {
+            const dataPropertiesFurnished = state.source.get("/category/long-term-rentals-unfurnished/");
+            if(dataPropertiesFurnished.isCategory) {
+            let myPostsFiltered = dataPropertiesFurnished.items.map(({ id }) => state.source.properties[id]);
+            setAllRentProperties(myPostsFiltered);
             }
-        )
+        });
+    }, []);
+
+    const handleResults = (result) => {
+        setArrResult(result)
     }
-    
+
     return ( 
+
         <>
         {
-            dataPropertiesUnfurnished.isReady && myPosts.length >= 0? 
-        <>
-            {/* <ContainerBackgroundTour>
-
-                <BackgroundColor>
-                    <div>
-                        <h3>Find your Property</h3>
-                    </div>
-                </BackgroundColor>
-
-            </ContainerBackgroundTour> */}
-
-            <SectionFeaturedProperties>
-
-                <ContainerPropertiesForm>
+            allRentProperties.length > 0?
+        
+        <MarginPaddingContainer>
 
 
-                    <SearchBarForm />
-                
-                    <PropertiesGrid>
+            <MarginTopSearchBar>
+                <SearchBarRentPages allRentProperties={allRentProperties} handleResults= {handleResults} setSearchTerm={setSearchTerm} setArrResult={setArrResult} />
+            </MarginTopSearchBar>
+
+            <TextSearchFilter>
+                {
+                    Object.keys(searchTerm).map(elem => {
+                        if(searchTerm[elem] !== '') {
+                            return(
+                                <p>{elem}: <span>{searchTerm[elem]}</span></p>
+                            )
+                        }
+                    })
+                }
+
+            </TextSearchFilter>
+
+            {
+   
+                    allRentProperties.length > 0 && Object.keys(searchTerm).length === 0 ?
+
+                    <>
+                        <SliderDots>
+                            {
+                                allRentProperties.map(property => {
+                                    return(
+                                        <SinglePropertyComponent property={property}/>
+                                    )
+                                })
+                            }
+                        </SliderDots> 
+                    </> 
+
+                    : arrResult.length > 0 && Object.keys(searchTerm).length > 0 ?
+                    
+                    <SliderDots>
                         {
-                            myPosts.map(property => {
+                            arrResult.map(property => {
                                 return(
-                                    <SinglePropertyComponent property={property} />
+                                    <SinglePropertyComponent property={property}/>
                                 )
                             })
                         }
-                    </PropertiesGrid>
-                    
-                </ContainerPropertiesForm>
-            </SectionFeaturedProperties>
+                    </SliderDots> 
 
-        </>
-        : <Loading/>
+                    : arrResult.length === 0 && Object.keys(searchTerm).length > 0 ?
+                    
+                    <TextNoPropertiesFound>
+                        <p>No properties found with this critera</p>
+                        <p>Choose another set of filter or clear all the filters</p>
+                    </TextNoPropertiesFound>
+
+                    : null
+            }
+        </MarginPaddingContainer>
+
+        : <Loading />
+
         }
+
         </>
      );
 }

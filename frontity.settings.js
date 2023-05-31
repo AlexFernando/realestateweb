@@ -53,6 +53,11 @@ const settings = {
                   name: 'Abu Tor',
                   link: '/neighborhood/abu-tor/'
                 },
+
+                {
+                  name: 'Arnona',
+                  link: '/neighborhood/arnona/'
+                },
                 {
                   name: 'Baka',
                   link: '/neighborhood/baka/'
@@ -83,9 +88,77 @@ const settings = {
 
            
                 {
-                  name: 'Old Katamon',
-                  link: '/neighborhood/old-katamon/'
+                  name: 'Katamon',
+                  link: '/neighborhood/katamon/'
+                },
+
+                {
+                  name: 'Kiryat HaYovel',
+                  link: '/neighborhood/kiryat-hayovel/'
+                },
+
+                {
+                  name: 'Kiryat Shmuel',
+                  link: '/neighborhood/kiryat-shmuel/'
+                },
+
+                {
+                  name: 'Mekor Haim',
+                  link: '/neighborhood/mekor-haim/'
+                },
+
+                {
+                  name: 'Mishkenot Hauma',
+                  link: '/neighborhood/mishkenot-hauma/'
+                },
+
+
+                {
+                  name: 'Nachlaot',
+                  link: '/neighborhood/nachlaot/'
+                },
+                {
+                  name: 'The Old City',
+                  link: '/neighborhood/the-old-city/'
+                },
+              
+                {
+                  name: 'Ramat Eshkol',
+                  link: '/neighborhood/ramat-eshkol/'
+                },
+                {
+                  name: 'Ramot',
+                  link: '/neighborhood/ramot/'
+                },
+                {
+                  name: 'Rassco',
+                  link: '/neighborhood/rassco/'
+                },
+                {
+                  name: 'Rehavia',
+                  link: '/neighborhood/rehavia/'
+                },
+
+                {
+                  name: 'Talbiya',
+                  link: '/neighborhood/talbiya/'
+                },
+
+                {
+                  name: 'Talpiyot',
+                  link: '/neighborhood/talpiyot/'
+                },
+
+                {
+                  name: 'Shaarei Hesed',
+                  link: '/neighborhood/shaarei-hesed/'
+                },
+
+                {
+                  name: 'Yemin Moshe',
+                  link: '/neighborhood/yemin-moshe/'
                 }
+                
               ]
             },
 

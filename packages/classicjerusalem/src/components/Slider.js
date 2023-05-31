@@ -17,6 +17,7 @@ const SliderContainer = styled.div`
 export const PropertiesGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     grid-gap: 1rem;
     color: #444;
     font-family: 'Lato';
@@ -70,13 +71,13 @@ const Slider = ({ children }) => {
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      let count = 3;
+      let count = 6;
       if (width <= 576) {
-        count = 1;
-      } else if (width>576 && width <= 1024) {
         count = 2;
+      } else if (width>576 && width <= 1024) {
+        count = 4;
       } else {
-        count = 3;
+        count = 6;
       }
       const groupedChildren = groupChildren(children, count);
       setGroupedChildren(groupedChildren);
@@ -117,7 +118,7 @@ const Slider = ({ children }) => {
     return groupedChildren;
   };
 
-  const [groupedChildren, setGroupedChildren] = useState(() => groupChildren(children, 3));
+  const [groupedChildren, setGroupedChildren] = useState(() => groupChildren(children, 6));
 
   return (
     <>

@@ -132,7 +132,7 @@ const AllProperties = ({state, actions, libraries}) => {
                                     <Link href={property.link} >
                                         <SingleProperty>
                                             <SinglePropertyThumb>
-                                                <ImageCard src={property.acf.images_carousel.img_one.sizes.medium_large} />
+                                                <ImageCard src={property.acf.image_card.sizes.medium_large} />
                                                 <ImageContent>
                                                     <ul>
                                                         <li>
@@ -163,7 +163,7 @@ const AllProperties = ({state, actions, libraries}) => {
                                                             <ImLocation />
                                                         </IconContext.Provider>
                                                         </span>
-                                                        {property.acf.details_properties.address}
+                                                        {property.acf.details_properties.neighborhood}
                                                     </p>
 
                                    

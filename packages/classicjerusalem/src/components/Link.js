@@ -6,6 +6,8 @@ const Anchor = styled.a`
   font-weight: 400;
   text-decoration: none;
   cursor: pointer;
+  height: 100%;
+  width: 100%;
 `;
 
 const Link = ({ href, actions, children }) => {

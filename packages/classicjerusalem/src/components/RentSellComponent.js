@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { connect, styled, css, Global, useFills, keyframes } from "frontity";
 import Image from "@frontity/components/image";
-import {SectionFeaturedProperties, MarginPaddingContainer, SectionTitle, UnderlineTitle} from './home'
+import {SectionFeaturedProperties, MarginPaddingContainer, SectionTitle, UnderlineTitle, IconTitle, IconTitleFill} from './home'
 import SinglePropertyComponent from './SingleProperty';
 
 const RentSell = ({state, actions, libraries}) => {
@@ -46,10 +46,10 @@ const RentSell = ({state, actions, libraries}) => {
             <MarginPaddingContainer>
 
                 <SectionTitle>Latest Properties</SectionTitle>
-
+{/* 
                 <UnderlineTitle>
                     <span></span>
-                </UnderlineTitle>
+                </UnderlineTitle> */}
 
            
                 <ListContainer>
@@ -117,23 +117,58 @@ export const PropertiesGrid = styled.div`
 `
 
 const ListContainer = styled.ul`
-    display: flex;
+    /* display: flex;
     justify-content: center;
     margin: 0;
     padding: 0;
+    margin-top: 3rem; */
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-left: 0;
+    list-style: none;
+    text-align: center;
+    margin-bottom: 4rem;
     margin-top: 3rem;
 
 `
 
 const ListItem = styled.li`
-    cursor: pointer;   
+    /* cursor: pointer;   
     list-style: none;
     text-decoration: none;
     text-transform: uppercase;
     font-weight: 500;
     margin: auto 3rem;
     color: ${props => (props.active ? "#0c0c0c" : "#a6a6a6")};
-    border-bottom: ${props => props.active ? "2px solid #0c0c0c": "unset"};
+    border-bottom: ${props => props.active ? "2px solid #0c0c0c": "unset"}; */
+
+    font-size: 1rem;
+    cursor: pointer;
+
+    /* text-decoration: none; */
+    /* background-color: var(--golden-color); */
+    border-color: var(--main-color);
+    color: #fff;
+    padding: 1rem 2rem;
+    position: relative;
+    border-radius: 5px;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    background-color: ${props => (props.active ? "#cba631" : "#1c2641")};
+
+    &:before {
+
+        background-color: ${props => (props.active ? "#cba631" : "#1c2641")};
+        content: ${props => (props.active ? "''" : "none")};
+        height: 20px;
+        margin-left: 5px;
+        position: absolute;
+        top: 35px;
+        width: 20px;
+        transform: rotate(45deg);
+    }
 
 `
 

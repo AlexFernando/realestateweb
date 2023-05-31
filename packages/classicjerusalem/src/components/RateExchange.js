@@ -18,17 +18,17 @@ function ExchangeRates({ state, actions}) {
   }
 
   useEffect( () => {
-    actions.theme.updateExchangeRate({currency_pair: 'USD_USD', exchange_rate: 1})
+    actions.theme.updateExchangeRate({currency_pair: 'ILS_ILS', exchange_rate: 1})
   },[])
   
 
   const handleNoRate = () => {
-    actions.theme.updateExchangeRate({currency_pair: 'USD_USD', exchange_rate: 1})
+    actions.theme.updateExchangeRate({currency_pair: 'ILS_ILS', exchange_rate: 1})
   }
 
   const handleUsdEurClick = async () => {
     try {
-      const response = await fetch('https://api.api-ninjas.com/v1/exchangerate?pair=USD_EUR', {
+      const response = await fetch('https://api.api-ninjas.com/v1/exchangerate?pair=ILS_USD', {
         headers: {
           'X-Api-Key': 'HXBv+KXBsF4/0Y1m5zx46Q==o44oHdKyfBWCcrwK'  
         }
@@ -47,7 +47,7 @@ function ExchangeRates({ state, actions}) {
 
   const handleUsdIlsClick = async () => {
     try {
-      const response = await fetch('https://api.api-ninjas.com/v1/exchangerate?pair=USD_ILS', {
+      const response = await fetch('https://api.api-ninjas.com/v1/exchangerate?pair=ILS_EUR', {
         headers: {
           'X-Api-Key': 'HXBv+KXBsF4/0Y1m5zx46Q==o44oHdKyfBWCcrwK'  
         }
@@ -68,9 +68,9 @@ function ExchangeRates({ state, actions}) {
     return (
       <ContainerSelector>
         <CoinSelector onChange={e => changeFunc(e.target.value)}>
-          <option value="1">USD</option>
-          <option value="2">EUR</option>
-          <option value="3">ILS</option>
+          <option value="1">ILS</option>
+          <option value="2">USD</option>
+          <option value="3">EUR</option>
         </CoinSelector>
       </ContainerSelector>
 

@@ -14,6 +14,7 @@ import logo from '../images/logo.png';
 
 import { IconContext } from "react-icons";
 import {GiFamilyHouse, GiSpookyHouse, GiHouse} from 'react-icons/gi';
+import {BsHouseDoor, BsHouseDoorFill} from 'react-icons/bs'
 
 import Hero from './heroComponent';
 import FadeInOnScroll from './FadeInScroll'
@@ -39,6 +40,18 @@ const Home = ({state, actions, libraries}) => {
 
     const Html2react = libraries.html2react.Component;
     
+    const images = [];
+
+    if(typeof pageHomeData !== "undefined"){
+        
+        const ImageSlider = pageHomeData.acf.images_slider;
+
+        Object.keys(ImageSlider).map(elem => {
+            console.log(ImageSlider[elem].url)
+            images.push(ImageSlider[elem].url)
+        })   
+    }
+
     return ( 
         <>     
                 {typeof pageHomeData === "undefined" ? <Loading /> :     
@@ -47,7 +60,7 @@ const Home = ({state, actions, libraries}) => {
                             <Main>
                                 <Overlay>
 
-                                    <Hero />
+                                    <Hero images = {images}/>
 
                                     <TextoImagenContainer>
                             
@@ -61,11 +74,13 @@ const Home = ({state, actions, libraries}) => {
                                             </FadeInOnScroll>
                                             
                                             <UnderlineFullBackground>
-                                                <span></span>
+                                                <IconTitle />
                                             </UnderlineFullBackground>
                             
                                         
                                         </TextoImagen>
+
+
 
                                         <SearchBar></SearchBar>
                         
@@ -81,9 +96,9 @@ const Home = ({state, actions, libraries}) => {
                                 <FadeInOnScroll>
                                     <SectionTitle>Featured Properties</SectionTitle>
                                 </FadeInOnScroll>
-                                <UnderlineTitle>
+                                {/* <UnderlineTitle>
                                     <span></span>
-                                </UnderlineTitle>
+                                </UnderlineTitle> */}
                              
                                     <Properties />
                            
@@ -98,8 +113,11 @@ const Home = ({state, actions, libraries}) => {
                             <MarginPaddingContainer>
                                 <ContactText>
                                     <FadeInOnScroll>
-                                        <SectionTitle>ARE YOU LOOKING  TO SELL / RENT/ AIRBNB YOUR PROPERTY? </SectionTitle>
-                                        <UnderlineTitle><span></span></UnderlineTitle>
+                                        <SectionTitleAlternative>ARE YOU LOOKING  TO SELL / RENT/ AIRBNB YOUR PROPERTY? </SectionTitleAlternative> 
+                                        <UnderlineFullBackground>
+                                        <IconTitle />
+                                        </UnderlineFullBackground>
+                                        {/* <UnderlineTitle><span></span></UnderlineTitle> */}
                                     </FadeInOnScroll>
                                     
                                     <FadeInOnScroll>
@@ -351,9 +369,17 @@ const ButtonParallax = styled.div`
         }
     }
 `
-
 /**ENDS BACKGROUND VIDEO */
-  
+export const SectionTitleAlternative = styled.h2`
+    font-family: 'Lato';
+    font-size: 35px;
+    font-size: var(--step-2);
+    font-weight: 400;
+    letter-spacing: -1px;
+    margin-bottom: 10px;
+    text-align: center;
+    position: relative; 
+`  
 
 /**SECTION FEATURED PROPERTIES */
 export const SectionTitle = styled.h2`
@@ -365,7 +391,69 @@ export const SectionTitle = styled.h2`
     margin-bottom: 10px;
     text-align: center;
     position: relative; 
+
+    &:before {
+            width: 140px;
+            width: clamp(4.49rem, calc(5.62rem + 1.33vw), 9.82rem);
+            height: 3px;
+            background-color: #cba631;
+            position: absolute;
+            top: 16px;
+            content: '';
+            background-color: #c0962d;
+            transform: translateX(-110%);
+            width: 14rem;
+            vertical-align: middle;
+
+            @media (min-width: 1024px) and (max-width: 1440px){
+                width: clamp(2.49rem, calc(3.62rem + 1.33vw), 9.82rem);
+                width: 9rem;
+            }
+
+            @media (max-width: 1023px){
+                width: 4rem;
+            }
+
+        }
+
+        &:after {
+            width: 100px;
+            width: clamp(2.49rem, calc(2.62rem + 1.33vw), 4.82rem);
+            height: 3px;
+            position: absolute;
+            top: 16px;
+            content: '';
+            background-color: #c0962d;
+            transform: translateX(10%);
+            width: 14rem;
+
+            @media (min-width: 1024px) and (max-width: 1440px){
+                width: clamp(1.49rem, calc(1.62rem + 1.33vw), 3.82rem);
+                width: 9rem;
+            }
+
+            @media (max-width: 1023px){
+                width: 4rem;
+            }
+        }
 `
+
+
+export const IconTitle = styled(BsHouseDoor)`
+
+  color: var(--golden-icons);
+  font-size: var(--step-2);
+  text-align: center;
+  font-weight: 100;
+`;
+
+export const IconTitleFill = styled(BsHouseDoorFill)`
+  font-size: var(--step-2);
+  text-align: center;
+  font-weight: 100;
+  fill:var(--golden-color);
+`
+
 
 export const FirstUnderlineTitle = styled.div`
     height: 35px;
@@ -431,19 +519,7 @@ const UnderlineFullBackground = styled.div`
         height: var(--step-1);
     }
 
-    span {
-        position: absolute;
-        background-color: #c0962d;
-        bottom: 0;
-        top: 0;
-        left: 50%;
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background-color: transparent;
-        border: 3px solid #c0962d;
-      
-        /* height: 100%; */
+
 
         &:before {
             width: 140px;
@@ -451,11 +527,12 @@ const UnderlineFullBackground = styled.div`
             height: 3px;
             background-color: #cba631;
             position: absolute;
-            top: 2px;
+            top: 10px;
             content: '';
             background-color: #c0962d;
             transform: translateX(-110%);
             width: 14rem;
+            vertical-align: middle;
         
             @media (min-width: 1024px) and (max-width: 1440px){
                 width: clamp(2.49rem, calc(3.62rem + 1.33vw), 9.82rem);
@@ -473,11 +550,13 @@ const UnderlineFullBackground = styled.div`
             width: clamp(2.49rem, calc(2.62rem + 1.33vw), 4.82rem);
             height: 3px;
             position: absolute;
-            top: 2px;
+            top: 10px;
             content: '';
             background-color: #c0962d;
             transform: translateX(10%);
             width: 14rem;
+            vertical-align: middle;
+        
 
             @media (min-width: 1024px) and (max-width: 1440px){
                 width: clamp(1.49rem, calc(1.62rem + 1.33vw), 3.82rem);
@@ -488,7 +567,7 @@ const UnderlineFullBackground = styled.div`
                 width: 4rem;
             }
         }
-    }
+    
 
 `
 
@@ -579,8 +658,6 @@ export const MarginPaddingContainer = styled.div`
     @media (min-width: 1199px) and (max-width: 1440px){
         width: min(98%, 67.5rem + 10vw);
     }
-
-
     /* @media (min-width: 1280px) and (max-width: 1368px){
         max-width: 80vw;
     }

@@ -42,11 +42,11 @@ const Testimonials = ({state, actions, libraries}) => {
                 <SectionTitle>Testimonials</SectionTitle>
             </FadeInOnScroll>
 
-            <UnderlineTitle>
+            {/* <UnderlineTitle>
                 <span></span>
-            </UnderlineTitle>
+            </UnderlineTitle> */}
 
-            <TestimonialSlider>
+            <ContainerTestimonial>
                 <ZoomInOnScroll delay={0.5} duration={1} distance="200px">
                     <CardTestimonial>
                         <div>
@@ -127,7 +127,7 @@ const Testimonials = ({state, actions, libraries}) => {
                         
                     </CardTestimonial>
                 </ZoomInOnScroll>
-            </TestimonialSlider>
+            </ContainerTestimonial>
             {
                 showModalForm? 
                 <ModalForm>
@@ -148,11 +148,20 @@ const Testimonials = ({state, actions, libraries}) => {
 export default connect(Testimonials)
 
 const ContainerSection = styled.div`
-     max-width: min(800px, 95%);
+     /* max-width: max(800px, 90%);
     margin-left: auto;
-        margin-right: auto;
+        margin-right: auto; */
     margin-top: 3rem;
-   
+    width: min(98%, 77.5rem + 10vw);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center; 
+    /* margin: 2% auto;
+    text-align: center; */
+
+    @media (min-width: 1199px) and (max-width: 1440px){
+        width: min(98%, 67.5rem + 10vw);
+    }
 
 
     h2 {

@@ -3,11 +3,8 @@ import {connect, styled, css, keyframes} from "frontity";
 import Iframe from "@frontity/components/iframe";
 import Loading from './Loading';
 
-const Hero = () => {
+const Hero = ({images}) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const images = ["https://realstate.wildfreewalkingtours.com/wp-content/uploads/2023/03/background4-1536x1002.jpg",
-                  "https://realstate.wildfreewalkingtours.com/wp-content/uploads/2023/03/background3-1536x1012.jpg", 
-                  "https://realstate.wildfreewalkingtours.com/wp-content/uploads/2023/03/background2-1536x1024.jpg"];
 
   useEffect(() => {
     const interval = setInterval(() => {

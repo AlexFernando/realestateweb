@@ -22,6 +22,7 @@ import WhatsAppFloating from './components/WhatsAppFloating';
 import SubscribeIcon from './components/SubscribeIcon';
 import ShorTermRentals from './components/ShortTermRentals'
 import ShortTermRentals from './components/ShortTermRentals';
+import MyPDFPage from './components/GeneratePdf'
 
 const Root = ({state, actions}) => {
 
@@ -128,6 +129,7 @@ const Root = ({state, actions}) => {
             {state.router.link === "/blogposts/" && <Blog />}
             {data.isBlog && <BlogDetails />}
             {state.router.link === "/contact/" && <GeneralContact />}  
+            {/* {data.isAdmin && <MyPDFPage />} */}
             <FooterOne />
             <Footer title= "Classic Jerusalem" />  
 

@@ -1,127 +1,61 @@
 import React, {useState, useEffect} from 'react';
 import { connect, styled, css, Global, loadable } from "frontity";
 import Loading from './Loading';
+import SearchBarBgRent from './SearchBarBgRent';
+import SearchBarBgSell from './SearchBarBgSell';
+import LoadingSearchBar from './Loader3'
 
 const SearchBarSell = ({state, actions, libraries}) => {
 
-    const exchangeRateValue = state.theme.coinExchange.exchange_rate;
-    const currencyPair = state.theme.coinExchange.currency_pair;
+    const [stateProperty, setStateProperty] = useState('RentSearch')
+    const [isLoading, setIsLoading] = useState(false);
+
+    /**Item Switch color */
+    const [activeItem, setActiveItem] = useState(0);
+
+    const handleItemClick = itemIndex => {
+      setActiveItem(itemIndex);
+      setIsLoading(true);
+
+    //   if(itemIndex === 0) {
+    //       console.log("button rent: ", activeItem)
+    //         setStateProperty('RentSearch')
+    //   }
+    //   else {
+    //     console.log("button sell: ", activeItem)
+
+    //         setStateProperty('SellSearch')
+ 
+    //   }
+
+    // Simulate a delay to show the loading state
+    setTimeout(() => {
+      setStateProperty(stateProperty === 'RentSearch' ? 'SellSearch' : 'RentSearch');
+      setIsLoading(false);
+    }, 250);
+    };
     
+
     return ( 
         <MarginTop>
-            <SearchTabContent>
-                <SearchForm>
-                    <div>
-                        <SearchMultiFilter>
-                            <ListFilter>
-                                <ItemList>
-                                    <EnterSearchInput>
-                                        <div>
-                                            <input type="text" placeholder="Property ID" />
-                                        </div>
+            <ButtonSearchContainer>
+                <ButtonToggleColor active={activeItem === 0} onClick={() => handleItemClick(0)}>Rent</ButtonToggleColor>
+                <ButtonToggleColor active={activeItem === 1} onClick={() => handleItemClick(1)}>Buy</ButtonToggleColor>
+            </ButtonSearchContainer>
 
-                                    </EnterSearchInput>
-                                </ItemList>
+            {/* {
+                StateProperty === 'RentSearch'? <SearchBarBgRent />
+                : <SearchBarBgSell />
+            } */}
 
-                                <ItemList>
-                                    <ProperyType>
-                                        <div>
-                                            <select>
-                                                <option value>Neighborhood</option>
-                                                <option>Abu Tor</option>
-                                      
-                                                <option>
-                                
-                                                    Arnona
-                                                </option>
-                                                <option >
-                                                    Baka
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </ProperyType>
-                                </ItemList>
+            {isLoading ? (
+                <LoadingSearchBar />
+            ) : (
+                <>
+                {stateProperty === 'RentSearch' ? <SearchBarBgRent /> : <SearchBarBgSell />}
+                </>
+            )}
 
-                                <ItemList>
-                                    <ProperyType>
-                                        <div>
-                                            <select>
-                                                <option value>Type</option>
-                                                <option>For Rent</option>
-                                                <option>For Sale</option>
-                                            </select>
-                                        </div>
-                                    </ProperyType>
-                                </ItemList>
-
-                                <ItemList>
-                                    <ProperyType>
-                                        <div>
-                                            <select>
-                                                <option value>Bedrooms</option>
-                                                <option>1 bedroom</option>
-                                                <option>2 bedrooms</option>
-                                                <option>3 bedrooms</option>
-                                                <option>4 bedrooms</option>
-                                                <option>5 bedrooms</option>
-                                            </select>
-                                        </div>
-                                    </ProperyType>
-                                </ItemList>
-
-
-                                <ItemPrice>
-                                    <ProperyType>
-                                        <div>
-                                            <select>
-                                                <option defaultValue>{currencyPair === "USD_USD"? "$ " : currencyPair === "USD_EUR"? "€ " : "₪ "}Min. Price</option>
-                                                <option>{parseInt(Number(500)*Number(exchangeRateValue))}</option>
-                                                <option>{parseInt(Number(1000)*Number(exchangeRateValue))}</option>
-                                                <option>{parseInt(Number(2000)*Number(exchangeRateValue))}</option>
-                                                <option>{parseInt(Number(3000)*Number(exchangeRateValue))}</option>
-                                                <option>{parseInt(Number(4000)*Number(exchangeRateValue))}</option>
-                                                <option>{parseInt(Number(5000)*Number(exchangeRateValue))}</option>
-                                                <option>{parseInt(Number(6000)*Number(exchangeRateValue))}</option>
-                                                <option>{parseInt(Number(7000)*Number(exchangeRateValue))}</option>
-                                                <option>{parseInt(Number(8000)*Number(exchangeRateValue))}</option>
-                                                <option>{parseInt(Number(9000)*Number(exchangeRateValue))}</option>
-                                                <option>{parseInt(Number(10000)*Number(exchangeRateValue))}</option>
-                                            </select>
-                                        </div>
-                                    </ProperyType>
-                                </ItemPrice>
-
-                                <ItemPrice>
-                                    <ProperyType>
-                                        <div>
-                                            <select>
-                                                <option defaultValue>{currencyPair === "USD_USD"? "$ " : currencyPair === "USD_EUR"? "€ " : "₪ "}Max. Price</option>
-                                                <option>{parseInt(Number(1000)*Number(exchangeRateValue))}</option>
-                                                <option>{parseInt(Number(2000)*Number(exchangeRateValue))}</option>
-                                                <option>{parseInt(Number(3000)*Number(exchangeRateValue))}</option>
-                                                <option>{parseInt(Number(4000)*Number(exchangeRateValue))}</option>
-                                                <option>{parseInt(Number(5000)*Number(exchangeRateValue))}</option>
-                                                <option>{parseInt(Number(6000)*Number(exchangeRateValue))}</option>
-                                                <option>{parseInt(Number(7000)*Number(exchangeRateValue))}</option>
-                                                <option>{parseInt(Number(8000)*Number(exchangeRateValue))}</option>
-                                                <option>{parseInt(Number(9000)*Number(exchangeRateValue))}</option>
-                                                <option>{parseInt(Number(1000)*Number(exchangeRateValue))}</option>
-                                                <option>{parseInt(Number(1000)*Number(exchangeRateValue))}</option>
-                                            </select>
-                                        </div>
-                                    </ProperyType>
-                                </ItemPrice>
-
-                          
-                                    <ItemList>
-                                        <button>Search</button>
-                                    </ItemList>
-                                
-                            </ListFilter>
-                        </SearchMultiFilter>
-                    </div>
-                </SearchForm>
-            </SearchTabContent>
         </MarginTop>
     );
 }
@@ -133,236 +67,43 @@ const MarginTop = styled.div`
     padding: 0 .5rem;
 `
 
-const SearchTabContent = styled.div`
-    margin-top: 0px;
+const ButtonSearchContainer = styled.ul`
     display: flex;
     justify-content: center;
-`
-
-const SearchForm = styled.div`
-    /* background-color: #fff; */
-    border-radius: 8px;
-    padding: 30px 20px;
-    position: relative;
-    z-index: 0;
-    box-shadow: 0px 0px 10px 0px rgb(255 255 255 / 85%);
-    /* background-color: #0c0c0c; */
-    background-color: transparent;
-    /* background-color: var(--main-color); */
-    background-image: linear-gradient(180deg, #3e4c66 0%, #1c2641 20%);
-    /* background-image: linear-gradient(180deg, #FFFFFF 0%, #FFFFFFCC 100%); */
-    border-style: .5px solid #3e4c66;
-     
-    @media (min-width: 1025px) and (max-width: 1367px) {
-        padding: 15px 10px;
-    }
-`
-const SearchMultiFilter = styled.div`
-    /* position: relative; */
-    display: flex;
-    justify-content: center;
-`
-
-const ListFilter = styled.ul`
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-      
-    button {
-        border-radius: 8px;
-        background-color: var(--golden-color);
-        font-size: 14px;
-        font-size: clamp(.8rem, calc(0.40rem + 0.54vw), 1.20rem);
-        font-family: 'Lato', sans-serif;
-        color: #fff;
-        font-weight: 700;
-        line-height: 1.2;
-        height: 50px;
-        width: 215px;
-        /**add new lines styles */
-        width: 10vw;
-        height: 5vh;
-        /**new lines added */
-        transition: all .3s ease;
-        cursor: pointer;
-        border: none;
-    
-        @media (max-width: 1200px) {
-            width: 100%;
-        }
-    }
-    
-    @media (min-width: 1200px) and (max-width: 1367px) {
-        justify-content: center;
-    }
-`
-const ItemList = styled.li`
-    display: inline-block;
-    line-height: 3;
-    margin-right: 20px;
-    margin-left: 20px;
-    vertical-align: text-top;
-    /**add new lines styles */
-   
-    width: 10vw;
-    /**new lines added */
-
-    @media (max-width: 1200px) {
-        margin-bottom: 1rem;
-        width: 40%;
-        margin-right: 0;
-        margin-left: 0;
-
-        &:nth-of-type(5){
-            width: 100%;
-        }
-    }
+    padding-left: 0;
+    list-style: none;
+    text-align: center;
+    margin-bottom: 5rem;
 `
 
-const ItemPrice = styled.li`
-    display: inline-block;
-    line-height: 3;
-    margin-right: 10px;
-    margin-left: 10px;
-    vertical-align: text-top;
-    /**add new lines styles */
-   
-    width: 8vw;
-    /**new lines added */
+const ButtonToggleColor = styled.li`
+    font-size: 1rem;
+    cursor: pointer;
 
-    @media (max-width: 1200px) {
-        margin-bottom: 1rem;
-        width: 40%;
-        margin-right: 0;
-        margin-left: 0;
+    /* text-decoration: none; */
+    /* background-color: var(--golden-color); */
+    border-color: var(--main-color);
+    color: #fff;
+    padding: 1rem 2rem;
+    position: relative;
+    border-radius: 5px;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    background-color: ${props => (props.active ? "#cba631" : "#1c2641")};
 
-        &:nth-of-type(5){
-            width: 100%;
-        }
+    &:before {
+
+        background-color: ${props => (props.active ? "#cba631" : "#1c2641")};
+        content: ${props => (props.active ? "''" : "none")};
+        height: 20px;
+        margin-left: 5px;
+        position: absolute;
+        top: 35px;
+        width: 20px;
+        transform: rotate(45deg);
     }
 `
-
-const EnterSearchInput = styled.div`
-    
-    margin-bottom: 0;
-
-    div {
-        
-        width: 100%;
-            /**add new lines styles */
-  
-    /**new lines added */
-
-        input {
-            background-color: #fff;
-            border: 1px solid #bcbcbc;
-            border-radius: 8px;
-            font-size: clamp(.8rem, calc(0.40rem + 0.54vw), 1rem);
-            font-family: 'Lato', sans-serif;
-            color: #484848;
-            line-height: 1.2;
-            height: 50px;
-            /* width: 215px;   */
-            padding: 0 1rem;
-            box-sizing: border-box; 
-            width: 100%;
-
-            /**new style line added */
-            /* font-size: .8vw; */
-            height: 5vh;
-            /**end style added */
-
-            &:focus {
-                outline: none;
-            }  
-            
-        }
-    }
-`
-const ProperyType = styled.div`
-
-    div {
-        width: 100%;
-
-        select {
-            background: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='DimGray' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>") no-repeat;
-            background-position: calc(100% - 0.75rem) center !important;
-            -moz-appearance:none !important;
-            -webkit-appearance: none !important; 
-            appearance: none !important;
-            padding-right: 2rem !important;
-            background-color: #fff;
-            border: 1px solid #bcbcbc;
-            border-radius: 8px;
-            font-size: 14px;
-            font-size: clamp(.83rem, calc(0.40rem + 0.54vw), 1rem);
-            font-family: 'Lato', sans-serif;
-            color: #484848;
-            line-height: 1.2;
-            height: 50px;
-            /* width: 215px; */
-            padding: 1vh 1vw;
-            width: 100%;
-            /**add new lines styles */
-            height: 5vh;
-            /* font-size: .8vw; */
-            align-self: center;
-            /**new lines added */
-
-            &:focus {
-                outline: none;
-            }  
-
-            &:after {
-                margin-right: 2rem;
-            }
-
-        }
-    }
-`
-const PriceType = styled.div`
-    div {
-        width: 50%;
-
-        select {
-            background: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='DimGray' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>") no-repeat;
-            background-position: calc(100% - 0.75rem) center !important;
-            -moz-appearance:none !important;
-            -webkit-appearance: none !important; 
-            appearance: none !important;
-            padding-right: 2rem !important;
-            background-color: #fff;
-            border: 1px solid #bcbcbc;
-            border-radius: 8px;
-            font-size: 14px;
-            font-size: clamp(.83rem, calc(0.40rem + 0.54vw), 1rem);
-            font-family: 'Lato', sans-serif;
-            color: #484848;
-            line-height: 1.2;
-            height: 50px;
-            /* width: 215px; */
-            padding: 1vh 1vw;
-            width: 100%;
-            /**add new lines styles */
-            height: 5vh;
-            /* font-size: .8vw; */
-            align-self: center;
-            /**new lines added */
-
-            &:focus {
-                outline: none;
-            }  
-
-            &:after {
-                margin-right: 2rem;
-            }
-
-      
-        }
-    }
-`
-
 export default connect(SearchBarSell);
+
+// display: ${props => {props.active ? "flex" : "none"}} ;

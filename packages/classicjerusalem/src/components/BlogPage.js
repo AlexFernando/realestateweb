@@ -10,8 +10,6 @@ import Loading from './Loading';
 import Link from './Link';
 import localAuthor from '../images/location-icon.svg'
 import LinkReadPost from './LinkReadPost'
-import { MarginTopContainer } from './home';
-import {ContainerBackgroundTour, BackgroundColor} from './AllProperties'
 
 const Blog = ({state, actions, libraries}) => {
 
@@ -51,12 +49,20 @@ const Blog = ({state, actions, libraries}) => {
                     </ContainerBackgroundTour>     
                         
                 {typeof pageBlog === "undefined" ? <Loading /> : 
-                    <MarginTopContainer>
+                    <MarginPaddingContainer>
+
+                        <ParagraphContainer>
+                            <p>Welcome to my blog page, where you'll find interesting articles related to real estate in Jerusalem. 
+                                Our blog covers market trends, practical tips, expert interviews, and more to keep you informed and up-to-date.
+                                Check out our blog page for insightful and informative articles on buying, selling, and investing in Jerusalem's 
+                                real estate market. Thank you for visiting and happy reading!
+                            </p>
+                        </ParagraphContainer>
                        
                         {
                             data.isReady && myPosts.length > 0? 
         
-                                <Container>
+                                <BlogGridContainer>
                                     {
                                         myPosts.map( post => {
                                             return(
@@ -105,11 +111,11 @@ const Blog = ({state, actions, libraries}) => {
                                             )
                                         })
                                     }
-                                </Container>
+                                </BlogGridContainer>
         
                             :null
                         }
-                    </MarginTopContainer>
+                    </MarginPaddingContainer>
                 }
             </Section>
 
@@ -121,19 +127,59 @@ const Blog = ({state, actions, libraries}) => {
 
 export default connect(Blog);
 
-const HeaderPage = styled.h1`
-    margin-top: 6.25rem;
-    text-align: center;
-    font-size: 2.375rem;
+export const ContainerBackgroundTour = styled.div`
+    background-image: url("https://realstate.wildfreewalkingtours.com/wp-content/uploads/2023/04/background_blog.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:center center;
+    height: 370px;
+    margin-top: 6rem;
+`
 
-    @media(max-width: 768px) { 
-        font-size: 2rem;
-        margin-top: 4.25;
+export const BackgroundColor = styled.div`
+
+    background-image: linear-gradient(to top, rgba(34,49,63, .4), rgba(34, 49, 63, .4)); 
+    color: #FFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: flex-start;
+    overflow-wrap: break-word;
+    height: 370px;
+
+
+    div {
+        margin-left: calc(6rem + 1.5625vw);
+        line-height: 2;
+
+        @media(max-width: 768px) {
+            margin-left: 1rem;
+        }
+
+        h3 {
+            text-transform: capitalize;
+            font-size: 2rem;
+        
+            font-weight: 600;
+
+            @media(max-width: 768px) {
+                font-size: 1.5rem;
+            }
+        }
     }
-` 
+
+
+`;
+
 export const MarginPaddingContainer = styled.div`
-    max-width: 77.5rem;
-    margin: 5% auto;
+    /* max-width: 77.5rem;
+    margin: 5% auto; */
+
+    margin-top: 5rem;
+    width: min(90%, 1800px);
+    margin-right: auto;
+    margin-left: auto;
 
     h2 {
         text-align: center;
@@ -153,19 +199,49 @@ const Section = styled.section`
    
 `
 
-const Container = styled.div`
-    max-width: 1200px;
-    width: 100%;
-    margin: 0px auto;
-    position: relative;
-    padding-right: 15px;
-    padding-left: 15px;
 
-    @media(max-width: 768px) { 
-        max-width: 100%;
-        padding: 0;
-        margin: 0;
+const ParagraphContainer = styled.div`
+
+
+    p{
+        text-align: center;
+        line-height: 1.8;
+        color: #343434;
     }
+`
+
+
+export const BlogGridContainer = styled.div`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1.5rem;
+    color: #444;
+    font-family: 'Lato';
+    margin-top: 2rem;
+
+    @media (max-width: 576px){
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 1rem;
+        margin: 2rem 0;
+        padding-left: calc(1.5rem/2);
+        padding-right: calc(1.5rem/2);
+    }
+
+    /* @media (min-width: 576px) and (max-width: 968px){
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1rem;
+        margin: 2rem 0;
+        padding-left: calc(1.5rem/2);
+        padding-right: calc(1.5rem/2);
+    }
+
+    @media (min-width: 968px) and (max-width: 1440px){
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1rem;
+        margin: 2rem 0;
+        padding-left: calc(1.5rem/2);
+        padding-right: calc(1.5rem/2);
+    } */
 `
 
 const Article = styled.article`
@@ -276,17 +352,5 @@ const Excerpt = styled.div`
         line-height: 1.5;
         text-align: justify;
     }
-`
-
-const InfoButton = styled.div`
-    display: flex;
-
-    span {
-        margin-top: 0;
-    }
-`
-
-const Content = styled.div`
-
 `
 

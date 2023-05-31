@@ -21,15 +21,14 @@ const Properties = ({state, actions, libraries}) => {
             const singlePost = state.source.properties[id];
             myPosts.push(singlePost);
         })
+
+        actions.theme.updateProperties(myPosts);
     }
 
 
     return(
       
         <SliderDots>
-   
-           
-
             {
                 myPosts.map(property => {
                     return(
@@ -37,10 +36,6 @@ const Properties = ({state, actions, libraries}) => {
                     )
                 })
             }
-
-        
-      
-
         </SliderDots>
     
 
@@ -60,7 +55,7 @@ export const PropertiesGrid = styled.div`
     color: #444;
     font-family: 'Lato';
     margin-top: 2rem;
-
+    
     @media (max-width: 576px){
         grid-template-columns: repeat(1, 1fr);
         grid-gap: 1rem;
@@ -78,7 +73,8 @@ export const PropertiesGrid = styled.div`
     }
 `
 
-export const SingleProperty = styled.div`   
+export const SingleProperty = styled.div`
+   
     background-color: #fff;
     border: 1px solid #ebebeb;
     /* border-radius: 8px; */

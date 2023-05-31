@@ -24,95 +24,96 @@ const GeneralContact = ({state, actions, libraries}) => {
         {(typeof contentForm === "undefined") || (typeof contentFormTeam === "undefined") ? <Loading /> :
             <>
 
-            <GeneralSection>
-        
-                <WidthContainer>
+                <GeneralSection>
+                    <GeneralSectionLayer>
+                        <WidthContainer>
 
-                    <TextHeader>
-                    
-                        <h2>Get in touch</h2>
-                        <p>Just drop us a line. We will be glad to answer your inquiries</p>
-                
-                    </TextHeader>
-        
-                
-                    <SectionContact>
-                        <SocialMediaSection>
-                            <GradientContact>
-                                <h3>Contact Information</h3>
-                                
-                                <SocialItem>
-                                    <PhoneIcon /> <span>+972-58-654-0969</span>
-                                </SocialItem>
-            
-                                <SocialItem href="mailto:classicjerusaleminfo@gmail.com/" alt="gmail" aria-label="Link to gmail" target="_blank" rel="noreferrer">
-                                    <NavBarIcon />
-                                    <span> classicjerusaleminfo@gmail.com</span>
-                                </SocialItem>
-            
-            
-                                <SocialItem href="https://wa.me/+972586540969" alt="WhatsApp" aria-label="Link to WhatsApp" target="_blank" rel="noreferrer">
-                                    <WhatsAppIcon />
-                                    <span>+972-58-654-0969</span>
-                                </SocialItem>
-            
-                                <SocialItem href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d217152.94172576632!2d34.90260814069641!3d31.742799330483617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502c4edaeeb9e23%3A0x4ca1616bb452513d!2sDistrito%20de%20Jerusal%C3%A9n%2C%20Israel!5e0!3m2!1ses-419!2spe!4v1674433992414!5m2!1ses-419!2spe" alt="Share on Facebook" aria-label="Link to Facebook" target="_blank" rel="noreferrer">
+                            <TextHeader>
                             
-                                    <Location />
-                                    <span>2023 Jerursalem St, Jerusalem, Israel</span>
-                                </SocialItem>
-                            </GradientContact>
-                        </SocialMediaSection>
-                        <Content>
-                            <h4>Send us a Message</h4>
-                            <Html2react html={contentForm.content.rendered} />
-                        </Content>
-                    </SectionContact>
-
-
-                <TextHeader>
-                    <h2>Work with us</h2>
-                    <p>Fill up the form and We will be glad to answer you back as soon as possible.</p>
+                                <h2>Get in touch</h2>
+                                <p>Just drop us a line. We will be glad to answer your inquiries</p>
+                        
+                            </TextHeader>
                 
-                </TextHeader>
-               
-                   <SectionContact>
-                       <SocialMediaSection>
-                           <GradientContact>
-                               <h3>Contact Information</h3>
+                        
+                            <SectionContact>
+                                <SocialMediaSection>
+                                    <GradientContact>
+                                        <h3>Contact Information</h3>
+                                        
+                                        <SocialItem>
+                                            <PhoneIcon /> <span>+972-58-654-0969</span>
+                                        </SocialItem>
+                    
+                                        <SocialItem href="mailto:classicjerusaleminfo@gmail.com/" alt="gmail" aria-label="Link to gmail" target="_blank" rel="noreferrer">
+                                            <NavBarIcon />
+                                            <span> classicjerusaleminfo@gmail.com</span>
+                                        </SocialItem>
+                    
+                    
+                                        <SocialItem href="https://wa.me/+972586540969" alt="WhatsApp" aria-label="Link to WhatsApp" target="_blank" rel="noreferrer">
+                                            <WhatsAppIcon />
+                                            <span>+972-58-654-0969</span>
+                                        </SocialItem>
+                    
+                                        <SocialItem href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d217152.94172576632!2d34.90260814069641!3d31.742799330483617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502c4edaeeb9e23%3A0x4ca1616bb452513d!2sDistrito%20de%20Jerusal%C3%A9n%2C%20Israel!5e0!3m2!1ses-419!2spe!4v1674433992414!5m2!1ses-419!2spe" alt="Share on Facebook" aria-label="Link to Facebook" target="_blank" rel="noreferrer">
+                                    
+                                            <Location />
+                                            <span>2023 Jerursalem St, Jerusalem, Israel</span>
+                                        </SocialItem>
+                                    </GradientContact>
+                                </SocialMediaSection>
+                                <Content>
+                                    <h4>Send us a Message</h4>
+                                    <Html2react html={contentForm.content.rendered} />
+                                </Content>
+                            </SectionContact>
 
 
-                               <SocialItem>
-                                   <PhoneIcon /> <span>+972-58-654-0969</span>
-                               </SocialItem>
-           
-                               <SocialItem href="mailto:classicjerusaleminfo@gmail.com/" alt="gmail" aria-label="Link to gmail" target="_blank" rel="noreferrer">
-                                   <NavBarIcon />
-                                   <span> classicjerusaleminfo@gmail.com</span>
-                               </SocialItem>
-           
-           
-                               <SocialItem href="https://wa.me/+972586540969" alt="WhatsApp" aria-label="Link to WhatsApp" target="_blank" rel="noreferrer">
-                                   <WhatsAppIcon />
-                                   <span>+972-58-654-0969</span>
-                               </SocialItem>
-           
-                               <SocialItem href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d217152.94172576632!2d34.90260814069641!3d31.742799330483617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502c4edaeeb9e23%3A0x4ca1616bb452513d!2sDistrito%20de%20Jerusal%C3%A9n%2C%20Israel!5e0!3m2!1ses-419!2spe!4v1674433992414!5m2!1ses-419!2spe" alt="Share on Facebook" aria-label="Link to Facebook" target="_blank" rel="noreferrer">
-                           
-                                   <Location />
-                                   <span>2023 Jerursalem St, Jerusalem, Israel</span>
-                               </SocialItem>
-                           </GradientContact>
-                       </SocialMediaSection>
-                       <Content>
-                                <h4>Join the team</h4>
-                                <Html2react html={contentFormTeam.content.rendered} />
-                            </Content>
-                   </SectionContact>
+                            <TextHeader>
+                                <h2>Work with us</h2>
+                                <p>Fill up the form and We will be glad to answer you back as soon as possible.</p>
+                            
+                            </TextHeader>
+                        
+                            <SectionContact>
+                                <SocialMediaSection>
+                                    <GradientContact>
+                                        <h3>Contact Information</h3>
 
-               </WidthContainer>
-           </GeneralSection>
 
+                                        <SocialItem>
+                                            <PhoneIcon /> <span>+972-58-654-0969</span>
+                                        </SocialItem>
+                    
+                                        <SocialItem href="mailto:classicjerusaleminfo@gmail.com/" alt="gmail" aria-label="Link to gmail" target="_blank" rel="noreferrer">
+                                            <NavBarIcon />
+                                            <span> classicjerusaleminfo@gmail.com</span>
+                                        </SocialItem>
+                    
+                    
+                                        <SocialItem href="https://wa.me/+972586540969" alt="WhatsApp" aria-label="Link to WhatsApp" target="_blank" rel="noreferrer">
+                                            <WhatsAppIcon />
+                                            <span>+972-58-654-0969</span>
+                                        </SocialItem>
+                    
+                                        <SocialItem href="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d217152.94172576632!2d34.90260814069641!3d31.742799330483617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502c4edaeeb9e23%3A0x4ca1616bb452513d!2sDistrito%20de%20Jerusal%C3%A9n%2C%20Israel!5e0!3m2!1ses-419!2spe!4v1674433992414!5m2!1ses-419!2spe" alt="Share on Facebook" aria-label="Link to Facebook" target="_blank" rel="noreferrer">
+                                    
+                                            <Location />
+                                            <span>2023 Jerursalem St, Jerusalem, Israel</span>
+                                        </SocialItem>
+                                    </GradientContact>
+                                </SocialMediaSection>
+                                
+                                <Content>
+                                    <h4>Join the team</h4>
+                                    <Html2react html={contentFormTeam.content.rendered} />
+                                </Content>
+                            </SectionContact>
+
+                        </WidthContainer>
+                    </GeneralSectionLayer>
+                </GeneralSection>
             </>
             }
         </>
@@ -120,7 +121,6 @@ const GeneralContact = ({state, actions, libraries}) => {
 }
 
 const GeneralSection = styled.section`
-    padding-bottom: 4rem;
     &:nth-of-type(1){
         margin-top: 120px;
     }
@@ -130,7 +130,18 @@ const GeneralSection = styled.section`
     }
 
     /* background-image: linear-gradient(180deg, rgba(28, 38, 65, .8)  0%, rgba(28, 38, 65, .8) 100%); */
-    background-color: var(--main-color);
+    /* background-color: var(--main-color); */
+
+    background-image: url("https://realstate.wildfreewalkingtours.com/wp-content/uploads/2023/03/background3.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:center center;
+    margin-top: 6rem;
+`
+
+const GeneralSectionLayer = styled.div`
+   padding-bottom: 4rem;
+   background-image: linear-gradient(180deg, rgba(28, 38, 65, .4)  0%, rgba(28, 38, 65, .4) 100%);
 `
 
 export const WidthContainer = styled.div`
@@ -145,7 +156,7 @@ export const WidthContainer = styled.div`
 `
 
 const TextHeader = styled.div`
-    background-color: var(--main-color);
+    /* background-color: var(--main-color); */
     width: 100%;
     padding: 3rem 0;
     margin-bottom: 2rem;
@@ -183,7 +194,6 @@ const GradientContact = styled.div`
     align-content: center;
     align-items: center;
     font-family: 'Lato';
-    background-image: linear-gradient(180deg, rgba(28, 38, 65, .9)  0%, rgba(28, 38, 65, .8) 100%);
     height: 100%;
     
     @media(max-width: 768px) {
@@ -200,6 +210,7 @@ export const SocialMediaSection = styled.div`
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: center;
+    background-color: var(--main-color);
 `
 
 export const SocialItem = styled.a`
@@ -385,6 +396,30 @@ const Content = styled.div`
     a {
         text-decoration: none;
     }
+
+
+    input[type=file] {
+        background: #ddd;
+        background: #eee;
+        background: #fff;
+        cursor: pointer;
+        color: #484848;
+    }
+
+    input[type=file]::before {
+        content: "Send us your CV : ";
+        display: inline-block;
+        background: #eee;
+        background: #fff;
+        padding: 5px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 500;
+        color: #333;
+        color: #484848;
+    }
+
 `;
 
 const ContainerRigth = styled.div`
