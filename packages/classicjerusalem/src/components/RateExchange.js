@@ -58,7 +58,6 @@ function ExchangeRates({ state, actions}) {
       }
 
       const data = await response.json();
-      console.log("data: ", data)
       actions.theme.updateExchangeRate(data);
     } catch (error) {
       console.error('Error:', error);

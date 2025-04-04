@@ -9,7 +9,7 @@ import {MarginBottomSearchBar} from './RentFurnished'
 
 import {MarginPaddingContainer} from './home';
 import SearchBarRentPages from './SearchBarRentPages';
-import {MarginTopSearchBar, TextSearchFilter, TextNoPropertiesFound} from './Rent'
+import {MarginTopSearchBar, TextSearchFilter, TextNoPropertiesFound, PropertiesGrid} from './Rent'
 import SliderDots from './Slider';
 
 
@@ -26,6 +26,7 @@ const SellProperties = ({state, actions, libraries}) => {
             const dataPropertiesFurnished = state.source.get("/category/for-sale/");
             if(dataPropertiesFurnished.isCategory) {
             let myPostsFiltered = dataPropertiesFurnished.items.map(({ id }) => state.source.properties[id]);
+            myPostsFiltered.sort((a, b) => a.acf.status_property.localeCompare(b.acf.status_property));
             setAllRentProperties(myPostsFiltered);
             }
         });
@@ -68,8 +69,8 @@ const SellProperties = ({state, actions, libraries}) => {
    
                     allRentProperties.length > 0 && Object.keys(searchTerm).length === 0 ?
 
-                    <>
-                        <SliderDots>
+                    <PropertiesGrid>
+                
                             {
                                 allRentProperties.map(property => {
                                     return(
@@ -77,12 +78,12 @@ const SellProperties = ({state, actions, libraries}) => {
                                     )
                                 })
                             }
-                        </SliderDots> 
-                    </> 
+                  
+                    </PropertiesGrid> 
 
                     : arrResult.length > 0 && Object.keys(searchTerm).length > 0 ?
                     
-                    <SliderDots>
+                    <PropertiesGrid>
                         {
                             arrResult.map(property => {
                                 return(
@@ -90,7 +91,7 @@ const SellProperties = ({state, actions, libraries}) => {
                                 )
                             })
                         }
-                    </SliderDots> 
+                    </PropertiesGrid> 
 
                     : arrResult.length === 0 && Object.keys(searchTerm).length > 0 ?
                     
@@ -159,34 +160,34 @@ export const ContainerPropertiesForm = styled.div`
 
 
 /**Properties */
-export const PropertiesGrid = styled.div`
+// export const PropertiesGrid = styled.div`
 
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 1rem;
-    background-color: #fff;
-    color: #444;
-    padding-left: calc(1.5rem/2);
-    padding-right: calc(1.5rem/2);
+//     display: grid;
+//     grid-template-columns: repeat(4, 1fr);
+//     grid-gap: 1rem;
+//     background-color: #fff;
+//     color: #444;
+//     padding-left: calc(1.5rem/2);
+//     padding-right: calc(1.5rem/2);
 
-    @media (min-width: 769px) and (max-width: 1420px){
-        grid-template-columns: repeat(3, 1fr);
-        grid-gap: 1rem;
-        margin: 2rem 0;
-    }
+//     @media (min-width: 769px) and (max-width: 1420px){
+//         grid-template-columns: repeat(3, 1fr);
+//         grid-gap: 1rem;
+//         margin: 2rem 0;
+//     }
 
-    @media (max-width: 576px){
-        grid-template-columns: repeat(1, 1fr);
-        grid-gap: 1rem;
-        margin: 2rem 0;
-    }
+//     @media (max-width: 576px){
+//         grid-template-columns: repeat(1, 1fr);
+//         grid-gap: 1rem;
+//         margin: 2rem 0;
+//     }
 
-    @media (min-width: 576px) and (max-width: 768px){
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 1rem;
-        margin: 2rem 0;
-    }
-`
+//     @media (min-width: 576px) and (max-width: 768px){
+//         grid-template-columns: repeat(2, 1fr);
+//         grid-gap: 1rem;
+//         margin: 2rem 0;
+//     }
+// `
 
 
 export default connect(SellProperties);

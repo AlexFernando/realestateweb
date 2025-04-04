@@ -1,15 +1,99 @@
-import React from "react";
+import React, {useState, useEffect, useRef} from "react";
+import Loading from './Loading'
 import { connect, styled, css} from "frontity";
 import {BsTelephoneForward, BsEnvelopeOpen, BsTelephoneOutbound} from 'react-icons/bs'
 import {HiOutlineEnvelopeOpen} from 'react-icons/hi2'
+import axios from 'axios';
 
-const SubscribeForm = ({ handleClose }) => {
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    // handle subscription logic
-  };
+const SubscribeForm = ({state, actions, libraries, handleClose }) => {
+
+  useEffect(() => {
+    actions.source.fetch("/home/");
+  }, []);
+
+  const pageHomeData = state.source.page[12];
+
+  const Html2react = libraries.html2react.Component;
+
+  const [myInputValue, setMyInputValue] = useState('')
+  const [mySubmit, setMySubmit] = useState(false)
+  const [dataToSendgrid, setDataToSendgrid] = useState({})
+
+  // Create a ref to store the input element
+  const formRef = useRef();
+
+
+  useEffect(() => {
+
+
+    const inputElement =  formRef.current && formRef.current.querySelector("input[type='email']");
+    const submitElement = formRef.current && formRef.current.querySelector("input[type='submit']");
+
+    const handleInputChange = () => {
+      if (inputElement) {
+        const inputValue = inputElement.value;
+        setMyInputValue(inputValue)
+      }
+    };
+
+
+    const handleSubmitClick = () => {
+  
+      // event.preventDefault(); // Prevent the default form submission
+
+      const inputElement = formRef.current.querySelector("input[type='email']");
+      const inputValue = inputElement.value;
+
+      const data = {
+        "contacts": [
+          {
+            "email": inputValue,
+          }
+        ]
+      };
+
+      // Perform your desired actions here
+
+        //TAKE EMAIL CONTACT TO SENDGRID
+      
+
+        axios.put('https://api.sendgrid.com/v3/marketing/contacts', data, {
+          headers: {
+              //copy header token here with authorization word
+          }
+        })
+        .then(response => {
+          console.log(response.status);
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.error("error: ", error.response);
+        });
+    };
+
+    if (inputElement) {
+      inputElement.addEventListener("input", handleInputChange);
+    }
+
+    if (submitElement) {
+      submitElement.addEventListener("click", handleSubmitClick);
+    }
+
+    return () => {
+      if (inputElement) {
+        inputElement.removeEventListener("input", handleInputChange);
+      }
+      if (submitElement) {
+        submitElement.removeEventListener("click", handleSubmitClick);
+      }
+    };
+  }, []);
 
   return (
+    <>
+    {typeof pageHomeData === "undefined" ? <Loading /> :
+
+    
     <FormContainer>
       <h3>SUBSCRIBE TO OUR NEWSLETTER</h3>
 
@@ -19,17 +103,20 @@ const SubscribeForm = ({ handleClose }) => {
         </Icon>
         <p>Be the first to get updates about Jerusalem real estate deals &#38; great off market opportunities. We keep your data in privacy.</p>
       </ContainerIconText>
-      <Form onSubmit={handleSubscribe}>
-        <Input type="email" placeholder="Enter your email" required />
-        <Button type="submit">Subscribe</Button>
+      <Form ref={formRef}>
+        <Html2react html={pageHomeData.content.rendered} />
         <CloseButton onClick={handleClose}>X</CloseButton>
       </Form>
      
     </FormContainer>
+
+    }
+
+    </>
   );
 };
 
-export default SubscribeForm;
+export default connect(SubscribeForm);
 
 const FormContainer = styled.div`
   position: fixed;
@@ -62,14 +149,85 @@ const FormContainer = styled.div`
     font-weight: 100;
 
   }
+
+
 `;
 
-const Form = styled.form`
+const Form = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: #fff;
+  background-color: #1c2641;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   border-radius: 0 3px 3px 0px;
+
+  .wp-block-group {
+    display: flex;
+    object-fit: fill;
+  }
+
+  .wpcf7-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        margin: 0;
+        padding: 0;
+        object-fit: cover;
+
+        p {
+          margin: 0;
+          padding: 0;
+
+          &:nth-of-type(1){
+            flex-basis: 70%;
+          }
+
+
+          &:nth-of-type(2){
+            flex-basis: 30%;
+          }
+     
+
+          input[type="email"] {
+            padding: 10px;
+            border: none;
+            width: 90%;
+            /* margin-right: 2px; */
+            font-size: 14px;
+         
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+          }
+
+          input[type="submit"] { 
+            background-color: var(--golden-color);
+            color: #fff;
+            border: none;
+            border-radius: 0 3px 3px 0px;
+            padding: 10px 40px;
+            font-size: 14px;
+      
+            text-transform: uppercase;
+            cursor: pointer;
+            flex-grow: 1;
+            font-family: 'Lato', sans-serif;
+            margin: 0;
+          }
+
+
+    input{
+
+        &:focus {
+           outline: none;
+        } 
+    }
+
+        }
+
+
+  }
+
+
 `;
 
 const Input = styled.input`

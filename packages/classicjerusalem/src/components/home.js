@@ -1,28 +1,17 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { connect, styled, css, Global } from "frontity";
-import Image from "@frontity/components/image";
-import Link from './Link';
-
 import Loading from './Loading';
-// import Loader from './Loading2';
-// import LoadingComponent from './Loader3'
 import Properties from './properties';
 import RentSell from './RentSellComponent'
 import SearchBar from './SearchBar'
+import SearchBarFeatureHome from './SearchBarFeatureHome'
 import Testimonials from './Testimonials'
-import logo from '../images/logo.png';
-
-import { IconContext } from "react-icons";
-import {GiFamilyHouse, GiSpookyHouse, GiHouse} from 'react-icons/gi';
 import {BsHouseDoor, BsHouseDoorFill} from 'react-icons/bs'
-
 import Hero from './heroComponent';
 import FadeInOnScroll from './FadeInScroll'
-import ZoomInOnScroll from './ZoomInEffect'
-import Slider from './loadingImages'
 
 /**MORE IMAGES LOADED */
-import Rent from '../images/rent.jpg';
+import Rent from '../images/final_sell_resized.jpeg';
 import Buy from '../images/buy_couple.jpg';
 import Sell from '../images/sell_adult.jpg';
 import RealEstateAgent from '../images/real_estate_agent.jpg'
@@ -30,12 +19,47 @@ import {ImageFooter} from './footer-one';
 import LinkViewMore from './LinkViewMore'
 import AboutSection from './AboutSection'
 
+import SearchInput from './SearchBarMobile'
+
+//import { Accessibility } from 'accessibility';
+
 const Home = ({state, actions, libraries}) => {
+
+    const [arrResult, setArrResult] = useState([]);
+    const [searchTerm, setSearchTerm] = useState({});
 
     useEffect(() => {
         actions.source.fetch("/home/");
+
+
+      
+/*           const options = {
+         
+
+            modules: {
+              decreaseText: false,
+              increaseText: false,
+              invertColors: false,
+              increaseTextSpacing: false,
+              decreaseTextSpacing: false,
+              increaseLineHeight: true,
+              decreaseLineHeight: true,
+              grayHues: true,
+              underlineLinks: true,
+              bigCursor: true,
+              readingGuide: true,
+              textToSpeech: true,  
+              speechToText: true,  
+              disableAnimations: true
+            }
+          };
+      
+        
+        new Accessibility(options); */
     }, []);
-    
+
+  
+
     const pageHomeData = state.source.page[12];
 
     const Html2react = libraries.html2react.Component;
@@ -47,11 +71,13 @@ const Home = ({state, actions, libraries}) => {
         const ImageSlider = pageHomeData.acf.images_slider;
 
         Object.keys(ImageSlider).map(elem => {
-            console.log(ImageSlider[elem].url)
             images.push(ImageSlider[elem].url)
         })   
     }
 
+    const handleResults = (result) => {
+        setArrResult(result)
+    }
     return ( 
         <>     
                 {typeof pageHomeData === "undefined" ? <Loading /> :     
@@ -76,14 +102,14 @@ const Home = ({state, actions, libraries}) => {
                                             <UnderlineFullBackground>
                                                 <IconTitle />
                                             </UnderlineFullBackground>
-                            
-                                        
                                         </TextoImagen>
 
+                                        {/* <SearchBar handleResults= {handleResults} setSearchTerm={setSearchTerm} setArrResult={setArrResult}>
 
+                                        </SearchBar> */}
 
-                                        <SearchBar></SearchBar>
-                        
+                                        <SearchBarFeatureHome handleResults= {handleResults} setSearchTerm={setSearchTerm} setArrResult={setArrResult}></SearchBarFeatureHome>
+                                        <SearchInput handleResults= {handleResults} setSearchTerm={setSearchTerm} setArrResult={setArrResult} />
                                     </TextoImagenContainer>      
 
                                 </Overlay>
@@ -100,7 +126,7 @@ const Home = ({state, actions, libraries}) => {
                                     <span></span>
                                 </UnderlineTitle> */}
                              
-                                    <Properties />
+                                    <Properties searchTerm={searchTerm} arrResult={arrResult} />
                            
                             </MarginPaddingContainer> 
                         </SectionFeaturedProperties>  
@@ -133,7 +159,7 @@ const Home = ({state, actions, libraries}) => {
                                         <ImageFooter src={Rent} />
                                         <h3>Sell</h3>
                                         <p>Sell your Aparment</p>
-                                        <LinkViewMore href="#">View More</LinkViewMore>
+                                        <LinkViewMore href="/sell-your-aparment/">View More</LinkViewMore>
                                     </CardService>
                                     </FadeInOnScroll>
 
@@ -142,7 +168,7 @@ const Home = ({state, actions, libraries}) => {
                                         <ImageFooter src={Buy} />
                                         <h3>Airbnb</h3>
                                         <p>Airbnb your aparment </p>
-                                        <LinkViewMore href="#">View More</LinkViewMore>
+                                        <LinkViewMore href="/airbnb-your-aparment/">View More</LinkViewMore>
                                     </CardService>
                                     </FadeInOnScroll>
 
@@ -151,7 +177,7 @@ const Home = ({state, actions, libraries}) => {
                                         <ImageFooter src={Sell} />
                                         <h3>Rent</h3>
                                         <p>Rent your aparment long term </p>
-                                        <LinkViewMore href="#">View More</LinkViewMore>
+                                        <LinkViewMore href="/rent-your-apartment-long-term/">View More</LinkViewMore>
                                     </CardService>
                                     </FadeInOnScroll>
 
@@ -160,7 +186,7 @@ const Home = ({state, actions, libraries}) => {
                                         <ImageFooter src={RealEstateAgent} />
                                         <h3>Market</h3>
                                         <p>Value your property</p>
-                                        <LinkViewMore href="#">View More</LinkViewMore>
+                                        <LinkViewMore href="/value-your-property/">View More</LinkViewMore>
                                     </CardService>
                                     </FadeInOnScroll>
                                 </ContainerServices>
@@ -188,12 +214,13 @@ const Text = styled.p`
 
 
 export const MarginTopContainer = styled.div`
+    
     margin-top: 90px;
 
     @media (max-width: 1024px) {
       margin-top: 100px;
-    }
-`;
+    } 
+`
 
 
 /**BACKGROUND VIDEO */  
@@ -201,6 +228,18 @@ export const Main = styled.section`
 
   height: 750px;
   position: relative;
+
+  @media (max-width: 576px){
+    height: 700px;
+    }
+
+    @media (min-width: 576px) and (max-width: 968px){
+        height: 750px;
+    }
+
+    @media (min-width: 968px) and (max-width: 1440px){
+        height: 550px;
+    }
   /* margin-top: 7vh; */
     /* @media (max-width: 768px){
         height: 750px;
@@ -723,7 +762,7 @@ const CardService = styled.div`
 
 
 export const ContactBackgroundImage = styled.section`
-    background-image:url('https://realstate.wildfreewalkingtours.com/wp-content/uploads/2023/01/aparment_background.jpg');
+    background-image:url('https://realestateadmin2025.classicjerusalem.com/wp-content/uploads/2023/01/aparment_background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     /* Set a specific height */
@@ -889,6 +928,6 @@ export const ContactForm = styled.div`
 /*SECTION TESTIMONIALS */
 export const SectionTestimonial = styled.section`
     background-color: #fff;
-    padding: 1rem 0 10rem 0;
+    padding: 1rem 0 3rem 0;
     position: relative;
 `

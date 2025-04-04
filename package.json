@@ -7,25 +7,31 @@
     "frontity"
   ],
   "engines": {
-    "node": "16.13.0",
+    "node": "12.x",
     "npm": ">=6.0.0"
   },
   "scripts": {
     "dev": "frontity dev",
-    "build": "frontity build",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider frontity build",
     "serve": "frontity serve"
   },
   "prettier": {},
   "dependencies": {
     "@aamodtgroup/frontity-contact-form-7": "^1.0.1",
+    "@emailjs/browser": "^3.11.0",
+    "@frederiknordahl/now": "^1.2.5",
     "@frontity/core": "^1.16.0",
     "@frontity/hooks": "^2.2.2",
     "@frontity/html2react": "^1.7.0",
     "@frontity/mars-theme": "./packages/mars-theme",
     "@frontity/tiny-router": "^1.4.4",
     "@frontity/wp-source": "^1.11.7",
+    "accessibility": "^6.0.1",
+    "axios": "^1.4.0",
     "classicjerusalem": "file:packages/classicjerusalem",
     "frontity": "^1.17.2",
+    "react-aria": "^3.34.1",
+    "react-datetime-picker": "^5.5.1",
     "react-icons": "^4.7.1",
     "react-image-gallery": "^1.2.11"
   }

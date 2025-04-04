@@ -19,6 +19,7 @@ const Blog = ({state, actions, libraries}) => {
 
     const data = state.source.get('/blog/');
 
+
     let myPosts = [];
 
     if(data.isReady) {
@@ -34,6 +35,7 @@ const Blog = ({state, actions, libraries}) => {
 
     const Html2react = libraries.html2react.Component;
 
+ 
     return ( 
         <>
         {data.isReady ?
@@ -128,7 +130,7 @@ const Blog = ({state, actions, libraries}) => {
 export default connect(Blog);
 
 export const ContainerBackgroundTour = styled.div`
-    background-image: url("https://realstate.wildfreewalkingtours.com/wp-content/uploads/2023/04/background_blog.jpg");
+    background-image: url("https://realestateadmin2025.classicjerusalem.com/wp-content/uploads/2023/04/background_blog.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position:center center;
@@ -245,7 +247,7 @@ export const BlogGridContainer = styled.div`
 `
 
 const Article = styled.article`
-    max-width: 771px;
+    width: 95%;
     margin: 0px auto 5rem;
     position: relative;
 
@@ -269,20 +271,32 @@ export const FeaturedMedia = styled.div`
     position: relative;
     overflow: hidden;
     width: 100%;
-    height: auto;
-
+    /* height: auto; */
+  
     img {
         transition: all 0.8s ease-in 0s;
         border-radius: 5px;
-   
+        
     }
 `
 export const StyledImage = styled(Image)`
     display: block;
     width: 100%;
-    height: auto;
-    object-fit: contain;
+    /* height: auto; */
+    /* object-fit: contain; */
+    height: 450px;
 
+    @media (max-width: 968px){
+        height: 250px;
+    }
+
+    @media (min-width: 968px) and (max-width: 1199px){
+        height: 300px;
+    }
+
+    @media (min-width: 1200px) and (max-width: 1440px){
+        height: 350px;
+    }
 `
 export const AuthorBio = styled.div`
     margin-top: -3.5rem;

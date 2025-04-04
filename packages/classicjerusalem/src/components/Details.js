@@ -4,33 +4,25 @@ import Image from "@frontity/components/image";
 import Iframe from "@frontity/components/iframe";
 import {BiCheck} from 'react-icons/bi';
 import Loading from './Loading';
-import SamuelAgent from '../images/real-state-agent-v1.jpeg'
-import SamuelAgentTwo from '../images/real-state-agent-v2.jpeg'
-import {PriceTag} from './SingleProperty'
-
 //Image
 import ImageGallery from 'react-image-gallery';
 import ImageSliderStyles from "react-image-gallery/styles/css/image-gallery.css";
-import AddtionalStyles from '../styles/style.css'
+import FormsDetails from './FormsDetailsProperty'
 
-//Nav 
-import {NavItem} from './header/nav'
-import Link from './Link'
-
-import {IoLogoWhatsapp} from 'react-icons/io'
+const DotsPrice = require('./helpers/DotsPrice');
 
 const Details = ({state, actions, libraries}) => {
 
     const exchangeRateValue = state.theme.coinExchange.exchange_rate;
     const currencyPair = state.theme.coinExchange.currency_pair;
 
-    useEffect( () => {
-        actions.source.fetch("/contact-other")     
-    }, [])
+    // useEffect( () => {
+    //     actions.source.fetch("/contact-other")     
+    // }, [])
 
     const Html2react = libraries.html2react.Component;
 
-    const contentForm = state.source.page["32"];
+    // const contentForm = state.source.page["32"];
 
     // getting properties data 
     const data = state.source.get(state.router.link);
@@ -47,8 +39,8 @@ const Details = ({state, actions, libraries}) => {
     
     if(typeof postProperty !== "undefined" && data.isReady) {
 
-        postProperty.acf.photo_gallery.map( elem => {
-            arrImages.push({srcSet: elem.medium_srcset , thumbnail : elem.thumbnail_image_url})
+        postProperty.acf.photo_gallery.photo_gallery[0].map( elem => {
+            arrImages.push({srcSet: elem.large_srcset , thumbnail : elem.thumbnail_image_url})
         })
     }
 
@@ -56,9 +48,10 @@ const Details = ({state, actions, libraries}) => {
       
     return (
         <>  
-            {typeof postProperty === "undefined" && typeof contentForm === "undefined" ? <Loading /> : 
+            {typeof postProperty === "undefined"? <Loading /> : 
 
-                    <InfoSection>   
+                    <InfoSection>  
+ 
                         {/* <LinkContainer>
 
                             <ol>
@@ -67,12 +60,14 @@ const Details = ({state, actions, libraries}) => {
                                 <li></li><a css = {css`color: var(--golden); text-decoration: none;`} href={linkRouter}>{lastLink} </a> 
                             </ol>
                         </LinkContainer> */}
-                   
+                                           <CodeProperty>Nº {postProperty.acf.details_properties.code_property}</CodeProperty>
                         <Container>
 
-                          
+
 
                             <AllInfoContainer>
+
+
 
                             {postProperty.acf.exclusivity === 'Yes'? 
                                     <Ribbon>
@@ -83,26 +78,22 @@ const Details = ({state, actions, libraries}) => {
 
                                 <ImageContainerSlider>
 
-                                <Global styles={ImageSliderStyles} />
-                                {/* <Global styles={AddtionalStyles} /> */}
-                                <ImageGallery items={arrImages} lazyLoad={true} />
+                                    <Global styles={ImageSliderStyles} />
+                                    {/* <Global styles={AddtionalStyles} /> */}
+                                    <ImageGallery items={arrImages} lazyLoad={true} />
                                 </ImageContainerSlider>
                     
 
                                 <HeaderPriceTitle>
                                     <Neighboorhood>
-                                        <span>Jerusalem, </span>{postProperty.acf.details_properties.neighborhood}
+                                    {postProperty.acf.details_properties.street_name}, {postProperty.acf.details_properties.neighborhood}, <span>Jerusalem</span>
                                     </Neighboorhood>
 
-                                    {/* <Price>
-                                        $ {postProperty.acf.details_properties.price_dollars}
-                                    </Price> */}
-
                                     <Price>   
-                                        {parseInt(Number(postProperty.acf.details_properties.price_dollars)*Number(exchangeRateValue))} 
+                                        {DotsPrice.formatPrice(parseInt(Number(postProperty.acf.details_properties.price_shekels)*Number(exchangeRateValue)))} 
                                         {
-                                            currencyPair === "USD_USD"? 
-                                            " $"  : currencyPair === "USD_EUR"? " €" : " ₪" 
+                                            currencyPair === "ILS_ILS"? 
+                                            " ₪"  : currencyPair === "ILS_USD"? " $" : " €"   
                                         }
                                     </Price> 
                                 </HeaderPriceTitle>
@@ -134,13 +125,13 @@ const Details = ({state, actions, libraries}) => {
                                                     Price
                                                 </p>
 
-                                                {/* <span> {` `+postProperty.acf.details_properties.price_dollars}</span> */}
+                                                {/* <span> {` `+postProperty.acf.details_properties.price_shekels}</span> */}
                                                 <span>
-                                                {parseInt(Number(postProperty.acf.details_properties.price_dollars)*Number(exchangeRateValue))} 
-                                                {
-                                                    currencyPair === "USD_USD"? 
-                                                    " $"  : currencyPair === "USD_EUR"? " €" : " ₪" 
-                                                }
+                                                {DotsPrice.formatPrice(parseInt(Number(postProperty.acf.details_properties.price_shekels)*Number(exchangeRateValue)))} 
+                                                    {
+                                                        currencyPair === "ILS_ILS"? 
+                                                        " ₪"  : currencyPair === "ILS_USD"? " $" : " €"   
+                                                    }
                                                 </span>
                                             </div>
                                             <div>
@@ -181,45 +172,32 @@ const Details = ({state, actions, libraries}) => {
                                         </InfoDetails>
                                     
                                     </ListingDetails>
-
-                                  
+                                
                                    
                                </AllInfoGrid>
 
-        
+                               {
+                                                postProperty.acf.video_property !== ""?
+
+                                          
+                                                    // <IframeVideo src={postProperty.acf.video_property}/>
+                                            
+                                                    <MyVideo controls="controls" width="800" height="600" name="Video Name">
+                                                    <source src={postProperty.acf.video_property} />
+                                                    </MyVideo>
+
+                                                : null
+
+                                            }
+                                 
+
+                                
                                 
                            </AllInfoContainer>
 
                             <MainInfo>
-                                    {typeof contentForm === "undefined" ? <Loading /> 
-                                        :
-                                        <ContentForm>
-                                            
-                                            <h3>Contact Email</h3>
-                                            
-                                            <Html2react html={contentForm.content.rendered} />
-
-                                            <h3>Phone Call</h3>
-
-                                            <AgentContact>
-                                                <StyledImage src={SamuelAgent} />
-                                                <div>
-                                                    <h4>
-                                                        Samuel Cohen
-                                                    </h4>
-
-                                                    <ul>
-                                                        <li>
-                                                            <a href="https://wa.me/+972586540969" alt="WhatsApp" aria-label="Link to WhatsApp" target="_blank" rel="noreferrer">
-                                                            <IoLogoWhatsapp /> <span>+972586540969</span>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-
-                                            </AgentContact>
-                                        </ContentForm>
-                                    }
+                             
+                                    <FormsDetails propertyName = {postProperty.acf.details_properties.property_name} propertyCode = {postProperty.acf.details_properties.code_property} category={postProperty.categories} />
 
                                     <MapDiv>
                                     {/* <IframeMap src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d217152.94172576632!2d34.90260814069641!3d31.742799330483617!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1502c4edaeeb9e23%3A0x4ca1616bb452513d!2sDistrito%20de%20Jerusal%C3%A9n%2C%20Israel!5e0!3m2!1ses-419!2spe!4v1674433992414!5m2!1ses-419!2spe" 
@@ -227,6 +205,7 @@ const Details = ({state, actions, libraries}) => {
                                     </IframeMap> */}
                                      
                                         <Html2react html={postProperty.content.rendered} />
+                                       
                                     
                                     </MapDiv>
                             </MainInfo>
@@ -246,7 +225,15 @@ export const InfoSection = styled.section`
     background-color: #f7f7f7;
     padding: 60px 0;
     position: relative;
-    margin-top: 5rem;
+    margin-top: 6rem;
+`
+
+export const CodeProperty = styled.span`
+    margin:2rem;
+    font-weight: 500;
+    padding: 0.5rem;
+    background-color: var(--golden-color);
+    color: #fff;
 `
 
 const Container = styled.div`
@@ -426,14 +413,36 @@ const CheckIcon = styled(BiCheck)`
     color: var(--golden-icons);
 `
 
-const IframeMap = styled(Iframe)`
+const MyVideo = styled.video`
+    margin-top: 3rem;
+    width: 700px;
+    height: 480px;
+    text-align: center;
 
-        width: 100%;
-        height: 400px;
+    @media (min-width: 1341px) and (max-width: 1500px){
+        width: 550px;
+        height: 380px;
+    }
 
-          @media(max-width: 576px) {
-            height: 250px;
-        }
+        @media (min-width: 1201px) and (max-width: 1340px){
+        width: 460px;
+        height: 320px;
+    }
+
+    @media (min-width: 993px) and (max-width: 1200px) {
+        width: 500px;
+                height: 480px;
+    }
+
+    @media (min-width: 576px) and (max-width: 992px){
+        width: 550px;
+                height: 750px;
+    }
+
+    @media (max-width: 576px){
+        width: 350px;
+                height: 320px; 
+    } 
 `
 const MapDiv = styled.div`
 
@@ -462,27 +471,27 @@ const MapDiv = styled.div`
                 height: 320px;
             }
 
- @media (min-width: 993px) and (max-width: 1200px) {
-    width: 500px;
-            height: 480px;
- }
+            @media (min-width: 993px) and (max-width: 1200px) {
+                width: 500px;
+                        height: 480px;
+            }
 
- /* @media (min-width: 769px)  and (max-width: 992px){
-    width: 400px;
-            height: 380px;
-} */
+            /* @media (min-width: 769px)  and (max-width: 992px){
+                width: 400px;
+                        height: 380px;
+            } */
 
 
 
- @media (min-width: 576px) and (max-width: 992px){
-    width: 550px;
-            height: 750px;
- }
+            @media (min-width: 576px) and (max-width: 992px){
+                width: 550px;
+                        height: 750px;
+            }
 
- @media (max-width: 576px){
-    width: 350px;
-            height: 320px; 
- } 
+            @media (max-width: 576px){
+                width: 350px;
+                        height: 320px; 
+            } 
 
         }
 `
@@ -530,162 +539,6 @@ export const Ribbon = styled.span`
             border-top: 3px solid var(--golden-color);
         }    
 `
-
-
-/**Contact Form Styles */
-const ContentForm = styled.div`
-
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: space-between;
-    line-height: 1.2;
-    background-color: #fff;
-    padding: 1rem;
-
-
-    @media(max-width: 768px) {
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        padding: 1rem;
-    }
-
-    .wpcf7-form {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        margin-right: auto;
-        margin-left: auto;
-
-        p {
-
-            color: var(--main-color);
-            flex-basis: 50%;
-            margin-right: auto;
-            margin-left: auto;
-
-            &:nth-of-type(5){
-                flex-basis: 100%;   
-            }
-
-            &:nth-of-type(6){
-                flex-basis: 100%;   
-            }
-
-            @media (max-width: 768px){
-                flex-basis: 100%;
-            }
-        }
-    }
-
-
-    input, textarea {
-
-        &:focus {
-           outline: none;
-        } 
-    }
-
-    input {
-        width: 50%;
-    }
-
-
-    input, textarea, select {
-      
-        background-color: transparent;
-        outline: none;    
-        border-top-style: hidden;
-        border-right-style: hidden;
-        border-left-style: hidden;
-        border-bottom-style: groove;
-        border-bottom: 1px solid var(--golden-color); 
-        font-family:inherit;
-        font-size: 1rem;
-        padding: 1rem;
-
-        &::placeholder {
-            font-family: 'Lato', sans-serif;
-            text-transform: uppercase;
-            font-weight: 300;
-        }
-    }
-
-    @media(max-width: 768px) {
-        input, textarea, select {
-            width: 90%;
-        }
-    }
-
-    textarea {
-        width: 70%;
-        height: 50px;
-    }
-
-
-    input[type="submit"] { 
-        width: 100%;
-        background-color: var(--golden-color);
-        height: 48px;  
-        padding: 1.5rem;
-        text-transform: none;
-        border: 1px solid #fff;
-        font-weight: 500;
-        font-size: 1rem;
-        text-transform: capitalize;
-        color: #FFF;
-        cursor: pointer;
-        font-family: 'Montserrat', sans-serif;
-        padding: 2px 24px;
-        position: relative;
-
-        @media(max-width: 768px) {
-            width: 100%;
-            
-        }
-    
-        &:hover {
-            background-color: #bf930d;
-            transition: all 0.4s;
-        }
-    }
-
-    a {
-        text-decoration: none;
-    }
-`
-
-const AgentContact = styled.div`
-    display: flex;
-    justify-content: flex-start;
-    align-content: center;
-
-    div{
-        margin-left: 1rem;
-
-        h4{
-            text-transform: uppercase;
-        }
-
-        ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-
-            li{
-                text-decoration: none;
-
-                a {
-                    text-decoration: none;
-                    color: var(--main-color);
-                }
-            }
-        }
-    }
-`
-
 export const StyledImage = styled(Image)`
     display: block;
     width: 150px;
@@ -715,6 +568,109 @@ const Price = styled.span`
 `
 
 export default connect(Details);
+
+// .wpcf7-form {
+//     display: flex;
+//     justify-content: space-between;
+//     flex-wrap: wrap;
+//     margin-right: auto;
+//     margin-left: auto;
+
+//     p {
+
+//         color: var(--main-color);
+//         flex-basis: 50%;
+//         margin-right: auto;
+//         margin-left: auto;
+
+//         &:nth-of-type(5){
+//             flex-basis: 100%;   
+//         }
+
+//         &:nth-of-type(6){
+//             flex-basis: 100%;   
+//         }
+
+//         @media (max-width: 768px){
+//             flex-basis: 100%;
+//         }
+//     }
+// }
+
+// input, textarea {
+
+//     &:focus {
+//        outline: none;
+//     } 
+// }
+
+// input {
+//     width: 50%;
+// }
+
+
+// input, textarea, select {
+  
+//     background-color: transparent;
+//     outline: none;    
+//     border-top-style: hidden;
+//     border-right-style: hidden;
+//     border-left-style: hidden;
+//     border-bottom-style: groove;
+//     border-bottom: 1px solid var(--golden-color); 
+//     font-family:inherit;
+//     font-size: 1rem;
+//     padding: 1rem;
+
+//     &::placeholder {
+//         font-family: 'Lato', sans-serif;
+//         text-transform: uppercase;
+//         font-weight: 300;
+//     }
+// }
+
+// @media(max-width: 768px) {
+//     input, textarea, select {
+//         width: 90%;
+//     }
+// }
+
+// textarea {
+//     width: 70%;
+//     height: 50px;
+// }
+
+
+// input[type="submit"] { 
+//     width: 100%;
+//     background-color: var(--golden-color);
+//     height: 48px;  
+//     padding: 1.5rem;
+//     text-transform: none;
+//     border: 1px solid #fff;
+//     font-weight: 500;
+//     font-size: 1rem;
+//     text-transform: capitalize;
+//     color: #FFF;
+//     cursor: pointer;
+//     font-family: 'Montserrat', sans-serif;
+//     padding: 2px 24px;
+//     position: relative;
+
+//     @media(max-width: 768px) {
+//         width: 100%;
+        
+//     }
+
+//     &:hover {
+//         background-color: #bf930d;
+//         transition: all 0.4s;
+//     }
+// }
+
+// a {
+//     text-decoration: none;
+// }
 
 
 // const LinkContainer = styled.div`

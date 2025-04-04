@@ -1,10 +1,11 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { connect, styled, css, Global, keyframes } from "frontity";
 import Image from "@frontity/components/image";
 import SinglePropertyComponent from './SingleProperty';
 import SliderDots from './Slider';
 
-const Properties = ({state, actions, libraries}) => {
+
+const Properties = ({state, actions, libraries, searchTerm, arrResult}) => {
   
     useEffect( () => {
         actions.source.fetch("/properties")
@@ -14,29 +15,104 @@ const Properties = ({state, actions, libraries}) => {
 
     let myPosts = [];
 
+    let featuredProperties = [];
+    let propertiesForSale = [];
+    let propertiesForRent = [];
+
     if(data.isReady) {
+
+        console.log("data ready: ", data)
         
-        data.items.map( ({id}) => {
+        data.items.forEach( ({id}) => {
 
             const singlePost = state.source.properties[id];
             myPosts.push(singlePost);
         })
 
-        actions.theme.updateProperties(myPosts);
-    }
+        myPosts.sort((a, b) => a.acf.status_property.localeCompare(b.acf.status_property));
 
+        actions.theme.updateProperties(myPosts);
+
+        
+        myPosts.forEach(elem => {
+            if(elem.categories.includes(13)) {
+                featuredProperties.push(elem)
+            }            
+        })
+
+        featuredProperties.length>0 && featuredProperties.forEach(elem => {
+            if(elem.categories.includes(3)) {
+                propertiesForSale.push(elem)
+            }            
+            else {
+                propertiesForRent.push(elem)
+            }
+        })
+
+        actions.theme.updatePropertiesSell(propertiesForSale);
+        actions.theme.updatePropertiesRent(propertiesForRent);
+    }
 
     return(
       
-        <SliderDots>
-            {
-                myPosts.map(property => {
-                    return(
-                        <SinglePropertyComponent property={property} />
-                    )
-                })
-            }
-        </SliderDots>
+            <>
+                 {
+                    Object.keys(searchTerm).length >0? 
+                    
+                    <TextSearchFilter>
+                        <p>Filters: </p>
+                        {
+                            
+                            Object.keys(searchTerm).map(elem => {
+                                if(searchTerm[elem] !== '') {
+                                    return(
+                                        <p> {elem}: <span>{searchTerm[elem]}</span>, </p>
+                                    )
+                                }
+                            })
+                        }
+                    </TextSearchFilter>
+
+                    :null
+                }
+               
+            {    
+                featuredProperties.length > 0 && Object.keys(searchTerm).length === 0 ?
+
+                <SliderDots>
+                    {
+                        featuredProperties.map(property => {
+                            return(
+                                <SinglePropertyComponent property={property} />
+                            )
+                        })
+                    }
+                </SliderDots>
+
+                : arrResult.length > 0 && Object.keys(searchTerm).length > 0 ?
+
+                <SliderDots>
+                    {
+                        arrResult.map(property => {
+                            return(
+                                <SinglePropertyComponent property={property}/>
+                            )
+                        })
+                    }
+                </SliderDots>
+
+                : arrResult.length === 0 && Object.keys(searchTerm).length > 0 ?
+                                        
+                <TextNoPropertiesFound>
+                    <p>No properties found with this critera</p>
+                    <p>Choose another set of filter or clear all the filters</p>
+                </TextNoPropertiesFound>
+
+                : null
+            } 
+            
+            </>
+  
     
 
     )
@@ -115,26 +191,52 @@ export const ImageCard = styled(Image)`
 `
 
 export const TextBand = styled.div`
-    width: 100%;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    background-color: rgba(203, 166, 49, 0.7);
-    padding: 5px 10px;
-    color: #FFF;
-    font-weight: 400;
-    font-size: 15px;
-    text-align: start;
-    text-transform: uppercase;
-    text-shadow: 1px 1px 1px #000;
-    vertical-align: middle;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(203, 166, 49, 0.7);
+  padding: 5px 10px;
+  color: #FFF;
+  font-weight: 600;
+  font-size: 15px;
+  text-align: start;
+  text-transform: uppercase;
+  vertical-align: middle;
+  text-shadow:  #000 1px 1px 1px;
 
-    span {
-        font-weight: 700;
-        text-shadow: 1px 1px 1px #000;
-        font-size: 17px;
+  @media (max-width: 768px){
+    text-shadow: none;
+   }
+
+
+
+    /* Safari-specific CSS */
+  @media not all and (min-resolution: 0.001dpcm) {
+    @supports (-webkit-appearance: none) {
+      text-shadow: none;
     }
-`
+  }
+
+  span {
+    font-weight: 700;
+    font-size: 17px;
+    text-shadow:  #000 1px 1px 1px;
+
+    @media (max-width: 768px){
+    text-shadow: none;
+   }
+
+
+      /* Safari-specific CSS */
+    @media not all and (min-resolution: 0.001dpcm) {
+      @supports (-webkit-appearance: none) {
+        text-shadow: none;
+      }
+    }
+  }
+
+`;
 
 export const Ribbon = styled.div`
     position: fixed;
@@ -343,5 +445,33 @@ const PriceTag = styled.a`
 
     @media(min-width: 768px) {
         margin-bottom: 0rem;
+    }
+`
+
+export const TextSearchFilter = styled.div`
+    display: flex;
+    justify-content: center;
+
+    p{
+        color : #4d4d4d;
+        margin-right: .5rem;
+        text-transform: capitalize;
+        
+        &:nth-of-type(1) {
+            font-weight: bold;
+        }
+    }
+
+    span {
+        color: #4d4d4d;
+    }
+`
+
+export const TextNoPropertiesFound = styled.div`
+    text-align: center;
+    p{
+        color : #4d4d4d;
+        margin: 2rem auto;
+        font-size: 1.5rem;
     }
 `

@@ -1,13 +1,33 @@
 import React, {useState, useEffect} from 'react';
 import { connect, styled, css, Global, loadable } from "frontity";
 import Image from "@frontity/components/image";
-import {MarginPaddingContainer, AuthorBioBox, AuthorName, PublishDate, FeaturedMedia, StyledImage} from './BlogPage'
-import {ContainerBackgroundTour, BackgroundColor} from './AllProperties'
+import {AuthorBioBox, AuthorName, PublishDate, FeaturedMedia, StyledImage} from './BlogPage'
+import {ContainerBackgroundTour, BackgroundColor} from './BlogPage'
+import {PropertiesGrid} from './Rent'
+import SinglePropertyComponent from './SingleProperty'
+import {MarginPaddingContainer} from './home';
 import Loading from './Loading';
 
-
-
 const BlogDetails = ({state, actions, libraries}) => {
+
+
+    useEffect( () => {
+        actions.source.fetch("/properties")
+    }, [])
+
+    const dataProperties = state.source.get('/properties');
+
+    let myPosts = [];
+
+    if(dataProperties.isReady) {
+        
+        dataProperties.items.map( ({id}) => {
+
+            const singlePost = state.source.properties[id];
+            myPosts.push(singlePost);
+        })
+    }
+
 
     const data = state.source.get(state.router.link);
 
@@ -17,40 +37,72 @@ const BlogDetails = ({state, actions, libraries}) => {
 
     const Html2react = libraries.html2react.Component;
 
+    let neighboorProperties =  []
+   
+    if(typeof postTour !== "undefined") {
+        neighboorProperties =  myPosts.filter(property => property.acf.details_properties.neighborhood.toLowerCase() === postTour.title.rendered.toLowerCase() && !property.categories.includes(14))
+    }
+
+
+
     return (
         <>
-            <ContainerBackgroundTour>
-                <BackgroundColor>
-                    <div>
-                        <h3>WELCOME TO CLASSIC JERUSALEM BLOG</h3>
-                    </div>
-                </BackgroundColor>
-            </ContainerBackgroundTour> 
+      
+                   <ContainerBackgroundTour>
+
+                        <BackgroundColor>
+                            <div>
+                                <h3>WELCOME TO CLASSIC JERUSALEM NEIGHBORDHOODS</h3>
+                            </div>
+                        </BackgroundColor>
+
+                    </ContainerBackgroundTour> 
 
         {typeof postTour === "undefined" ? <Loading /> : 
+            <>
+                <BlogMain>
+                    <HeaderDetails>
+                        <Content>
+                            <h2><Html2react html={postTour.title.rendered} /></h2>
+                    
+                            <AuthorBioBox>
+                                <AuthorName>
+                                    Classic Jerusalem
+                                </AuthorName>
 
-            <BlogMain>
-                <HeaderDetails>
-                    <Content>
-                        <h2><Html2react html={postTour.title.rendered} /></h2>
+                                <PublishDate>Fri Jul 01 2022</PublishDate>
+                            </AuthorBioBox>
                 
-                        <AuthorBioBox>
-                            <AuthorName>
-                                Classic Jerusalem
-                            </AuthorName>
+                            <Html2react html={postTour.content.rendered} />
+                        </Content>
 
-                            <PublishDate>Fri Jul 01 2022</PublishDate>
-                        </AuthorBioBox>
-              
-                        <Html2react html={postTour.content.rendered} />
-                    </Content>
-
-                </HeaderDetails>
+                    </HeaderDetails>
+            
+                
         
-             
-       
-            </BlogMain>
+                </BlogMain>
+
+                <MarginPaddingContainer>
+                    <PropertiesGrid>
+                                    
+                    {
+                        neighboorProperties.map(property => {
+                            return(
+                                <SinglePropertyComponent property={property}/>
+                            )
+                        })
+                    }
+
+                    </PropertiesGrid> 
+                </MarginPaddingContainer>
+            </>
+
         }
+
+
+
+
+ 
         
         </>
 
@@ -103,6 +155,8 @@ const AuthorBioDetails = styled.div`
     } */
     
 `
+
+
 
 
 const Content = styled.div`

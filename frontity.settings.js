@@ -2,7 +2,7 @@ const settings = {
   "name": "realstate",
   "state": {
     "frontity": {
-      "url": "https://realstate.wildfreewalkingtours.com",
+      "url": "https://realestateadmin2025.classicjerusalem.com",
       "title": "Classic Jerusalem",
       "description": "A real state agency that offers accomodation in Jerusalem"
     }
@@ -40,7 +40,7 @@ const settings = {
             },
 
             {
-              name: "For Sell",
+              name: "For Sale",
               link: "/sell/",
               submenu: []
             },
@@ -193,7 +193,7 @@ const settings = {
       "name": "@frontity/wp-source",
       "state": {
         "source": {
-          "api": "https://realstate.wildfreewalkingtours.com/wp-json",
+          "api": "https://realestateadmin2025.classicjerusalem.com/wp-json/",
          
           "params": {
             per_page: 100,

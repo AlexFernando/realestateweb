@@ -1,73 +1,100 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { connect, styled, css, Global, keyframes } from "frontity";
-import {SectionFeaturedProperties} from './home';
-import SearchBarForm from './SearchBarSell';
+import SearchBarRentPages from './SearchBarRentPages';
 import Loading from './Loading';
 import SinglePropertyComponent from './SingleProperty';
-import {MarginTopSearchBar, TextSearchFilter, TextNoPropertiesFound} from './Rent'
+import {MarginTopSearchBar, TextSearchFilter, TextNoPropertiesFound, PropertiesGrid} from './Rent'
+import {MarginPaddingContainer} from './home';
 
 const NewDevelopment = ({state, actions, libraries}) => {
 
-    useEffect( () => {
-        actions.source.fetch("/category/new-development/");
-    }, [])
+    const [arrResult, setArrResult] = useState([]);
+    const [allRentProperties, setAllRentProperties] = useState([]);
+    const [searchTerm, setSearchTerm] = useState({});
 
-    const dataPropertiesNewDevelopment = state.source.get("/category/new-development/");
-
-    let myPosts = [];
-
-    if(dataPropertiesNewDevelopment.isCategory) {
-        console.log("lenght :", dataPropertiesNewDevelopment.items.length )
-            dataPropertiesNewDevelopment.items.map( ({type, id}) => {
-                const singleProperty = state.source[type][id];
-                myPosts.push(singleProperty);
+    useEffect(() => {
+        actions.source.fetch("/category/new-development/").then(() => {
+            const dataPropertiesFurnished = state.source.get("/category/new-development/");
+            if(dataPropertiesFurnished.isCategory) {
+            let myPostsFiltered = dataPropertiesFurnished.items.map(({ id }) => state.source.properties[id]);
+            myPostsFiltered.sort((a, b) => a.acf.status_property.localeCompare(b.acf.status_property));
+            setAllRentProperties(myPostsFiltered);
             }
-        )
+        });
+    }, []);
+    
+    const handleResults = (result) => {
+        setArrResult(result)
     }
+
     
     return ( 
         <>
         {
-            dataPropertiesNewDevelopment.isReady?
-            
-      
+            allRentProperties.length > 0?
 
-            <SectionFeaturedProperties>
 
-                <ContainerPropertiesForm>
+        <MarginPaddingContainer>
 
-                    <SearchBarForm />
-                
-                    <PropertiesGrid>
-                        {myPosts.length > 0 && myPosts.map?(property => {
+
+            <MarginTopSearchBar>
+                <SearchBarRentPages allRentProperties={allRentProperties} handleResults= {handleResults} setSearchTerm={setSearchTerm} setArrResult={setArrResult} />
+            </MarginTopSearchBar>
+
+            <TextSearchFilter>
+                {
+                    Object.keys(searchTerm).map(elem => {
+                        if(searchTerm[elem] !== '') {
                             return(
-                                <SinglePropertyComponent property={property} />
+                                <p>{elem}: <span>{searchTerm[elem]}</span></p>
                             )
-                        })
-
-                        
-                        : 
-                        
-                        <TextNoPropertiesFound>
-                           <p>
-                                No properties to show yet
-                            </p> 
-                            <p>
-                                This will be updated soon
-                            </p>
-                        </TextNoPropertiesFound>
                         }
-         
-                    </PropertiesGrid>
+                    })
+                }
+
+            </TextSearchFilter>
+
+            {
+   
+                    allRentProperties.length > 0 && Object.keys(searchTerm).length === 0 ?
+
+                    <PropertiesGrid>
+                
+                            {
+                                allRentProperties.map(property => {
+                                    return(
+                                        <SinglePropertyComponent property={property}/>
+                                    )
+                                })
+                            }
+                  
+                    </PropertiesGrid> 
+
+                    : arrResult.length > 0 && Object.keys(searchTerm).length > 0 ?
                     
-                </ContainerPropertiesForm>
-            </SectionFeaturedProperties>
+                    <PropertiesGrid>
+                        {
+                            arrResult.map(property => {
+                                return(
+                                    <SinglePropertyComponent property={property}/>
+                                )
+                            })
+                        }
+                    </PropertiesGrid> 
 
+                    : arrResult.length === 0 && Object.keys(searchTerm).length > 0 ?
+                    
+                    <TextNoPropertiesFound>
+                        <p>No properties found with this critera</p>
+                        <p>Choose another set of filter or clear all the filters</p>
+                    </TextNoPropertiesFound>
 
-
-        
-        : <Loading/>
+                    : null
+            }
+        </MarginPaddingContainer>
+            : <Loading />
         }
+
         </>
      );
 
@@ -162,34 +189,34 @@ export const ContainerPropertiesForm = styled.div`
 
 
 /**Properties */
-export const PropertiesGrid = styled.div`
+// export const PropertiesGrid = styled.div`
 
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 1rem;
-    background-color: #fff;
-    color: #444;
-    padding-left: calc(1.5rem/2);
-    padding-right: calc(1.5rem/2);
+//     display: grid;
+//     grid-template-columns: repeat(4, 1fr);
+//     grid-gap: 1rem;
+//     background-color: #fff;
+//     color: #444;
+//     padding-left: calc(1.5rem/2);
+//     padding-right: calc(1.5rem/2);
 
-    @media (min-width: 769px) and (max-width: 1420px){
-        grid-template-columns: repeat(3, 1fr);
-        grid-gap: 1rem;
-        margin: 2rem 0;
-    }
+//     @media (min-width: 769px) and (max-width: 1420px){
+//         grid-template-columns: repeat(3, 1fr);
+//         grid-gap: 1rem;
+//         margin: 2rem 0;
+//     }
 
-    @media (max-width: 576px){
-        grid-template-columns: repeat(1, 1fr);
-        grid-gap: 1rem;
-        margin: 2rem 0;
-    }
+//     @media (max-width: 576px){
+//         grid-template-columns: repeat(1, 1fr);
+//         grid-gap: 1rem;
+//         margin: 2rem 0;
+//     }
 
-    @media (min-width: 576px) and (max-width: 768px){
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 1rem;
-        margin: 2rem 0;
-    }
-`
+//     @media (min-width: 576px) and (max-width: 768px){
+//         grid-template-columns: repeat(2, 1fr);
+//         grid-gap: 1rem;
+//         margin: 2rem 0;
+//     }
+// `
 
 /**End Properties */
 

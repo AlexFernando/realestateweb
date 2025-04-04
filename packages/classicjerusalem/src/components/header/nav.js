@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { connect, styled, css} from "frontity";
 import Link from "../linktrue";
 import {RxTriangleDown, RxTriangleLeft} from 'react-icons/rx'
@@ -15,27 +15,37 @@ import LangSwitcher from './langSwitcher';
 
 import ExchangeRates from '../RateExchange'
 
+import Loading from '../Loading';
+
 /**
  * Navigation Component
  *
  * It renders the navigation links
  */
 
-const Nav = ({ state }) => (
+const Nav = ({ state, actions, libraries }) => {
 
+  const InfoContactBussiness = state.source.page[742];
+
+  return(
   <NavbarContainer>
 
     <NavBarUp>
  
-        <SocialMediaSuperior>
+    
+          
+          {typeof InfoContactBussiness === "undefined" ? null:    
+
+<SocialMediaSuperior>
             <li>
               <PhoneIcon />
-              +972-58-654-0969
+              {InfoContactBussiness.acf.contact_data.phone_number}
             </li>
             <li>
               <NavBarIcon />
               <a href="mailto:classicjerusaleminfo@gmail.com/" alt="gmail" aria-label="Link to gmail" target="_blank" rel="noreferrer">
-              classicjerusaleminfo@gmail.com
+            
+              {InfoContactBussiness.acf.contact_data.email}
               </a>
             </li>
             <li>
@@ -51,12 +61,16 @@ const Nav = ({ state }) => (
             </li>
 
             <li>
-              <a href="https://www.instagram.com/classicjerusalem/" alt="Share on Instagram" aria-label="Link to Instagram" target="_blank" rel="noreferrer">
+              <a href="https://instagram.com/classic_jerusalem?igshid=NTc4MTIwNjQ2YQ==" alt="Share on Instagram" aria-label="Link to Instagram" target="_blank" rel="noreferrer">
                   <InstagramIcon />
               </a>
             </li>
+            </SocialMediaSuperior>
 
-        </SocialMediaSuperior>
+            }
+
+
+
 
         <LangSwitcher />
         
@@ -146,7 +160,8 @@ const Nav = ({ state }) => (
     </NavBarDown>
   
   </NavbarContainer>
-);
+)
+}
 
 export default connect(Nav);
 

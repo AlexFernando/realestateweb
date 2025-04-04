@@ -21,7 +21,7 @@ const SocialMediaSuperiorMobile = ({ state }) => {
             </li>
 
             <li>
-              <a href="https://www.instagram.com/classicjerusalem/" alt="Share on Instagram" aria-label="Link to Instagram" target="_blank" rel="noreferrer">
+              <a href="https://instagram.com/classic_jerusalem?igshid=NTc4MTIwNjQ2YQ==" alt="Share on Instagram" aria-label="Link to Instagram" target="_blank" rel="noreferrer">
                   <InstagramIcon />
               </a>
             </li>

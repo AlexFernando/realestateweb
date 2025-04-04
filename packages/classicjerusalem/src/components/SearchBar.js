@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import { connect, styled, css, Global, loadable } from "frontity";
-import Loading from './Loading';
 import SearchBarBgRent from './SearchBarBgRent';
 import SearchBarBgSell from './SearchBarBgSell';
 import LoadingSearchBar from './Loader3'
 
-const SearchBarSell = ({state, actions, libraries}) => {
+const SearchBarSell = ({state, actions, libraries, handleResults, setSearchTerm, setArrResult}) => {
 
     const [stateProperty, setStateProperty] = useState('RentSearch')
     const [isLoading, setIsLoading] = useState(false);
@@ -16,17 +15,6 @@ const SearchBarSell = ({state, actions, libraries}) => {
     const handleItemClick = itemIndex => {
       setActiveItem(itemIndex);
       setIsLoading(true);
-
-    //   if(itemIndex === 0) {
-    //       console.log("button rent: ", activeItem)
-    //         setStateProperty('RentSearch')
-    //   }
-    //   else {
-    //     console.log("button sell: ", activeItem)
-
-    //         setStateProperty('SellSearch')
- 
-    //   }
 
     // Simulate a delay to show the loading state
     setTimeout(() => {
@@ -43,16 +31,13 @@ const SearchBarSell = ({state, actions, libraries}) => {
                 <ButtonToggleColor active={activeItem === 1} onClick={() => handleItemClick(1)}>Buy</ButtonToggleColor>
             </ButtonSearchContainer>
 
-            {/* {
-                StateProperty === 'RentSearch'? <SearchBarBgRent />
-                : <SearchBarBgSell />
-            } */}
-
             {isLoading ? (
                 <LoadingSearchBar />
             ) : (
                 <>
-                {stateProperty === 'RentSearch' ? <SearchBarBgRent /> : <SearchBarBgSell />}
+                {stateProperty === 'RentSearch' ? <SearchBarBgRent handleResults= {handleResults} setSearchTerm={setSearchTerm} setArrResult={setArrResult} /> 
+                
+                : <SearchBarBgSell handleResults= {handleResults} setSearchTerm={setSearchTerm} setArrResult={setArrResult}/>}
                 </>
             )}
 
@@ -63,7 +48,7 @@ const SearchBarSell = ({state, actions, libraries}) => {
 
 
 const MarginTop = styled.div`
-    margin-bottom: 3rem;
+    margin-bottom: .5rem;
     padding: 0 .5rem;
 `
 
@@ -74,7 +59,7 @@ const ButtonSearchContainer = styled.ul`
     padding-left: 0;
     list-style: none;
     text-align: center;
-    margin-bottom: 5rem;
+    margin-bottom: 1rem;
 `
 
 const ButtonToggleColor = styled.li`

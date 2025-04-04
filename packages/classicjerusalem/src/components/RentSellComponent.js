@@ -32,6 +32,10 @@ const RentSell = ({state, actions, libraries}) => {
 
     let myPosts = [];
 
+    let propertiesForSale = [];
+
+    let propertiesForRent = [];
+
     if(data.isReady) {
         
         data.items.map( ({id}) => {
@@ -39,48 +43,58 @@ const RentSell = ({state, actions, libraries}) => {
             const singlePost = state.source.properties[id];
             myPosts.push(singlePost);
         })
+
+        myPosts.sort((a, b) => a.acf.status_property.localeCompare(b.acf.status_property));
+
+        myPosts.length>0 && myPosts.forEach(elem => {
+            if(elem.categories.includes(3)) {
+                propertiesForSale.push(elem)
+            }            
+            else {
+                propertiesForRent.push(elem)
+            }
+        })
+
     }
 
     return(
         <SectionFeaturedProperties>
-            <MarginPaddingContainer>
+            {
+                propertiesForSale.length > 0 && propertiesForRent.length >0 ?
 
-                <SectionTitle>Latest Properties</SectionTitle>
-{/* 
-                <UnderlineTitle>
-                    <span></span>
-                </UnderlineTitle> */}
+                <MarginPaddingContainer>
 
-           
-                <ListContainer>
-                    <ListItem active={activeItem === 0} onClick={() => handleItemClick(0)}>To Rent </ListItem>
-                    <ListItem active={activeItem === 1} onClick={() => handleItemClick(1)}>To Buy</ListItem>
-                </ListContainer>
+                    <SectionTitle>Latest Properties</SectionTitle>
+            
+                    <ListContainer>
+                        <ListItem active={activeItem === 0} onClick={() => handleItemClick(0)}>For Rent </ListItem>
+                        <ListItem active={activeItem === 1} onClick={() => handleItemClick(1)}>For Sale</ListItem>
+                    </ListContainer>
 
-                <PropertiesGrid>
-                    {
-                        StateProperty === 'Sell' ? 
-                        
-                            myPosts.slice(0,3).map(property => {
-                                return(
-                                <SinglePropertyComponent property = {property} />
-                                )
-                            })
+                    <PropertiesGrid>
+                        {
+                            StateProperty === 'Sell' ? 
+                                propertiesForSale.slice(0,3).map(property => {
+                                    return(
+                                    <SinglePropertyComponent property = {property} />
+                                    )
+                                })
 
-                        : 
-                        
-                           
-                            myPosts.slice(0,3).reverse().map(property => {
-                                return(
-                                    <SinglePropertyComponent property={property}/>
-                                )
-                            })
-                
-                    }
-                
-                </PropertiesGrid>
+                            :    
+                                propertiesForRent.slice(0,3).reverse().map(property => {
+                                    return(
+                                        <SinglePropertyComponent property={property}/>
+                                    )
+                                })
+                    
+                        }
+                    </PropertiesGrid>
 
-            </MarginPaddingContainer>
+                </MarginPaddingContainer>
+
+                :null
+            }
+
         </SectionFeaturedProperties>
     )
 

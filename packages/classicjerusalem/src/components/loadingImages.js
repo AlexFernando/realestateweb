@@ -17,9 +17,9 @@ const Slider = () => {
 
   return (
     <SliderContainer ref={ref}>
-      <SliderItem backgroundUrl="https://realstate.wildfreewalkingtours.com/wp-content/uploads/2023/03/background4-1536x1002.jpg" />
-      <SliderItem backgroundUrl="https://realstate.wildfreewalkingtours.com/wp-content/uploads/2023/03/background3-1536x1012.jpg" />
-      <SliderItem backgroundUrl="https://realstate.wildfreewalkingtours.com/wp-content/uploads/2023/03/background1-1536x1025.jpg" />
+      <SliderItem backgroundUrl="https://realestateadmin2025.classicjerusalem.com/wp-content/uploads/2023/03/background4-1536x1002.jpg" />
+      <SliderItem backgroundUrl="https://realestateadmin2025.classicjerusalem.com/wp-content/uploads/2023/03/background3-1536x1012.jpg" />
+      <SliderItem backgroundUrl="https://realestateadmin2025.classicjerusalem.com/wp-content/uploads/2023/03/background1-1536x1025.jpg" />
     </SliderContainer>
   );
 };

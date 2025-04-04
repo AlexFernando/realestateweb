@@ -4,20 +4,8 @@ import SinglePropertyComponent from './SingleProperty';
 import SliderDots from './Slider';
 import {MarginTop, PropertiesGridContainer} from './NewDevelopment'
 import {MarginPaddingContainer} from './home';
-import SearchBarBgRent from './SearchBarBgRent';
 import SearchBarRentPages from './SearchBarRentPages';
 import Loading from './Loading';
-// import Image from "@frontity/components/image";
-// import Link from './Link';
-
-// import {SingleProperty, SinglePropertyThumb, ImageCard, SinglePropertyDetails} from './properties'
-
-// import ZoomInOnScroll from './ZoomInEffect'
-
-// import Rent from '../images/rent.jpg';
-// import Buy from '../images/buy_couple.jpg';
-// import Sell from '../images/sell_adult.jpg';
-// import RealEstateAgent from '../images/real_estate_agent.jpg'
 
 const RentComponent = ({state, actions, libraries}) => {
 
@@ -32,8 +20,9 @@ const RentComponent = ({state, actions, libraries}) => {
             const data = state.source.get('/properties');
             let myPosts = data.items.map(({ id }) => state.source.properties[id]);
             myPostsFiltered = myPosts.filter(elem => {
-                return elem.categories[0] !== 7 && elem.categories[0] !== 1 && elem.categories[0] !== 3;
+                return !elem.categories.includes(7)  && !elem.categories.includes(3) && !elem.categories.includes(1) && !elem.categories.includes(14);
             });
+            myPostsFiltered.sort((a, b) => a.acf.status_property.localeCompare(b.acf.status_property));
             setAllRentProperties(myPostsFiltered);
         });
     }, []);
@@ -78,8 +67,8 @@ const RentComponent = ({state, actions, libraries}) => {
                     {
                         allRentProperties.length > 0 && Object.keys(searchTerm).length === 0 ?
 
-                        <>
-                            <SliderDots>
+                        <PropertiesGrid>
+                  
                                 {
                                     allRentProperties.map(property => {
                                         return(
@@ -87,12 +76,12 @@ const RentComponent = ({state, actions, libraries}) => {
                                         )
                                     })
                                 }
-                            </SliderDots> 
-                        </> 
+                         
+                        </PropertiesGrid> 
 
                         : arrResult.length > 0 && Object.keys(searchTerm).length > 0 ?
                         
-                        <SliderDots>
+                        <PropertiesGrid>
                             {
                                 arrResult.map(property => {
                                     return(
@@ -100,7 +89,7 @@ const RentComponent = ({state, actions, libraries}) => {
                                     )
                                 })
                             }
-                        </SliderDots> 
+                        </PropertiesGrid> 
 
                         : arrResult.length === 0 && Object.keys(searchTerm).length > 0 ?
                         
@@ -122,6 +111,33 @@ const RentComponent = ({state, actions, libraries}) => {
         </>
     )
 }
+
+export const PropertiesGrid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    grid-gap: 1rem;
+    color: #444;
+    font-family: 'Lato';
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+    @media (max-width: 576px){
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 1rem;
+        margin: 2rem 0;
+        padding-left: calc(1.5rem/2);
+        padding-right: calc(1.5rem/2);
+    }
+
+    @media (min-width: 577px) and (max-width: 1024px){
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1rem;
+        margin: 2rem 0;
+        padding-left: calc(1.5rem/2);
+        padding-right: calc(1.5rem/2);
+    }
+`
 
 export const MarginTopSearchBar = styled.div`
     margin-top: 10rem;

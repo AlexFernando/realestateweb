@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import { Head, connect, Global, css, styled } from "frontity";
+import Switch from "@frontity/components/switch"
 import Header from './components/header/header'
 import Footer from './components/footer';
 import FooterOne from './components/footer-one'
@@ -22,11 +23,25 @@ import WhatsAppFloating from './components/WhatsAppFloating';
 import SubscribeIcon from './components/SubscribeIcon';
 import ShorTermRentals from './components/ShortTermRentals'
 import ShortTermRentals from './components/ShortTermRentals';
+import SellPropertyPage from './components/SellPropertyPage';
+import AirbnbYourAparment from './components/AirbnbYourAparment';
+import RentAparmentLongTermPage from './components/RentAparmentLongTermPage';
+import ValuePropertyPage from './components/ValuePropertyPage'
 import MyPDFPage from './components/GeneratePdf'
+import Error from './components/Error'
+import LoadingComponent from './components/Loading';
+// import RentComponentList from './components/RentList'
+
 
 const Root = ({state, actions}) => {
 
     const data = state.source.get(state.router.link);
+
+    useEffect(() => {
+        actions.theme.handleFBCLID();
+        actions.source.fetch("/contact-info-classic-jerusalem");
+      }, []);
+
 
     return (
       <>
@@ -111,24 +126,30 @@ const Root = ({state, actions}) => {
             <HeaderAlt />
             <WhatsAppFloating />
             <SubscribeIcon />
+            <Switch>
+                <LoadingComponent when={data.isFetching} />
+                <Home when={data.isHomePage} />   
+                <Details when={data.isProperties} />   
+                <NeighborhoodDeatils when={data.isNeighborhood} />     
+                <BlogDetails when={data.isBlog} />   
+                <RentComponent when={state.router.link === "/rent/"} />          
+               
+                <RentFurnished when= {state.router.link === "/rent/long-term-rentals/furnished/"} />
+                <RentUnfurnished when= {state.router.link === "/rent/long-term-rentals/unfurnished/"}/>
+                <ShortTermRentals when= {state.router.link === "/rent/short-term-rentals/"} />
+                <PesachRentals when= {state.router.link === "/rent/pesach-and-succot-rentals/"} />
+                <SellProperties when= {state.router.link === "/sell/"} />
+                <Neighborhood when = {state.router.link === "/neighborhoods/" } />
+                <SellPropertyPage when = {state.router.link === "/sell-your-aparment/" } />
+                <AirbnbYourAparment when = {state.router.link === "/airbnb-your-aparment/" } />
+                <RentAparmentLongTermPage when = {state.router.link === "/rent-your-apartment-long-term/"} />
+                <ValuePropertyPage when = {state.router.link === "/value-your-property/"} />
+                <Blog when = {state.router.link === "/blogposts/"} />
+                <NewDevelopment  when = {state.router.link === "/new-development/"}/>
 
-            {data.isHomePage && <Home /> }
-            {/* {data.isDetails && <Details />} */}
-            {/* {data.isProperties && <Properties />} */}
-            {/* {state.router.link === "/properties/" && <Properties /> } */}
-            {data.isProperties && <Details /> }
-            {state.router.link === "/rent/" && <RentComponent /> } 
-            {state.router.link === "/rent/long-term-rentals/furnished/" && <RentFurnished /> } 
-            {state.router.link === "/rent/long-term-rentals/unfurnished/" && <RentUnfurnished/>}
-            {state.router.link === "/rent/short-term-rentals/" && <ShortTermRentals/>}
-            {state.router.link === "/rent/pesach-and-succot-rentals/" && <PesachRentals/>}
-            {state.router.link === "/sell/" && <SellProperties/>}
-            {state.router.link === "/neighborhoods/" && <Neighborhood />} 
-            {data.isNeighborhood && <NeighborhoodDeatils />}
-            {state.router.link === "/new-development/" && <NewDevelopment />}
-            {state.router.link === "/blogposts/" && <Blog />}
-            {data.isBlog && <BlogDetails />}
-            {state.router.link === "/contact/" && <GeneralContact />}  
+                <GeneralContact when = {state.router.link === "/contact/"} /> 
+                <Error when={data.isError} />
+            </Switch>
             {/* {data.isAdmin && <MyPDFPage />} */}
             <FooterOne />
             <Footer title= "Classic Jerusalem" />  

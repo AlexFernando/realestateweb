@@ -132,7 +132,7 @@ const GeneralSection = styled.section`
     /* background-image: linear-gradient(180deg, rgba(28, 38, 65, .8)  0%, rgba(28, 38, 65, .8) 100%); */
     /* background-color: var(--main-color); */
 
-    background-image: url("https://realstate.wildfreewalkingtours.com/wp-content/uploads/2023/03/background3.jpg");
+    background-image: url("https://realestateadmin2025.classicjerusalem.com/wp-content/uploads/2023/03/background3.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position:center center;
@@ -184,6 +184,11 @@ const SectionContact = styled.section`
     border: 1px solid var(--golden-color);
     position: relative;
     /* margin-bottom: 3rem; */
+
+    @media(max-width: 768px) {
+        flex-direction: column;
+        align-content: center;
+    }
 `
 const GradientContact = styled.div`
     display: flex;
@@ -199,12 +204,13 @@ const GradientContact = styled.div`
     @media(max-width: 768px) {
         flex-direction: column;
         align-content: center;
+        padding: 3rem;
     }
 `
 
 export const SocialMediaSection = styled.div`
 
-    /* background-image:url('https://realstate.wildfreewalkingtours.com/wp-content/uploads/2023/01/aparment_background.jpg');  */
+    /* background-image:url('https://realestateadmin.wildfreewalkingtours.com/wp-content/uploads/2023/01/aparment_background.jpg');  */
     background-repeat: no-repeat;
     background-size: cover;
     /* Create the parallax scrolling effect */
@@ -225,6 +231,10 @@ export const SocialItem = styled.a`
 
     &:nth-of-type(1){
         margin-top: 2rem;
+    }
+
+    @media(max-width: 768px) {
+        margin: 3rem;
     }
 `
 

@@ -4,9 +4,12 @@ import Image from "@frontity/components/image";
 import Link from './Link';
 import Loading from './Loading';
 import {SingleProperty, SinglePropertyThumb, ImageCard, SinglePropertyDetails} from './properties'
+import SinglePropertyComponent from './SingleProperty';
 import {MarginTop, PropertiesGridContainer} from './NewDevelopment'
+import {PropertiesGrid} from './Rent'
 import ZoomInOnScroll from './ZoomInEffect'
 import SearchBar from './SearchBar';
+import noImage from '../images/no_image.jpg';
 
 const Neighborhood = ({state, actions, libraries}) => {
 
@@ -37,10 +40,8 @@ const Neighborhood = ({state, actions, libraries}) => {
         {!data.isReady && typeof pageNeighborhood === "undefined" ? <Loading /> : 
 
             <MarginTop>
-        
-                <SearchBar />
                 
-                <PropertiesGridContainer>
+                <PropertiesGridNeigh>
 
                     {
                         myPosts.reverse().map(property => {
@@ -48,12 +49,18 @@ const Neighborhood = ({state, actions, libraries}) => {
                             const newParagraph = property.content.rendered.substring(0, 250);
                             
                             return(
-                                <ZoomInOnScroll delay={0.2} duration={1} distance="200px">
+
                                     <Link href={property.link}>
                                         <SingleProperty key={property.id}>
                                             <SinglePropertyThumb>
-                                        
-                                                <ImageCard src={property.acf.image_card.sizes.medium_large} />
+                                            {
+                                                property.acf.image_card? 
+
+                                                <ImageCardNeighborhood src={property.acf.image_card.sizes.medium_large} />
+
+                                                :<ImageCardNeighborhood src={noImage} />
+                                            }
+
 
                                             </SinglePropertyThumb>
 
@@ -70,12 +77,12 @@ const Neighborhood = ({state, actions, libraries}) => {
                                             </NeighborhoodDetails>
                                         </SingleProperty>
                                     </Link>
-                                </ZoomInOnScroll>
+                        
                             )
                         })
                     }
                 
-                </PropertiesGridContainer>
+                </PropertiesGridNeigh>
 
             </MarginTop>
         }
@@ -97,6 +104,64 @@ const NeighborhoodDetails = styled.div`
     p {
         color: gray;
         text-align: justify;
+    }
+`
+
+const PropertiesGridNeigh = styled.div`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 3rem;
+    color: #444;
+    font-family: 'Lato';
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding-left: calc(5rem/2);
+    padding-right: calc(5rem/2);
+
+    @media (max-width: 576px){
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 1rem;
+        margin: 2rem 0;
+        padding-left: calc(1.5rem/2);
+        padding-right: calc(1.5rem/2);
+    }
+
+    @media (min-width: 577px) and (max-width: 1024px){
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1rem;
+        margin: 2rem 0;
+        padding-left: calc(1.5rem/2);
+        padding-right: calc(1.5rem/2);
+    }
+`
+
+export const ImageCardNeighborhood = styled(Image)`
+    /* vertical-align: middle; */
+    /* min-height: 200px; */
+    /**to make responsive */
+    /* max-width: 100%; */
+    /* transform: scale(1.1);
+
+    &:hover {
+        animation: ${zoomOut} .5s ease-in-out forwards;
+    } */
+
+    display: block;
+    width: 100%;
+    /* height: auto; */
+    /* object-fit: contain; */
+    height: 350px;
+
+    @media (max-width: 968px){
+        height: 200px;
+    }
+
+    @media (min-width: 968px) and (max-width: 1199px){
+        height: 220px;
+    }
+
+    @media (min-width: 1200px) and (max-width: 1440px){
+        height: 250px;
     }
 `
 

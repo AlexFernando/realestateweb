@@ -72,7 +72,6 @@ const AllNavbar = styled.div`
     transition: box-shadow 0.3s ease;
     transform: ${({ isHidden }) =>
     isHidden ? "translateY(-100%)" : "translateY(0)"};
-    z-index: 1;
 `
 
 const BrandContainer = styled.div`

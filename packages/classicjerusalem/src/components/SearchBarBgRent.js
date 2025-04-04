@@ -3,7 +3,7 @@ import { connect, styled, css, Global, loadable } from "frontity";
 import Loading from './Loading';
 import Link from './Link';
 
-const SearchBarBgRent = ({state, actions, libraries, active}) => {
+const SearchBarBgRent = ({state, actions, libraries, active, handleResults, setSearchTerm, setArrResult}) => {
 
     //states of the component
     const [propertyID, setPropertyID] = useState('');
@@ -11,13 +11,16 @@ const SearchBarBgRent = ({state, actions, libraries, active}) => {
     const [bedrooms, setBedrooms] = useState('');
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
+    const [buttonClear, setButtonClear] = useState(false);
 
     //General states
   
     const exchangeRateValue = state.theme.coinExchange.exchange_rate;
     const currencyPair = state.theme.coinExchange.currency_pair;
 
-    const propertiesForFilter = state.theme.myProperties;
+    const propertiesForFilter = state.theme.propertiesForRent;
+
+
 
     const handleSearch = () => {
 
@@ -31,7 +34,7 @@ const SearchBarBgRent = ({state, actions, libraries, active}) => {
           }
       
           // Filter by Neighborhood
-          if (neighborhood && property.acf.details_properties.neighborhood !== neighborhood) {
+          if (neighborhood && property.acf.details_properties.neighborhood.toLowerCase() !== neighborhood.toLowerCase()) {
             return false;
           }
       
@@ -41,23 +44,38 @@ const SearchBarBgRent = ({state, actions, libraries, active}) => {
           }
       
           // Filter by Min Price
-          if (minPrice && property.acf.details_properties.price_dollars < parseInt(minPrice)) {
+          if (minPrice && property.acf.details_properties.price_shekels < parseInt(minPrice)) {
             return false;
           }
       
           // Filter by Max Price
-          if (maxPrice && property.acf.details_properties.price_dollars > parseInt(maxPrice)) {
+          if (maxPrice && property.acf.details_properties.price_shekels > parseInt(maxPrice)) {
             return false;
           }
       
           // All filters match
           return true;
         });
-        
-      };
-      
+
+        handleResults(filteredProperties);
+
+        const searchTerm = {"propertyID": propertyID , "neighborhood": neighborhood, "bedrooms": bedrooms, "minPrice": minPrice, "maxPrice": maxPrice};
+    
+        setSearchTerm(searchTerm);
+    };
+
+    const handleClearResult = () => {
+        setArrResult([])
+        setSearchTerm({})
+        setPropertyID('')
+        setNeighborhood('')
+        setBedrooms('')
+        setMinPrice('')
+        setMaxPrice('')
+    }
     
     return ( 
+    
         <SearchTabContent>
             <SearchForm>
                 <div>
@@ -165,17 +183,26 @@ const SearchBarBgRent = ({state, actions, libraries, active}) => {
             
                     
                             <ItemList>
-                                <Link href="/rent">
-                                    <button onClick={handleSearch}>Search</button>
-                                </Link>
-
+                                <button onClick={handleSearch}>Search</button>
                             </ItemList>
+
+                        
+                            <ItemList>
+                                <button onClick={handleClearResult}> Clear All </button>
+                            </ItemList>
+
+      
+                    
                             
                         </ListFilter>
                     </SearchMultiFilter>
                 </div>
             </SearchForm>
+
+
         </SearchTabContent>
+
+
     );
 }
 
@@ -370,6 +397,32 @@ const ProperyType = styled.div`
         }
     }
 `
+
+const ButtonClear = styled.button`
+    border-radius: 8px;
+    background-color: var(--golden-color);
+    font-size: 14px;
+    font-size: clamp(.8rem, calc(0.40rem + 0.54vw), 1.20rem);
+    font-family: 'Lato', sans-serif;
+    color: #fff;
+    font-weight: 700;
+    line-height: 1.2;
+    height: 50px;
+    width: 215px;
+    /**add new lines styles */
+    width: 10vw;
+    height: 5vh;
+    /**new lines added */
+    transition: all .3s ease;
+    cursor: pointer;
+    border: none;
+
+    @media (max-width: 1200px) {
+        width: 100%;
+    }
+`
+
+
 const PriceType = styled.div`
     div {
         width: 50%;

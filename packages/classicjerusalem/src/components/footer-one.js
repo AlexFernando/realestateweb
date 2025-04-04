@@ -20,6 +20,7 @@ const InfoFooter = ({state, actions, libraries}) => {
     }, [])
 
     const data = state.source.get('/blog/');
+    const InfoContactBussiness = state.source.page[742];
 
     let myPosts = [];
 
@@ -33,105 +34,86 @@ const InfoFooter = ({state, actions, libraries}) => {
     }
 
     return ( 
+
         <ContactContainer>
- 
-            <ContainerImageFooter>
-                {/* <ImageStyled>
-                    <Image alt="logo" src={logo} />  
-                </ImageStyled> */}
+            {typeof InfoContactBussiness === "undefined" ? null:  
+                <>
+                    <ContainerImageFooter>
+                        {/* <ImageStyled>
+                            <Image alt="logo" src={logo} />  
+                        </ImageStyled> */}
 
-                <h2>Classic Jerusalem <span>Realty</span></h2>
+                        <h2>Classic Jerusalem <span>Realty</span></h2>
 
-                <p>At Classic Jerusalem Realty, we're committed to providing exceptional real estate services. 
-                    Whether you're buying, selling, or renting, we're here to guide you every step of the way.
-          
-                </p>
+                        <p>At Classic Jerusalem Realty, we're committed to providing exceptional real estate services. 
+                            Whether you're buying, selling, or renting, we're here to guide you every step of the way.
+                
+                        </p>
 
-                <p>
-                If you have any questions or are interested in learning more, don't hesitate to contact us via phone or email. 
-                    Our team is always happy to assist you and help you achieve your real estate goals in Jerusalem.
-                </p>
-            </ContainerImageFooter>
+                        <p>
+                        If you have any questions or are interested in learning more, don't hesitate to contact us via phone or email. 
+                            Our team is always happy to assist you and help you achieve your real estate goals in Jerusalem.
+                        </p>
+                    </ContainerImageFooter>
 
-            <ContainerImageFooter>
-                <h2>From the <span>Blog</span></h2>
-                <BlogContainer>
-                {
-                     myPosts.map( post => {
-                        return(
-                         <BlogElement>
-                                <StyledImage src={post.acf.imagepost.sizes.thumbnail} alt="blog-image" />
-                                <div>
-                                    <p>{post.title.rendered}</p>
-                                    <span>{post.date.substring(0,10)}</span>
-                                </div>
-                          </BlogElement>
-                        ) 
-                    
-                    })
-                }
-                </BlogContainer>
+                    <ContainerImageFooter>
+                        <h2>From the <span>Blog</span></h2>
+                        <BlogContainer>
+                        {
+                            myPosts.slice(0,3).map( post => {
+                                return(
+                                    <Link href={post.link}>
+                                        <BlogElement>
+                                                <StyledImage src={post.acf.imagepost.sizes.thumbnail} alt="blog-image" />
+                                                <div>
+                                                    <p>{post.title.rendered}</p>
+                                                    <span>{post.date.substring(0,10)}</span>
+                                                </div>
+                                        </BlogElement>
+                                    </Link>
+                                ) 
+                            
+                            })
+                        }
+                        </BlogContainer>
 
-            </ContainerImageFooter>
+                    </ContainerImageFooter>
 
-            <ContainerImageFooter>
-                <h2>Contact <span>us</span></h2>
+                    <ContainerImageFooter>
+                        <h2>Contact <span>us</span></h2>
 
-                <ContainerInfo>                
-                    <p><NavBarIcon></NavBarIcon><span>classicjerusaleminfo@gmail.com</span></p>
-                    <p><PhoneIcon></PhoneIcon><span>+972-58-654-0969</span> </p>
-                    {/* <h4>Classic Jerusalem <span>Realty</span></h4> */}
-                    <p><MapIcon></MapIcon><span>123 Jerusalem Street, Jerusalem</span></p>
-                </ContainerInfo>
+                        <ContainerInfo>                
+                            <p><NavBarIcon></NavBarIcon><span>  {InfoContactBussiness.acf.contact_data.email}</span></p>
+                            <p><PhoneIcon></PhoneIcon><span>  {InfoContactBussiness.acf.contact_data.phone_number}</span> </p>
+                            {/* <h4>Classic Jerusalem <span>Realty</span></h4> */}
+                            <p><MapIcon></MapIcon><span>  {InfoContactBussiness.acf.contact_data.address}</span></p>
+                        </ContainerInfo>
 
-                <SocialMediaFooter>
-                    <li>
-                    <a href="https://wa.me/+972586540969" alt="WhatsApp" aria-label="Link to WhatsApp" target="_blank" rel="noreferrer">
-                        <WhatsAppIcon />
-                    </a>
-                    </li>
+                        <SocialMediaFooter>
+                            <li>
+                            <a href="https://wa.me/+972586540969" alt="WhatsApp" aria-label="Link to WhatsApp" target="_blank" rel="noreferrer">
+                                <WhatsAppIcon />
+                            </a>
+                            </li>
 
-                    <li>
-                    <a href="https://www.facebook.com/ClassicJerusalem" alt="Share on Facebook" aria-label="Link to Facebook" target="_blank" rel="noreferrer">
-                        <FacebookIcon />
-                    </a>
-                    </li>
+                            <li>
+                            <a href="https://www.facebook.com/ClassicJerusalem" alt="Share on Facebook" aria-label="Link to Facebook" target="_blank" rel="noreferrer">
+                                <FacebookIcon />
+                            </a>
+                            </li>
 
-                    <li>
-                    <a href="https://www.instagram.com/classicjerusalem/" alt="Share on Instagram" aria-label="Link to Instagram" target="_blank" rel="noreferrer">
-                        <InstagramIcon />
-                    </a>
-                    </li>
+                            <li>
+                            <a href="https://instagram.com/classic_jerusalem?igshid=NTc4MTIwNjQ2YQ==" alt="Share on Instagram" aria-label="Link to Instagram" target="_blank" rel="noreferrer">
+                                <InstagramIcon />
+                            </a>
+                            </li>
 
-                </SocialMediaFooter>
+                        </SocialMediaFooter>
 
-            </ContainerImageFooter>
-
-
-            {/* <ContainerImageFooter>
-                <ImageFooter src={Rent} />
-                <h3>Rent</h3>
-                <p>Find a property for rent</p>
-            </ContainerImageFooter>
-
-            <ContainerImageFooter>
-                <ImageFooter src={Buy} />
-                <h3>Buy</h3>
-                <p>Buying a propety </p>
-            </ContainerImageFooter>
-
-            <ContainerImageFooter>
-                <ImageFooter src={Sell} />
-                <h3>Sell</h3>
-                <p>Selling your apartment  </p>
-            </ContainerImageFooter>
-
-            <ContainerImageFooter>
-                <ImageFooter src={RealEstateAgent} />
-                <h3>Airbnb</h3>
-                <p>We take care of Airbnb your apartment</p>
-            </ContainerImageFooter> */}
-            
+                    </ContainerImageFooter>
+                </>
+        
+            }
         </ContactContainer >
 
     );
@@ -246,7 +228,7 @@ const BlogContainer = styled.div`
 
 const BlogElement = styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     margin-bottom: 2rem;
 
     p{
@@ -256,6 +238,7 @@ const BlogElement = styled.div`
         text-align: start;
         margin-bottom: 0;
         margin-top: 0;
+        color: #ccc;
     }
 
     span {

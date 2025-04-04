@@ -2,62 +2,77 @@ import React, {useState, useEffect} from 'react';
 import { connect, styled, css, Global, loadable } from "frontity";
 import Loading from './Loading';
 
-const SearchBarBgSell = ({state, actions, libraries}) => {
+const SearchBarBgSell = ({state, actions, libraries, handleResults, setSearchTerm, setArrResult}) => {
 
-       //states of the component
-       const [propertyID, setPropertyID] = useState('');
-       const [neighborhood, setNeighborhood] = useState('');
-       const [bedrooms, setBedrooms] = useState('');
-       const [minPrice, setMinPrice] = useState('');
-       const [maxPrice, setMaxPrice] = useState('');
+    //states of the component
+    const [propertyID, setPropertyID] = useState('');
+    const [neighborhood, setNeighborhood] = useState('');
+    const [bedrooms, setBedrooms] = useState('');
+    const [minPrice, setMinPrice] = useState('');
+    const [maxPrice, setMaxPrice] = useState('');
 
-       const propertiesForFilter = state.theme.myProperties;
-
-       console.log("properties: ", propertiesForFilter)
-   
-       const handleSearch = () => {
-
-        console.log("beds: ", bedrooms)
-        // Perform search based on the selected filters
-        const filteredProperties = propertiesForFilter.filter(property => {
-          // Check each filter criteria and return true if the property matches all selected filters
-      
-          // Filter by Property ID
-          if (propertyID && property.acf.details_properties.code_property !== propertyID) {
-            return false;
-          }
-      
-          // Filter by Neighborhood
-          if (neighborhood && property.acf.details_properties.neighborhood !== neighborhood) {
-            return false;
-          }
-      
-          // Filter by Bedrooms
-          if (bedrooms && property.acf.details_properties.beds !== bedrooms) {
-            return false;
-          }
-      
-          // Filter by Min Price
-          if (minPrice && property.acf.details_properties.price_dollars < parseInt(minPrice)) {
-            return false;
-          }
-      
-          // Filter by Max Price
-          if (maxPrice && property.acf.details_properties.price_dollars > parseInt(maxPrice)) {
-            return false;
-          }
-      
-          // All filters match
-          return true;
-        });
-      
-        console.log("filtered Properties: ", filteredProperties);
-        
-      };
-
+    //General states
+  
     const exchangeRateValue = state.theme.coinExchange.exchange_rate;
     const currencyPair = state.theme.coinExchange.currency_pair;
+
+    const propertiesForFilter = state.theme.propertiesForSell;
+   
+    const handleSearch = () => {
+
+    // Perform search based on the selected filters
+    const filteredProperties = propertiesForFilter.filter(property => {
+        // Check each filter criteria and return true if the property matches all selected filters
     
+        // Filter by Property ID
+        if (propertyID && property.acf.details_properties.code_property !== propertyID) {
+            return false;
+        }
+    
+        // Filter by Neighborhood
+        if (neighborhood && property.acf.details_properties.neighborhood.toLowerCase() !== neighborhood.toLowerCase()) {
+            return false;
+        }
+          
+        // Filter by Bedrooms
+        if (bedrooms && property.acf.details_properties.beds !== bedrooms) {
+            return false;
+        }
+    
+        // Filter by Min Price
+        if (minPrice && property.acf.details_properties.price_shekels < parseInt(minPrice)) {
+            return false;
+        }
+    
+        // Filter by Max Price
+        if (maxPrice && property.acf.details_properties.price_shekels > parseInt(maxPrice)) {
+            return false;
+        }
+    
+        // All filters match
+            return true;
+        });
+
+
+        handleResults(filteredProperties);
+
+        const searchTerm = {"propertyID": propertyID , "neighborhood": neighborhood, "bedrooms": bedrooms, "minPrice": minPrice, "maxPrice": maxPrice};
+
+        setSearchTerm(searchTerm);
+    
+    };
+
+    const handleClearResult = () => {
+        setArrResult([])
+        setSearchTerm({})
+        setPropertyID('')
+        setNeighborhood('')
+        setBedrooms('')
+        setMinPrice('')
+        setMaxPrice('')
+    }
+    
+
     return ( 
         <SearchTabContent>
             <SearchForm>
@@ -167,6 +182,10 @@ const SearchBarBgSell = ({state, actions, libraries}) => {
                     
                             <ItemList>
                                 <button onClick={handleSearch}>Search</button>
+                            </ItemList>
+
+                            <ItemList>
+                                <button onClick={handleClearResult}> Clear All </button>
                             </ItemList>
 
                         </ListFilter>

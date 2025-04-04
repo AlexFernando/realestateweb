@@ -17,7 +17,7 @@ const SliderContainer = styled.div`
 export const PropertiesGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(1, 1fr);
     grid-gap: 1rem;
     color: #444;
     font-family: 'Lato';
@@ -124,7 +124,7 @@ const Slider = ({ children }) => {
     <>
       <SliderContainer ref={sliderRef} onScroll={handleScroll}>
         {groupedChildren.map((group, index) => (
-          <div key={index} style={{ flex: '0 0 100%', paddingRight: '10px' }}>
+          <div key={index} style={{ flex: '0 0 100%', paddingRight: '0px' }}>
             <Slide>{group}</Slide>
           </div>
         ))}

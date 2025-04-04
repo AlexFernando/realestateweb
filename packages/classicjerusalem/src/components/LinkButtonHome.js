@@ -19,11 +19,9 @@ const Anchor = styled.a`
     text-decoration: none;
     font-family: 'Montserrat', sans-serif;
     /* width: 7rem; */
-    margin: 1rem 0 1rem 1rem ;
-
-    @media(min-width: 768px) {
-        margin-bottom: 0rem;
-    }
+    margin: 0 0 1rem 1rem ;
+    margin-bottom: 0rem;
+  
 
     &:hover {
         background-color: var(--golden-icons);

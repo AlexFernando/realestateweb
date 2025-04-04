@@ -60,7 +60,7 @@ const BlogDetails = ({state, actions, libraries}) => {
 const BlogMain = styled.div`
     max-width: 969px;
     width: 100%;
-    margin: 0px auto;
+    margin: 2rem auto;
     position: relative;
     padding-right: 15px;
     padding-left: 15px;

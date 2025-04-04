@@ -146,7 +146,7 @@ const AllProperties = ({state, actions, libraries}) => {
 
                                                     <p>
                                                         $
-                                                        {property.acf.details_properties.price_dollars}
+                                                        {property.acf.details_properties.price_shekels}
                                                         <small>/mo</small>
                                                     </p>
                                                 </ImageContent>
@@ -178,6 +178,7 @@ const AllProperties = ({state, actions, libraries}) => {
                                                             <span>
                                                                 {property.acf.details_properties.beds}
                                                             </span>
+                                                            <span>Beds</span>
                                                         </li>
 
                                                         <li>
@@ -187,6 +188,7 @@ const AllProperties = ({state, actions, libraries}) => {
                                                                 </IconContext.Provider>
                                                             </span>
                                                             <span>{property.acf.details_properties.baths}</span>
+                                                            <span>Baths</span>
                                                         </li>
                                                         <li>
                                                             <span>

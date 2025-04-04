@@ -12,7 +12,6 @@ const SearchBarRentPages = ({state, actions, libraries, active, allRentPropertie
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
     const [buttonClear, setButtonClear] = useState(false);
-
     //General states
   
     const exchangeRateValue = state.theme.coinExchange.exchange_rate;
@@ -28,31 +27,26 @@ const SearchBarRentPages = ({state, actions, libraries, active, allRentPropertie
       
           // Filter by Property ID
           if (propertyID && property.acf.details_properties.code_property !== propertyID) {
-              console.log("property ID")
             return false;
           }
       
           // Filter by Neighborhood
           if (neighborhood && property.acf.details_properties.neighborhood.toLowerCase() !== neighborhood.toLowerCase()) {
-            console.log("neighborhood")
             return false;
           }
       
           // Filter by Bedrooms
           if (bedrooms && property.acf.details_properties.beds !== bedrooms) {
-            console.log("bedroom")
             return false;
           }
       
           // Filter by Min Price
-          if (minPrice && property.acf.details_properties.price_dollars < parseInt(minPrice)) {
-            console.log("minPrice")
+          if (minPrice && property.acf.details_properties.price_shekels < parseInt(minPrice)) {
             return false;
           }
       
           // Filter by Max Price
-          if (maxPrice && property.acf.details_properties.price_dollars > parseInt(maxPrice)) {
-            console.log("maxPrice")
+          if (maxPrice && property.acf.details_properties.price_shekels > parseInt(maxPrice)) {
             return false;
           }
       
@@ -63,8 +57,6 @@ const SearchBarRentPages = ({state, actions, libraries, active, allRentPropertie
         handleResults(filteredProperties);
 
         const searchTerm = {"propertyID": propertyID , "neighborhood": neighborhood, "bedrooms": bedrooms, "minPrice": minPrice, "maxPrice": maxPrice};
-
-        console.log("the search term: ", searchTerm)
     
         setSearchTerm(searchTerm);
           
@@ -73,7 +65,6 @@ const SearchBarRentPages = ({state, actions, libraries, active, allRentPropertie
 
   
     const handleClearResult = () => {
-        console.log("hola clear result")
         setArrResult([])
         setSearchTerm({})
         setPropertyID('')
